@@ -1,11 +1,37 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>麻雀条件計算ツール</title>
-</head>
-<body>
-  <h1>こんにちは GitHub Pages</h1>
-  <p>これが表示されたら成功です</p>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>麻雀条件計算ツール</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/tab.css">
+  </head>
+
+  <body>
+    <div class="tab">
+      <ul class="tab__menu">
+        <li class="tab__menu-item is-active" data-tab="01">対局情報</li>
+        <li class="tab__menu-item" data-tab="02">ルール設定</li>
+        <li class="tab__menu-item" data-tab="03">menu3</li>
+      </ul>
+      <div class="tab__panel">
+        <div class="tab__panel-box tab__panel-box0 is-show" data-panel="01">
+          <p class="tab__panel-text">1</p>
+        </div>
+        <div class="tab__panel-box tab__panel-box0" data-panel="02">
+          <p class="tab__panel-text">2</p>
+        </div>
+        <div class="tab__panel-box tab__panel-box0" data-panel="03">
+          <p class="tab__panel-text">3</p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <script src="./js/app.js"></script>
+    <script src="./js/tab.js"></script>
+  </body>
 </html>
