@@ -55,7 +55,7 @@ const RULE_KEY_LABELS = {
   [RULE_KEY.TIE_RANKING_POINT_RULE]:      '同点時の順位点',
   [RULE_KEY.KYOTAKU_SETTLEMENT]:          '終局時の供託処理',
   [RULE_KEY.INCREMENT_TSUMIBO]:           '積み棒の加算',
-  [RULE_KEY.ALLOW_WEST_ROUND]:            '西入の有無',
+  [RULE_KEY.ALLOW_WEST_ROUND]:            '西入',
   [RULE_KEY.MAX_YAKUMAN_LIMIT]:           '役満複合の最大数',
 };
 
@@ -63,9 +63,9 @@ const RULE_OPTIONS = Object.entries(RULE_KEY_LABELS).map(([value, label]) => ({ 
 
 // ===== 連荘条件 =====
 const RENCHAN_RULE = {
-  TENPAI: 'TENPAI_RENCHAN',  // テンパイ連荘
-  AGARI:  'AGARI_RENCHAN',   // 和了連荘
-  NONE:   'NO_RENCHAN',      // 連荘なし
+  TENPAI: 'tenpai_renchan',  // テンパイ連荘
+  AGARI:  'agari_renchan',   // 和了連荘
+  NONE:   'no_renchan',      // 連荘なし
 };
 
 const RENCHAN_RULE_LABELS = {
@@ -128,27 +128,27 @@ const RULE_PRESETS = {
   },
   [RULE_IDS.JPML]: {
     [RULE_KEY.NAME]                       : '連盟公式ルール',
-    [RULE_KEY.BASE]                       : RULE_IDS.JPML,                  // ベースルール
-    [RULE_KEY.INITIAL_SCORE]              : 30000,                          // 配給原点
-    [RULE_KEY.RETURN_SCORE]               : 30000,                          // 返し点
+    [RULE_KEY.BASE]                       : RULE_IDS.JPML,                          // ベースルール
+    [RULE_KEY.INITIAL_SCORE]              : 30000,                                  // 配給原点
+    [RULE_KEY.RETURN_SCORE]               : 30000,                                  // 返し点
     // 連盟公式ルールの順位点は浮きの人数で異なる
     [RULE_KEY.RANKING_POINTS]             : {  
-                                            1: [12, -1, -3,  -8],           // 1人浮き
-                                            2: [ 8,  4, -4,  -8],           // 2人浮き
-                                            3: [ 8,  3,  1, -12],           // 3人浮き
-                                            0: [ 8,  4, -4,  -8]},          // 4人沈み
-    [RULE_KEY.TENPAI_FEE]                 : 3000,                           // テンパイ料
-    [RULE_KEY.ROUNDING_MANGAN]            : false,                          // 切り上げ満貫
-    [RULE_KEY.ALLOW_GAME_END_BY_NEGATIVE] : false,                          // トビ終了
-    [RULE_KEY.END_ON_A_WIN]               : false,                          // アガリやめ
-    [RULE_KEY.END_ON_A_TENPAI]            : false,                          // テンパイやめ
-    [RULE_KEY.RENCHAN_RULE]               : RENCHAN_RULE.TENPAI,            // 連荘条件
-    [RULE_KEY.HEAD_HONOR_POINTS]          : 2,                              // 連風牌雀頭の符数
-    [RULE_KEY.TIE_RANKING_POINT_RULE]     : TIE_RANKING_POINT_RULE.SHARED,  // 同点時の順位決定
-    [RULE_KEY.KYOTAKU_SETTLEMENT]         : KYOTAKU_SETTLEMENT_TYPE.KEEP,   // 終局時の供託処理
-    [RULE_KEY.INCREMENT_TSUMIBO]          : true,                           // 積み棒の加算
-    [RULE_KEY.ALLOW_WEST_ROUND]           : false,                          // 西入
-    [RULE_KEY.MAX_YAKUMAN_LIMIT]          : 4,                              // 役満複合の最大数
+                                            1: [12, -1, -3,  -8],                   // 1人浮き
+                                            2: [ 8,  4, -4,  -8],                   // 2人浮き
+                                            3: [ 8,  3,  1, -12],                   // 3人浮き
+                                            0: [ 8,  4, -4,  -8]},                  // 4人沈み
+    [RULE_KEY.TENPAI_FEE]                 : 3000,                                   // テンパイ料
+    [RULE_KEY.ROUNDING_MANGAN]            : false,                                  // 切り上げ満貫
+    [RULE_KEY.ALLOW_GAME_END_BY_NEGATIVE] : false,                                  // トビ終了
+    [RULE_KEY.END_ON_A_WIN]               : false,                                  // アガリやめ
+    [RULE_KEY.END_ON_A_TENPAI]            : false,                                  // テンパイやめ
+    [RULE_KEY.RENCHAN_RULE]               : RENCHAN_RULE.TENPAI,                    // 連荘条件
+    [RULE_KEY.HEAD_HONOR_POINTS]          : 2,                                      // 連風牌雀頭の符数
+    [RULE_KEY.TIE_RANKING_POINT_RULE]     : TIE_RANKING_POINT_RULE.SHARED,          // 同点時の順位決定
+    [RULE_KEY.KYOTAKU_SETTLEMENT]         : KYOTAKU_SETTLEMENT_TYPE.KEEP,           // 終局時の供託処理
+    [RULE_KEY.INCREMENT_TSUMIBO]          : true,                                   // 積み棒の加算
+    [RULE_KEY.ALLOW_WEST_ROUND]           : false,                                  // 西入
+    [RULE_KEY.MAX_YAKUMAN_LIMIT]          : 4,                                      // 役満複合の最大数
   },
   [RULE_IDS.NPM]: {
     [RULE_KEY.NAME]                       : '協会ルール',
@@ -209,41 +209,41 @@ const RULE_PRESETS = {
   },
   [RULE_IDS.RMU]: {
     [RULE_KEY.NAME]                       : 'RMUルール(A)',
-    [RULE_KEY.BASE]                       : RULE_IDS.RMU,                   // ベースルール
-    [RULE_KEY.INITIAL_SCORE]              : 30000,                          // 配給原点
-    [RULE_KEY.RETURN_SCORE]               : 30000,                          // 返し点
-    [RULE_KEY.RANKING_POINTS]             : [15, 5, -5, -15],               // 順位点配列
-    [RULE_KEY.TENPAI_FEE]                 : 3000,                           // テンパイ料
-    [RULE_KEY.ROUNDING_MANGAN]            : true,                           // 切り上げ満貫
-    [RULE_KEY.ALLOW_GAME_END_BY_NEGATIVE] : false,                          // トビ終了
-    [RULE_KEY.END_ON_A_WIN]               : false,                          // アガリやめ
-    [RULE_KEY.END_ON_A_TENPAI]            : false,                          // テンパイやめ
-    [RULE_KEY.RENCHAN_RULE]               : RENCHAN_RULE.TENPAI,            // 連荘条件
-    [RULE_KEY.HEAD_HONOR_POINTS]          : 2,                              // 連風牌雀頭の符数
-    [RULE_KEY.TIE_RANKING_POINT_RULE]     : TIE_RANKING_POINT_RULE.SHARED,  // 同点時の順位決定
-    [RULE_KEY.KYOTAKU_SETTLEMENT]         : KYOTAKU_SETTLEMENT_TYPE.KEEP,   // 終局時の供託処理
-    [RULE_KEY.INCREMENT_TSUMIBO]          : true,                           // 積み棒の加算
-    [RULE_KEY.ALLOW_WEST_ROUND]           : false,                          // 西入
-    [RULE_KEY.MAX_YAKUMAN_LIMIT]          : 4,                              // 役満複合の最大数
+    [RULE_KEY.BASE]                       : RULE_IDS.RMU,                           // ベースルール
+    [RULE_KEY.INITIAL_SCORE]              : 30000,                                  // 配給原点
+    [RULE_KEY.RETURN_SCORE]               : 30000,                                  // 返し点
+    [RULE_KEY.RANKING_POINTS]             : [15, 5, -5, -15],                       // 順位点配列
+    [RULE_KEY.TENPAI_FEE]                 : 3000,                                   // テンパイ料
+    [RULE_KEY.ROUNDING_MANGAN]            : true,                                   // 切り上げ満貫
+    [RULE_KEY.ALLOW_GAME_END_BY_NEGATIVE] : false,                                  // トビ終了
+    [RULE_KEY.END_ON_A_WIN]               : false,                                  // アガリやめ
+    [RULE_KEY.END_ON_A_TENPAI]            : false,                                  // テンパイやめ
+    [RULE_KEY.RENCHAN_RULE]               : RENCHAN_RULE.TENPAI,                    // 連荘条件
+    [RULE_KEY.HEAD_HONOR_POINTS]          : 2,                                      // 連風牌雀頭の符数
+    [RULE_KEY.TIE_RANKING_POINT_RULE]     : TIE_RANKING_POINT_RULE.SHARED,          // 同点時の順位決定
+    [RULE_KEY.KYOTAKU_SETTLEMENT]         : KYOTAKU_SETTLEMENT_TYPE.KEEP,           // 終局時の供託処理
+    [RULE_KEY.INCREMENT_TSUMIBO]          : true,                                   // 積み棒の加算
+    [RULE_KEY.ALLOW_WEST_ROUND]           : false,                                  // 西入
+    [RULE_KEY.MAX_YAKUMAN_LIMIT]          : 4,                                      // 役満複合の最大数
   },
   [RULE_IDS.MYU]: {
     [RULE_KEY.NAME]                       : 'ミュー（μ）リーグルール',
-    [RULE_KEY.BASE]                       : RULE_IDS.MYU,                   // ベースルール
-    [RULE_KEY.INITIAL_SCORE]              : 30000,                          // 配給原点
-    [RULE_KEY.RETURN_SCORE]               : 30000,                          // 返し点
-    [RULE_KEY.RANKING_POINTS]             : [12, 4, -4, -12],               // 順位点配列
-    [RULE_KEY.TENPAI_FEE]                 : 0,                              // テンパイ料
-    [RULE_KEY.ROUNDING_MANGAN]            : false,                          // 切り上げ満貫
-    [RULE_KEY.ALLOW_GAME_END_BY_NEGATIVE] : false,                          // トビ終了
-    [RULE_KEY.END_ON_A_WIN]               : false,                          // アガリやめ
-    [RULE_KEY.END_ON_A_TENPAI]            : false,                          // テンパイやめ
-    [RULE_KEY.RENCHAN_RULE]               : RENCHAN_RULE.TENPAI,            // 連荘条件
-    [RULE_KEY.HEAD_HONOR_POINTS]          : 2,                              // 連風牌雀頭の符数
-    [RULE_KEY.TIE_RANKING_POINT_RULE]     : TIE_RANKING_POINT_RULE.SHARED,  // 同点時の順位決定
-    [RULE_KEY.KYOTAKU_SETTLEMENT]         : KYOTAKU_SETTLEMENT_TYPE.KEEP,   // 終局時の供託処理
-    [RULE_KEY.INCREMENT_TSUMIBO]          : false,                          // 積み棒の加算
-    [RULE_KEY.ALLOW_WEST_ROUND]           : false,                          // 西入
-    [RULE_KEY.MAX_YAKUMAN_LIMIT]          : 4,                              // 役満複合の最大数
+    [RULE_KEY.BASE]                       : RULE_IDS.MYU,                           // ベースルール
+    [RULE_KEY.INITIAL_SCORE]              : 30000,                                  // 配給原点
+    [RULE_KEY.RETURN_SCORE]               : 30000,                                  // 返し点
+    [RULE_KEY.RANKING_POINTS]             : [12, 4, -4, -12],                       // 順位点配列
+    [RULE_KEY.TENPAI_FEE]                 : 0,                                      // テンパイ料
+    [RULE_KEY.ROUNDING_MANGAN]            : false,                                  // 切り上げ満貫
+    [RULE_KEY.ALLOW_GAME_END_BY_NEGATIVE] : false,                                  // トビ終了
+    [RULE_KEY.END_ON_A_WIN]               : false,                                  // アガリやめ
+    [RULE_KEY.END_ON_A_TENPAI]            : false,                                  // テンパイやめ
+    [RULE_KEY.RENCHAN_RULE]               : RENCHAN_RULE.TENPAI,                    // 連荘条件
+    [RULE_KEY.HEAD_HONOR_POINTS]          : 2,                                      // 連風牌雀頭の符数
+    [RULE_KEY.TIE_RANKING_POINT_RULE]     : TIE_RANKING_POINT_RULE.SHARED,          // 同点時の順位決定
+    [RULE_KEY.KYOTAKU_SETTLEMENT]         : KYOTAKU_SETTLEMENT_TYPE.KEEP,           // 終局時の供託処理
+    [RULE_KEY.INCREMENT_TSUMIBO]          : false,                                  // 積み棒の加算
+    [RULE_KEY.ALLOW_WEST_ROUND]           : false,                                  // 西入
+    [RULE_KEY.MAX_YAKUMAN_LIMIT]          : 4,                                      // 役満複合の最大数
   },
   [RULE_IDS.WRC]: {
     [RULE_KEY.NAME]                       : 'WRCルール',

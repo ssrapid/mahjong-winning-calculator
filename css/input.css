@@ -1,0 +1,9 @@
+.ranking-label {
+  /* visibility: hidden; */
+  color: #ccc;
+  font-size: 0.9em;
+}
+
+.ranking-label.active {
+  color: #000;
+}

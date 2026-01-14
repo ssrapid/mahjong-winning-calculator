@@ -1,0 +1,238 @@
+<div>
+  <label>ベースルール:
+    <select id="rulePresetSelect">
+      <!-- RULE_LABELSからJSで動的追加 -->
+    </select>
+  </label>
+</div>
+
+<div>
+  <label>
+    <input type="number" id="input_initialScore" value="25000" step="100">
+    点持ち
+  </label>
+  <label>
+    <input type="number" id="input_returnScore" value="30000" step="100">
+    点返し
+  </label>
+</div>
+<div>
+  <label>順位点:
+    <table>
+      <tbody>
+        <tr>
+          <th>
+            <span class="ranking-label" data-ranking="1">1人浮き:</span>
+          </th>
+          <td>
+            <label>
+              1着:
+              <input type="number" id="input_ranking_point_1-1" class="input-ranking-point input-ranking-point1" step="1">
+            </label>
+          </td>
+          <td>
+            <label>
+              2着:
+              <input type="number" id="input_ranking_point_1-2" class="input-ranking-point input-ranking-point1" step="1">
+            </label>
+          </td>
+          <td>
+            <label>
+              3着:
+              <input type="number" id="input_ranking_point_1-3" class="input-ranking-point input-ranking-point1" step="1">
+            </label>
+          </td>
+          <td>
+            <label>
+              4着:
+              <input type="number" id="input_ranking_point_1-4" class="input-ranking-point input-ranking-point1" step="1">
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <span class="ranking-label" data-ranking="2">2人浮き:</span>
+          </th>
+          <td>
+            <label>
+              1着:
+              <input type="number" id="input_ranking_point_2-1" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+          <td>
+            <label>
+              2着:
+              <input type="number" id="input_ranking_point_2-2" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+          <td>
+            <label>
+              3着:
+              <input type="number" id="input_ranking_point_2-3" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+          <td>
+            <label>
+              4着:
+              <input type="number" id="input_ranking_point_2-4" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <span class="ranking-label" data-ranking="3">3人浮き:</span>
+          </th>
+          <td>
+            <label>
+              1着:
+              <input type="number" id="input_ranking_point_3-1" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+          <td>
+            <label>
+              2着:
+              <input type="number" id="input_ranking_point_3-2" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+          <td>
+            <label>
+              3着:
+              <input type="number" id="input_ranking_point_3-3" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+          <td>
+            <label>
+              4着:
+              <input type="number" id="input_ranking_point_3-4" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <span class="ranking-label" data-ranking="4">4人沈み:</span>
+          </th>
+          <td>
+            <label>
+              1着:
+              <input type="number" id="input_ranking_point_4-1" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+          <td>
+            <label>
+              2着:
+              <input type="number" id="input_ranking_point_4-2" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+          <td>
+            <label>
+              3着:
+              <input type="number" id="input_ranking_point_4-3" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+          <td>
+            <label>
+              4着:
+              <input type="number" id="input_ranking_point_4-4" class="input-ranking-point input-ranking-point2" step="1" disabled>
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </label>
+
+  <div>
+
+    <label>
+      テンパイ料: 場に
+      <input  type="number" id="input_tenpaiFee">
+      点
+    </label>
+
+    <label>切り上げ満貫:
+      <select id="select_rule_roundingMangan">
+        <option value=true selected>あり</option>
+        <option value=false>なし</option>
+      </select>
+    </label>
+
+    <label>トビ終了:
+      <select id="select_rule_allowGameEndByNegative">
+        <option value=true>あり</option>
+        <option value=false selected>なし</option>
+      </select>
+    </label>
+
+    <label>アガリやめ:
+      <select id="select_rule_endOnAWin">
+        <option value=true>あり</option>
+        <option value=false selected>なし</option>
+      </select>
+    </label>
+
+    <label>テンパイやめ:
+      <select id="select_rule_endOnATenpai">
+        <option value=true>あり</option>
+        <option value=false selected>なし</option>
+      </select>
+    </label>
+
+    <label>西入:
+      <select id="select_rule_allowWestRound">
+        <option value=true>あり</option>
+        <option value=false selected>なし</option>
+      </select>
+    </label>
+
+    <label>
+      トップ必要点数:
+      <input  type="number" id="input_rule_minimumTopScore" value="25000" step="100" disabled>
+      点
+    </label>
+
+  </div>
+
+  <div>
+    <label>同点時の順位:
+      <select id="select_rule_tieRankingPointRule">
+        <option value="shared" selected>同順位(順位点折半)</option>
+        <option value="seat_order">席順で決定</option>
+      </select>
+    </label>
+
+    <label>終局時の残供託:
+      <select id="select_rule_kyotakuSettlement">
+        <option value="keep">供託のまま</option>
+        <option value="top_shared" selected>トップ取り(同点時分配)</option>
+        <option value="top_only_seat">トップ取り(同点時上家優先)</option>
+      </select>
+    </label>
+
+    <label>連荘条件:
+      <select id="select_rule_renchanRule">
+        <option value="tenpai_renchan" selected>テンパイ連荘</option>
+        <option value="agari_renchan">アガリ連荘</option>
+        <option value="no_renchan">連荘なし</option>
+      </select>
+    </label>
+
+    <label>積み棒の加算:
+      <select id="select_rule_incrementTsumibo">
+        <option value=true selected>あり</option>
+        <option value=false>なし</option>
+      </select>
+    </label>
+
+    <label>最大和了点:
+      <select id="select_rule_maxYakumanLimit">
+        <option value=1>役満</option>
+        <option value=2>2倍役満</option>
+        <option value=3>3倍役満</option>
+        <option value=4 selected>4倍役満</option>
+        <option value=5>5倍役満</option>
+        <option value=6>6倍役満</option>
+      </select>
+    </label>
+
+  </div>
+
+</div>

@@ -4,8 +4,9 @@
   <head>
     <meta charset="UTF-8">
     <title>麻雀条件計算ツール</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/mainTable.css">
     <link rel="stylesheet" href="./css/tab.css">
+    <link rel="stylesheet" href="./css/input.css">
   </head>
 
   <body>
@@ -16,12 +17,8 @@
         <li class="tab__menu-item" data-tab="03">menu3</li>
       </ul>
       <div class="tab__panel">
-        <div class="tab__panel-box tab__panel-box0 is-show" data-panel="01">
-          <p class="tab__panel-text">1</p>
-        </div>
-        <div class="tab__panel-box tab__panel-box0" data-panel="02">
-          <p class="tab__panel-text">2</p>
-        </div>
+        <div id="tab__panel-main" class="tab__panel-box tab__panel-box0 is-show" data-panel="01"></div>
+        <div id="tab__panel-rule" class="tab__panel-box tab__panel-box0" data-panel="02"></div>
         <div class="tab__panel-box tab__panel-box0" data-panel="03">
           <p class="tab__panel-text">3</p>
         </div>
@@ -30,8 +27,20 @@
 
 
 
+    <script src="./js/myUtilities.js"></script>
+    <script src="./js/seatUtilities.js"></script>
+    <script src="./js/tab.js"></script>
+    <script src="./js/mainTable.js"></script>
+    <script>
+      loadHTML(
+        document.getElementById("tab__panel-main"),
+        "./tabpanels/main.html",
+        () => buildMainTable(document.getElementById("main-table-root")));
+      loadHTML(
+        document.getElementById("tab__panel-rule"),
+        "./tabpanels/rule.html");
+    </script>
 
     <script src="./js/app.js"></script>
-    <script src="./js/tab.js"></script>
   </body>
 </html>
