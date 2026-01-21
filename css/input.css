@@ -1,9 +1,64 @@
-.ranking-label {
-  /* visibility: hidden; */
+input[type="number"] {
+  text-align: right;
+}
+
+input:disabled {
   color: #ccc;
+}
+
+.input-name {
+  width: 10em;
+}
+.input-point, .input-score {
+  width: 6em;
+}
+
+#input_kyotaku, #input_tsumibo {
+  width: 3em;
+}
+
+#input_rule_initialScore, #input_rule_returnScore {
+  width: 6em;
+}
+
+.input-ranking-point {
+  width: 3em;
+}
+
+label.label-for-rankingPoint:has(input:disabled) {
+  color: #ccc;
+}
+
+.ranking-rowlabel {
+  color: #eee;
   font-size: 0.9em;
 }
 
-.ranking-label.active {
+.ranking-rowlabel.active {
   color: #000;
 }
+
+#input_rule_tenpaiFee {
+  width: 5em;
+}
+
+#input_rule_minimumTopScore {
+  width: 6em;
+}
+
+
+
+input[type="radio"],
+input[type="checkbox"],
+label:has(input[type="radio"]),
+label:has(input[type="checkbox"]) {
+  cursor: pointer;
+  user-select: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+

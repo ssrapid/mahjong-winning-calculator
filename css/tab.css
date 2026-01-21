@@ -51,6 +51,9 @@
   border-radius: 10px;
 }
 
+#tab__panel-main {
+  padding: 0px 0px;
+}
 .tab__panel-box0 {
   display: none;
 }

@@ -1,4 +1,6 @@
-// agariTemplates.js
+/**
+ * agariTemplates.js
+ */
 
 // 定数キー定義
 const TEMPLATE = {
@@ -17,11 +19,11 @@ const TEMPLATE = {
   IS_UNAVAILABLE_WHEN_RIICHI : "isUnavailableWhenRiichi", // リーチ時に存在しなくなる和了点(1000点など)
   YAKUMAN_LEVEL              : 'yakumanLevel',            // 役満複合
   DESCRIPTION                : 'description',             // 説明
-  TENPAI_GAIN                : 'tenpaiGain',
-  NOTEN_LOSS                 : 'notenLoss',
-  TENPAI_COUNT               : 'tenpaiCount',
-  NOTEN_COUNT                : 'notenCount',
-  TENPAI_FLAGS               : 'tenpaiFlags',
+  TENPAI_GAIN                : 'tenpaiGain',              // テンパイ料
+  NOTEN_LOSS                 : 'notenLoss',               // ノーテン罰符
+  TENPAI_COUNT               : 'tenpaiCount',             // テンパイ人数
+  NOTEN_COUNT                : 'notenCount',              // ノーテン人数
+  TENPAI_FLAGS               : 'tenpaiFlags',             // テンパイフラグ
 };
 
 const AGARI_TYPES = {
@@ -87,8 +89,8 @@ function getTsumoAgariTemplates2 (rule){
       [TEMPLATE.TSUMO_GAIN_AS_DEALER]       : 2100,
       [TEMPLATE.YAKUMAN_LEVEL]              : 0,
       [TEMPLATE.FU_AND_HAN]                 : [{ fu: 20, han: 2 }, { fu: 40, han: 1 }],
-      [TEMPLATE.IS_UNAVAILABLE_WHEN_RIICHI] : true, // リーチ+ツモで30符以上の2翻、または、リーチ+ツモ+平和で20符3翻あるので、リーチでこの点数にはならない
-      [TEMPLATE.DESCRIPTION]                : '',
+      [TEMPLATE.IS_UNAVAILABLE_WHEN_RIICHI] : true,
+      [TEMPLATE.DESCRIPTION]                : 'リーチ+ツモで30符以上の2翻、または、リーチ+ツモ+平和で20符3翻あるので、リーチでこの点数にはならない。',
     },
     {
       [TEMPLATE.ID]                         : 'tsumo_0408',
@@ -98,9 +100,9 @@ function getTsumoAgariTemplates2 (rule){
       [TEMPLATE.TSUMO_GAIN_AS_CHILD]        : 1600,
       [TEMPLATE.TSUMO_GAIN_AS_DEALER]       : 2400,
       [TEMPLATE.YAKUMAN_LEVEL]              : 0,
-      [TEMPLATE.FU_AND_HAN]                 : [{ fu: 50, han: 1 }],  // 25符2翻ツモはない(ツモ+七対子で3翻から)
-      [TEMPLATE.IS_UNAVAILABLE_WHEN_RIICHI] : true, // リーチ+ツモで2翻あるので、リーチでこの点数にはならない
-      [TEMPLATE.DESCRIPTION]                : '',
+      [TEMPLATE.FU_AND_HAN]                 : [{ fu: 50, han: 1 }],
+      [TEMPLATE.IS_UNAVAILABLE_WHEN_RIICHI] : true,
+      [TEMPLATE.DESCRIPTION]                : '25符2翻ツモはない(ツモ+七対子で3翻から)。リーチ+ツモで2翻あるので、リーチでこの点数にはならない。',
     },
     {
       [TEMPLATE.ID]                         : 'tsumo_0510',
@@ -122,8 +124,8 @@ function getTsumoAgariTemplates2 (rule){
       [TEMPLATE.TSUMO_GAIN_AS_DEALER]       : 3600,
       [TEMPLATE.YAKUMAN_LEVEL]              : 0,
       [TEMPLATE.FU_AND_HAN]                 : [{ fu: 70, han: 1 }],
-      [TEMPLATE.IS_UNAVAILABLE_WHEN_RIICHI] : true, // リーチ+ツモで2翻あるので、リーチでこの点数にはならない
-      [TEMPLATE.DESCRIPTION]                : '',
+      [TEMPLATE.IS_UNAVAILABLE_WHEN_RIICHI] : true,
+      [TEMPLATE.DESCRIPTION]                : 'リーチ+ツモで2翻あるので、リーチでこの点数にはならない',
     },
     {
       [TEMPLATE.ID]                         : 'tsumo_0713',
@@ -145,8 +147,8 @@ function getTsumoAgariTemplates2 (rule){
       [TEMPLATE.TSUMO_GAIN_AS_DEALER]    : 4500,
       [TEMPLATE.YAKUMAN_LEVEL]           : 0,
       [TEMPLATE.FU_AND_HAN]      : [{ fu: 90, han: 1 }],
-      [TEMPLATE.IS_UNAVAILABLE_WHEN_RIICHI] : true, // リーチ+ツモで2翻あるので、リーチでこの点数にはならない
-      [TEMPLATE.DESCRIPTION]             : '',
+      [TEMPLATE.IS_UNAVAILABLE_WHEN_RIICHI] : true,
+      [TEMPLATE.DESCRIPTION]             : 'リーチ+ツモで2翻あるので、リーチでこの点数にはならない',
     },
     {
       [TEMPLATE.ID]                         : 'tsumo_0816',

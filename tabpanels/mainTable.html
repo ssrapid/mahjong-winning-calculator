@@ -1,0 +1,195 @@
+<div id="main-table-root">
+  <table id="mainTable" class="main-table">
+    <thead id="mainTable_thead">
+      <tr id="tr_input_name">
+        <th>対局者名</th>
+        <th colspan="2">
+          <input type="text"
+            id="input_name_e"
+            class="input-name input-player_e"
+            placeholder="東家" data-field="name" data-seat="e">
+        </th>
+        <th colspan="2">
+          <input type="text"
+            id="input_name_s"
+            class="input-name input-player_s"
+            placeholder="南家" data-field="name" data-seat="s">
+        </th>
+        <th colspan="2">
+          <input type="text"
+            id="input_name_w"
+            class="input-name input-player_w"
+            placeholder="西家" data-field="name" data-seat="w">
+        </th>
+        <th colspan="2">
+          <input type="text"
+            id="input_name_n"
+            class="input-name input-player_n"
+            placeholder="北家" data-field="name" data-seat="n">
+        </th>
+        <th>
+          <button>席替え</button>
+        </th>
+      </tr>
+      <tr id="tr_input_point">
+        <th>開始前ポイント</th>
+        <td colspan="2">
+          <input type="number"
+            id="input_point_e"
+            class="input-point input-player_e"
+            value="0.0" step="0.1" data-field="point" data-seat="e">
+        </td>
+        <td colspan="2">
+          <input type="number"
+            id="input_point_s"
+            class="input-point input-player_s"
+            value="0.0" step="0.1" data-field="point" data-seat="s">
+        </td>
+        <td colspan="2">
+          <input type="number"
+            id="input_point_w"
+            class="input-point input-player_w"
+            value="0.0" step="0.1" data-field="point" data-seat="w">
+        </td>
+        <td colspan="2">
+          <input type="number"
+            id="input_point_n"
+            class="input-point input-player_n"
+            value="0.0" step="0.1" data-field="point" data-seat="n">
+        </td>
+        <td>
+          <button id="button_reset_point" data-field="point" data-value="0.0">reset</button>
+        </td>
+      </tr>
+      <tr id="tr_input_score">
+        <th>持ち点</th>
+        <td colspan="2">
+          <input type="number"
+            id="input_score_e"
+            class="input-score input-player_e"
+            value="25000" step="100" data-field="score" data-seat="e">
+        </td>
+        <td colspan="2">
+          <input type="number"
+            id="input_score_s"
+            class="input-score input-player_s"
+            value="25000" step="100" data-field="score" data-seat="s">
+        </td>
+        <td colspan="2">
+          <input type="number"
+            id="input_score_w"
+            class="input-score input-player_w"
+            value="25000" step="100" data-field="score" data-seat="w">
+        </td>
+        <td colspan="2">
+          <input type="number"
+            id="input_score_n"
+            class="input-score input-player_n"
+            value="25000" step="100" data-field="score" data-seat="n">
+        </td>
+        <td>
+          <button id="button_reset_score" data-field="score">reset</button>
+        </td>
+      </tr>
+      <tr id="tr_input_dealer">
+        <th>親番</th>
+        <td colspan="2">
+          <label>
+            <input type="radio"
+              id="input_dealer_e"
+              class="input-dealer input-player_e"
+              name="radio_dealer" value="e" data-field="dealer" data-seat="e">
+            親番
+          </label>
+        </td>
+        <td colspan="2">
+          <label>
+            <input type="radio"
+              id="input_dealer_s"
+              class="input-dealer input-player_s"
+              name="radio_dealer" value="s" data-field="dealer" data-seat="s">
+            親番
+          </label>
+        </td>
+        <td colspan="2">
+          <label>
+            <input type="radio"
+              id="input_dealer_w"
+              class="input-dealer input-player_w"
+              name="radio_dealer" value="w" data-field="dealer" data-seat="w">
+            親番
+          </label>
+        </td>
+        <td colspan="2">
+          <label>
+            <input type="radio"
+              id="input_dealer_n"
+              class="input-dealer input-player_n"
+              name="radio_dealer" value="n" data-field="dealer" data-seat="n" checked>
+            親番
+          </label>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>供託・積み棒</th>
+        <td colspan="9">
+          <div class="tr-kyotaku-tsumibo">
+            <div>
+              <label>
+                <input type="checkbox" id="input_finalRound" data-field="finalRound" checked>
+                オーラス
+              </label>
+            </div>
+            <div>
+              <label>積み棒:
+                <input type="number" id="input_tsumibo" value="0" data-field="tsumibo">
+              </label>
+              <button id="button_increment_tsumibo" data-field="tsumibo" data-add="+1">+1</button>
+              <button id="button_reset_tsumibo" data-field="tsumibo" data-value="0">
+                Reset
+              </button>
+            </div>
+            <div>
+              <label>供託:
+                <input type="number" id="input_kyotaku" value="0" data-field="kyotaku">
+              </label>
+              <button id="button_increment_kyotaku" type="button" data-field="kyotaku" data-add="+1">+1</button>
+              <button id="button_reset_kyotaku" type="button" data-field="kyotaku" data-value="0">Reset</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>リーチ</th>
+        <td colspan="2">
+          <label>
+            <input type="checkbox" id="input_riichi_e" class="input-riichi input-player_e" data-field="riichi" data-seat="e">
+            リーチ
+          </label>
+        </td>
+        <td colspan="2">
+          <label>
+            <input type="checkbox" id="input_riichi_s" class="input-riichi input-player_s" data-field="riichi" data-seat="s">
+            リーチ
+          </label>
+        </td>
+        <td colspan="2">
+          <label>
+            <input type="checkbox" id="input_riichi_w" class="input-riichi input-player_w" data-field="riichi" data-seat="w">
+            リーチ
+          </label>
+        </td>
+        <td colspan="2">
+          <label>
+            <input type="checkbox" id="input_riichi_n" class="input-riichi input-player_n" data-field="riichi" data-seat="n">
+            リーチ
+          </label>
+        </td>
+        <td>
+          <button id="button_reset_riichi" data-field="riichi" data-value="false">reset</button>
+        </td>
+      </tr>
+    </thead>
+  </table>
+</div>
