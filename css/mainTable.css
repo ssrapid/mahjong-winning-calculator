@@ -51,6 +51,6 @@
 
 .tentative-game-point div .unit,
 .tentative-total-point div .unit {
-  opacity: .7;
+  opacity: .9;
   font-size: .8em;
 }

@@ -6,26 +6,26 @@
         <th colspan="2">
           <input type="text"
             id="input_name_e"
-            class="input-name input-player_e"
-            placeholder="東家" data-field="name" data-value-type="string" data-seat="e">
+            class="input-name input-player input-player_e"
+            placeholder="対局者名(東家)" data-field="name" data-value-type="string" data-seat="e">
         </th>
         <th colspan="2">
           <input type="text"
             id="input_name_s"
-            class="input-name input-player_s"
-            placeholder="南家" data-field="name" data-value-type="string" data-seat="s">
+            class="input-name input-player input-player_s"
+            placeholder="対局者名(南家)" data-field="name" data-value-type="string" data-seat="s">
         </th>
         <th colspan="2">
           <input type="text"
             id="input_name_w"
-            class="input-name input-player_w"
-            placeholder="西家" data-field="name" data-value-type="string" data-seat="w">
+            class="input-name input-player input-player_w"
+            placeholder="対局者名(西家)" data-field="name" data-value-type="string" data-seat="w">
         </th>
         <th colspan="2">
           <input type="text"
             id="input_name_n"
-            class="input-name input-player_n"
-            placeholder="北家" data-field="name" data-value-type="string" data-seat="n">
+            class="input-name input-player input-player_n"
+            placeholder="対局者名(北家)" data-field="name" data-value-type="string" data-seat="n">
         </th>
         <th>
           <!-- 未実装のためdisabled -->
@@ -33,29 +33,29 @@
         </th>
       </tr>
       <tr id="tr_input_point">
-        <th>開始前ポイント</th>
+        <th>ポイント</th>
         <td colspan="2">
           <input type="number"
             id="input_point_e"
-            class="input-point input-player_e"
+            class="input-point input-player input-player_e"
             value="0.0" step="0.1" data-field="point" data-value-type="number" data-seat="e">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_point_s"
-            class="input-point input-player_s"
+            class="input-point input-player input-player_s"
             value="0.0" step="0.1" data-field="point" data-value-type="number" data-seat="s">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_point_w"
-            class="input-point input-player_w"
+            class="input-point input-player input-player_w"
             value="0.0" step="0.1" data-field="point" data-value-type="number" data-seat="w">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_point_n"
-            class="input-point input-player_n"
+            class="input-point input-player input-player_n"
             value="0.0" step="0.1" data-field="point" data-value-type="number" data-seat="n">
         </td>
         <td>
@@ -67,25 +67,25 @@
         <td colspan="2">
           <input type="number"
             id="input_score_e"
-            class="input-score input-player_e"
+            class="input-score input-player input-player_e"
             step="100" data-field="score" data-value-type="number" data-seat="e">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_score_s"
-            class="input-score input-player_s"
+            class="input-score input-player input-player_s"
             step="100" data-field="score" data-value-type="number" data-seat="s">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_score_w"
-            class="input-score input-player_w"
+            class="input-score input-player input-player_w"
             step="100" data-field="score" data-value-type="number" data-seat="w">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_score_n"
-            class="input-score input-player_n"
+            class="input-score input-player input-player_n"
             step="100" data-field="score" data-value-type="number" data-seat="n">
         </td>
         <td>
@@ -98,7 +98,7 @@
           <label>
             <input type="radio"
               id="input_dealer_e"
-              class="input-dealer input-player_e"
+              class="input-dealer input-player input-player_e"
               name="radio_dealer" value="e" data-field="dealer" data-seat="e">
             親番
           </label>
@@ -107,7 +107,7 @@
           <label>
             <input type="radio"
               id="input_dealer_s"
-              class="input-dealer input-player_s"
+              class="input-dealer input-player input-player_s"
               name="radio_dealer" value="s" data-field="dealer" data-seat="s">
             親番
           </label>
@@ -116,7 +116,7 @@
           <label>
             <input type="radio"
               id="input_dealer_w"
-              class="input-dealer input-player_w"
+              class="input-dealer input-player input-player_w"
               name="radio_dealer" value="w" data-field="dealer" data-seat="w">
             親番
           </label>
@@ -125,7 +125,7 @@
           <label>
             <input type="radio"
               id="input_dealer_n"
-              class="input-dealer input-player_n"
+              class="input-dealer input-player input-player_n"
               name="radio_dealer" value="n" data-field="dealer" data-seat="n" checked>
             親番
           </label>
@@ -165,25 +165,25 @@
         <th>リーチ</th>
         <td colspan="2">
           <label>
-            <input type="checkbox" id="input_riichi_e" class="input-riichi input-player_e" data-field="riichi" data-seat="e">
+            <input type="checkbox" id="input_riichi_e" class="input-riichi input-player input-player_e" data-field="riichi" data-seat="e">
             リーチ
           </label>
         </td>
         <td colspan="2">
           <label>
-            <input type="checkbox" id="input_riichi_s" class="input-riichi input-player_s" data-field="riichi" data-seat="s">
+            <input type="checkbox" id="input_riichi_s" class="input-riichi input-player input-player_s" data-field="riichi" data-seat="s">
             リーチ
           </label>
         </td>
         <td colspan="2">
           <label>
-            <input type="checkbox" id="input_riichi_w" class="input-riichi input-player_w" data-field="riichi" data-seat="w">
+            <input type="checkbox" id="input_riichi_w" class="input-riichi input-player input-player_w" data-field="riichi" data-seat="w">
             リーチ
           </label>
         </td>
         <td colspan="2">
           <label>
-            <input type="checkbox" id="input_riichi_n" class="input-riichi input-player_n" data-field="riichi" data-seat="n">
+            <input type="checkbox" id="input_riichi_n" class="input-riichi input-player input-player_n" data-field="riichi" data-seat="n">
             リーチ
           </label>
         </td>

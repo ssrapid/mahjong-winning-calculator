@@ -7,10 +7,11 @@ input:disabled {
 }
 
 .input-name {
-  width: 10em;
+  width: 7em;
+  text-align: center;
 }
 .input-point, .input-score {
-  width: 6em;
+  width: 5em;
 }
 
 #input_kyotaku, #input_tsumibo {
@@ -64,7 +65,9 @@ button {
 #button_reset_tsumibo,
 #button_increment_kyotaku,
 #button_reset_kyotaku {
-  min-width: 5em;
+  font-size: .7em;
+  min-width: 4rem;
+  min-height: 1.2rem;
 }
 
 .button-shortcut {
