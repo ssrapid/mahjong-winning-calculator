@@ -1,3 +1,7 @@
+import { loadTextFile } from "./html-loader.js";
+import { promise_tab1 } from "../main.js";
+import { expandTable } from "./tabpanel-main.js";
+
 
 
 /**
@@ -14,4 +18,7 @@ export function setupCalculateButton() {
  */
 function calculateButtonHandler() {
   console.log('計算');
+  expandTable();
+
 }
+

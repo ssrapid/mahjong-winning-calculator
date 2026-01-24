@@ -1,10 +1,10 @@
-import { RULE_KEY } from "./ruleDef.js"
+import { RULE_KEY } from "./define.js"
 
 /**
  * @typedef {Object} presetRule
  * @property {number} order
  * @property {boolean} hidden
- * @property {import("./ruleDef.js").RuleObject} rule
+ * @property {import("./define.js").RuleObject} rule
  */
 
 /**

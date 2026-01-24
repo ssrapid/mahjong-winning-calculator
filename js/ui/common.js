@@ -1,11 +1,11 @@
-import { state } from "../main.js"
-import { createSeatMap } from "../seatMap.js";
+import { state } from '../state.js'
+import * as SeatMap from '../seat-map/index.js';
 
 
 /**
  * 
  * @param {HTMLSelectElement} selectElement 
- * @param {{value:any, label:string}[]} entries 
+ * @param {{value:string, label:string}[]} entries 
  */
 export function setSelectOptions(selectElement, entries) {
   entries.forEach(({value, label}) => {
@@ -17,6 +17,10 @@ export function setSelectOptions(selectElement, entries) {
   return selectElement;
 }
 
+/**
+ * 
+ * @param {Event} e 
+ */
 export function selectAllOnFocus(e){
   e.target.select();
 }
@@ -62,7 +66,7 @@ export function updateState(e) {
     if(typeof state[field] !== 'object') {
       // stateの対応フィールドにobjectが存在しない場合
       console.warn(`state.${field}にobjectが存在しないか、object型以外の値が存在します。`);
-      state[field] = createSeatMap();
+      state[field] = SeatMap.create();
     }
     state[field][seat] = value;
   } else {

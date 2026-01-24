@@ -1,37 +1,52 @@
-import { loadHTML } from "./ui/htmlLoader.js";
-import { buildMainTable } from "./ui/buildMainTable.js";
-import { setupCalculateButton } from "./ui/calculateButton.js";
-import tabPanel_main from "./ui/tabPanel__main.js";
-import tabPanel_rule from "./ui/tabPanel__rule.js";
+/**
+ * main.js
+ */
 
-export { state } from "./state.js"
+
+import { insertHTML } from "./ui/html-loader.js";
+import { setupCalculateButton } from "./ui/calculateButton.js";
+import { resetScore } from "./ui/tabpanel-main.js";
+
+import tabPanel_main from "./ui/tabpanel-main.js";
+import tabPanel_rule from "./ui/tabpanel-rule.js";
+
+// import * as SeatUtilities from './seat-utilities/index.js'
+
+
+// import { state } from "./state.js"
+
+/**
+ * @type {Promise<HTMLElement>}
+ */
+export const promise_tab1 = insertHTML(
+  document.getElementById("tab__panel-main"),
+  "tabpanels/main.html"
+).then(async panel => {
+  const root = panel.querySelector("#main-table-root");
+  await insertHTML(root, "tabpanels/mainTable.html");
+  tabPanel_main(root);
+  return panel;
+});
+
+export const promise_tab2 = insertHTML(
+  document.getElementById("tab__panel-rule"),
+  "tabpanels/rule.html"
+).then (panel => {
+  tabPanel_rule(panel);
+  return panel;
+});
+
+
 
 
 
 function main() {
-  const promise_tab1 = loadHTML(
-    document.getElementById("tab__panel-main"),
-    "tabpanels/main.html"
-  ).then (panel => {
-    const root = panel.querySelector("#main-table-root");
-    // buildMainTable(root);
-    loadHTML(root, "tabpanels/mainTable.html");
-    return {panel, root};
-  }).then (({panel, root}) => {
-    tabPanel_main(root);
-    return panel;
-  });
 
-  const promise_tab2 = loadHTML(
-    document.getElementById("tab__panel-rule"),
-    "tabpanels/rule.html"
-  ).then (panel => {
-    tabPanel_rule(panel);
-    return panel;
-  });
+
 
   // 計算ボタンの有効化は各タブを読み込んだ後に実行する
   Promise.all([promise_tab1, promise_tab2]).then(() => {
+    resetScore();
     setupCalculateButton();
   })
 

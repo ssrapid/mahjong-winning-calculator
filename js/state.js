@@ -1,37 +1,41 @@
-import { createSeatMap } from "./seatUtilities.js";
+import * as SeatMap  from './seat-map/index.js';
 
 export const state = {
 
-  /**
-   * @type {import("./seatMap.js").seatMap<string|null>}
-   */
-  name: createSeatMap(),
 
 
   /**
    * 
    */
-  players: createSeatMap(() => ({
+  players: SeatMap.create(() => ({
     /** @type {string} */
     name: null,
     /** @type {number} */
-    point: null,
+    point: 0,
     /** @type {number} */
     score: null
   })),
 
+  riichi: SeatMap.create(false),
+
+  tableInfo: {
+    dealer : 'n',
+    finalRound: true,
+    kyotaku: 0,
+    tsumibo: 0
+  },
 
   /**
-   * @type {import("./ruleDef.js").RULE_ID} 
+   * @type {import("./rulemodule/ruleDef.js").RULE_ID} 
    */
   baseRule: null,
 
   /**
    * ルールオブジェクト
-   * @type {import("./ruleDef.js").RuleObject}
+   * @type {import("./rulemodule/ruleDef.js").RuleObject}
    */
   rule : null
-  
+
 }
 
 window.__state__ = state;

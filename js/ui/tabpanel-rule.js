@@ -1,9 +1,9 @@
-import { state } from "../main.js";
-import { setSelectOptions, selectAllOnFocus } from "./common.js";
-import { toBoolean } from "../myUtilities.js";
+import { state } from '../state.js';
+import { setSelectOptions, selectAllOnFocus } from './common.js';
+import { toBoolean } from '../my-utilities/index.js';
 
-import { RULE_IDS, RULE_KEY, TIE_SCORE_RULE, TIE_SCORE_RULE_OPTIONS, KYOTAKU_SETTLEMENT_TYPE, KYOTAKU_SETTLEMENT_OPTIONS, RENCHAN_RULE, RENCHAN_RULE_OPTIONS } from "../ruleDef.js";
-import { getBaseRuleOptions, getRulePreset } from "../ruleLoader.js";
+import { RULE_IDS, RULE_KEY, TIE_SCORE_RULE, TIE_SCORE_RULE_OPTIONS, KYOTAKU_SETTLEMENT_TYPE, KYOTAKU_SETTLEMENT_OPTIONS, RENCHAN_RULE, RENCHAN_RULE_OPTIONS } from "../rule/define.js";
+import { getBaseRuleOptions, getRulePreset } from '../rule/loader.js';
 
 
 /** @type {HTMLElement|Document} */
@@ -18,16 +18,16 @@ let input_rule_initialScore;
 /** @type {HTMLInputElement} */
 let input_rule_returnScore;
 
-/** 順位点の入力ボックス(全て) @type {HTMLCollectionOf<HTMLInputElement>} */
+/** 順位点の入力ボックス(全て) @type {NodeListOf<HTMLInputElement>} */
 let inputs_rankingPoints_all;
 
-/** 順位点の入力ボックス(共通) @type {HTMLCollectionOf<HTMLInputElement>} */
+/** 順位点の入力ボックス(共通) @type {NodeListOf<HTMLInputElement>} */
 let inputs_rankingPoints_common;
 
-/** 順位点の入力ボックス(JPML用) @type {HTMLCollectionOf<HTMLInputElement>} */
+/** 順位点の入力ボックス(JPML用) @type {NodeListOf<HTMLInputElement>} */
 let inputs_rankingPoints_for_jpml;
 
-/** 浮き人数ラベル @type {HTMLCollectionOf<HTMLSpanElement>} */
+/** 浮き人数ラベル @type {NodeListOf<HTMLSpanElement>} */
 let spans_rowindexOfRankingPoints;
 
 /** テンパイ料 @type {HTMLInputElement} */
@@ -294,7 +294,7 @@ export function setReturnScore(value) {
 
 /**
  *
- * @param {import("../ruleDef.js").RankingPointsDef} rankingPoints
+ * @param {import("../rulemodule/ruleDef.js").RankingPointsDef} rankingPoints
  */
 export function setRankingPoints(rankingPoints) {
   ensureDom();
@@ -457,8 +457,8 @@ function initSelectOfRenchanRule(){
 
 /**
  *
- * @param {import("../ruleDef.js").RENCHAN_RULE_TYPE} value
- * @returns {import("../ruleDef.js").RENCHAN_RULE_TYPE}
+ * @param {import("../rulemodule/ruleDef.js").RENCHAN_RULE_TYPE} value
+ * @returns {import("../rulemodule/ruleDef.js").RENCHAN_RULE_TYPE}
  */
 export function setRenchanRule(value) {
   ensureDom();

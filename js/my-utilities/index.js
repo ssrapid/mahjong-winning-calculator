@@ -1,16 +1,23 @@
 /**
- * myUtilities.js
+ * myUtilities
  * 汎用ユーティリティ
  */
 
-export { getByPath } from "./myUtilities/getByPath.js";
 
-export { getRanks } from "./myUtilities/getRanks.js";
+export * from './access-by-path.js'
+export * from './boolean-range.js'
+export * from './get-ranks.js';
+export * from './ordinal.js';
+export * from './to-number.js';
+export * from './to-boolean.js';
 
-export { toNumber } from "./myUtilities/toNumber.js";
-export { toBoolean } from "./myUtilities/toBoolean.js";
 
-export { findBooleanRanges, findBooleanRangesWithException } from "./myUtilities/BooleanRange.js";
+
+
+
+
+
+
 
 
 /**

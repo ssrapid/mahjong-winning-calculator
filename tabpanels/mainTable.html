@@ -7,28 +7,29 @@
           <input type="text"
             id="input_name_e"
             class="input-name input-player_e"
-            placeholder="東家" data-field="name" data-seat="e">
+            placeholder="東家" data-field="name" data-value-type="string" data-seat="e">
         </th>
         <th colspan="2">
           <input type="text"
             id="input_name_s"
             class="input-name input-player_s"
-            placeholder="南家" data-field="name" data-seat="s">
+            placeholder="南家" data-field="name" data-value-type="string" data-seat="s">
         </th>
         <th colspan="2">
           <input type="text"
             id="input_name_w"
             class="input-name input-player_w"
-            placeholder="西家" data-field="name" data-seat="w">
+            placeholder="西家" data-field="name" data-value-type="string" data-seat="w">
         </th>
         <th colspan="2">
           <input type="text"
             id="input_name_n"
             class="input-name input-player_n"
-            placeholder="北家" data-field="name" data-seat="n">
+            placeholder="北家" data-field="name" data-value-type="string" data-seat="n">
         </th>
         <th>
-          <button>席替え</button>
+          <!-- 未実装のためdisabled -->
+          <button id="button_change_seat" tabindex="-1" disabled>席替え</button>
         </th>
       </tr>
       <tr id="tr_input_point">
@@ -37,28 +38,28 @@
           <input type="number"
             id="input_point_e"
             class="input-point input-player_e"
-            value="0.0" step="0.1" data-field="point" data-seat="e">
+            value="0.0" step="0.1" data-field="point" data-value-type="number" data-seat="e">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_point_s"
             class="input-point input-player_s"
-            value="0.0" step="0.1" data-field="point" data-seat="s">
+            value="0.0" step="0.1" data-field="point" data-value-type="number" data-seat="s">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_point_w"
             class="input-point input-player_w"
-            value="0.0" step="0.1" data-field="point" data-seat="w">
+            value="0.0" step="0.1" data-field="point" data-value-type="number" data-seat="w">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_point_n"
             class="input-point input-player_n"
-            value="0.0" step="0.1" data-field="point" data-seat="n">
+            value="0.0" step="0.1" data-field="point" data-value-type="number" data-seat="n">
         </td>
         <td>
-          <button id="button_reset_point" data-field="point" data-value="0.0">reset</button>
+          <button id="button_reset_point" data-field="point" data-value="0.0" tabindex="-1">reset</button>
         </td>
       </tr>
       <tr id="tr_input_score">
@@ -67,28 +68,28 @@
           <input type="number"
             id="input_score_e"
             class="input-score input-player_e"
-            value="25000" step="100" data-field="score" data-seat="e">
+            step="100" data-field="score" data-value-type="number" data-seat="e">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_score_s"
             class="input-score input-player_s"
-            value="25000" step="100" data-field="score" data-seat="s">
+            step="100" data-field="score" data-value-type="number" data-seat="s">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_score_w"
             class="input-score input-player_w"
-            value="25000" step="100" data-field="score" data-seat="w">
+            step="100" data-field="score" data-value-type="number" data-seat="w">
         </td>
         <td colspan="2">
           <input type="number"
             id="input_score_n"
             class="input-score input-player_n"
-            value="25000" step="100" data-field="score" data-seat="n">
+            step="100" data-field="score" data-value-type="number" data-seat="n">
         </td>
         <td>
-          <button id="button_reset_score" data-field="score">reset</button>
+          <button id="button_reset_score" data-field="score" tabindex="-1">reset</button>
         </td>
       </tr>
       <tr id="tr_input_dealer">
@@ -145,8 +146,8 @@
               <label>積み棒:
                 <input type="number" id="input_tsumibo" value="0" data-field="tsumibo">
               </label>
-              <button id="button_increment_tsumibo" data-field="tsumibo" data-add="+1">+1</button>
-              <button id="button_reset_tsumibo" data-field="tsumibo" data-value="0">
+              <button id="button_increment_tsumibo" data-field="tsumibo" data-add="+1" tabindex="-1">+1</button>
+              <button id="button_reset_tsumibo" data-field="tsumibo" data-value="0" tabindex="-1">
                 Reset
               </button>
             </div>
@@ -154,8 +155,8 @@
               <label>供託:
                 <input type="number" id="input_kyotaku" value="0" data-field="kyotaku">
               </label>
-              <button id="button_increment_kyotaku" type="button" data-field="kyotaku" data-add="+1">+1</button>
-              <button id="button_reset_kyotaku" type="button" data-field="kyotaku" data-value="0">Reset</button>
+              <button id="button_increment_kyotaku" type="button" data-field="kyotaku" data-add="+1" tabindex="-1">+1</button>
+              <button id="button_reset_kyotaku" type="button" data-field="kyotaku" data-value="0" tabindex="-1">Reset</button>
             </div>
           </div>
         </td>
@@ -187,9 +188,136 @@
           </label>
         </td>
         <td>
-          <button id="button_reset_riichi" data-field="riichi" data-value="false">reset</button>
+          <button id="button_reset_riichi" data-field="riichi" data-value="false" tabindex="-1">reset</button>
         </td>
       </tr>
     </thead>
+    <tbody id="tbody_now" class="mainTable-tbody">
+      <tr>
+        <th>Game</th>
+        <!-- <td class="tentative-game-point" colspan="2" data-seat="e">(計算前)</td> -->
+        <td colspan="2" class="tentative-game-point" data-seat="e">
+          <div data-seat="e">
+            <span class="rank">1st</span>
+            <span class="point">50.0</span>
+            <span class="unit">Pt</span>
+          </div>
+        </td>
+        <td class="tentative-game-point" colspan="2" data-seat="s">(計算前)</td>
+        <td class="tentative-game-point" colspan="2" data-seat="w">(計算前)</td>
+        <td class="tentative-game-point" colspan="2" data-seat="n">(計算前)</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Total</th>
+        <!-- <td class="tentative-total-point" colspan="2" data-seat="e">(計算前)</td> -->
+        <td colspan="2" class="tentative-total-point" data-seat="e">
+          <div data-seat="e">
+            <span class="point">100.0</span>
+            <span class="unit">Pt</span>
+          </div>
+        </td>
+        <td class="tentative-total-point" colspan="2" data-seat="s">(計算前)</td>
+        <td class="tentative-total-point" colspan="2" data-seat="w">(計算前)</td>
+        <td class="tentative-total-point" colspan="2" data-seat="n">(計算前)</td>
+        <td></td>
+      </tr>
+    </tbody>
+    <tbody id="tbody_result" class="mainTable-tbody">
+      <tr>
+        <th>ツモ条件</th>
+        <td colspan="2" data-seat="e">(計算前)</td>
+        <td colspan="2" data-seat="s">(計算前)</td>
+        <td colspan="2" data-seat="w">(計算前)</td>
+        <td colspan="2" data-seat="n">(計算前)</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th rowspan="3">ロン条件</th>
+        <td class="td-target" data-seat="e" data-target="s" data-suffix="から">南家から</td>
+        <td data-seat="e" data-target="s">(計算前)</td>
+        <td data-seat="s" data-target="e" data-suffix="から">東家から</td>
+        <td data-seat="s" data-target="e">(計算前)</td>
+        <td data-seat="w" data-target="e" data-suffix="から">東家から</td>
+        <td data-seat="w" data-target="e">(計算前)</td>
+        <td data-seat="n" data-target="e" data-suffix="から">東家から</td>
+        <td data-seat="n" data-target="e">(計算前)</td>
+        <td rowspan="3"></td>
+      </tr>
+      <tr>
+        <td data-seat="e" data-target="w" data-suffix="から">西家から</td>
+        <td data-seat="e" data-target="w">(計算前)</td>
+        <td data-seat="s" data-target="w" data-suffix="から">西家から</td>
+        <td data-seat="s" data-target="w">(計算前)</td>
+        <td data-seat="w" data-target="s" data-suffix="から">南家から</td>
+        <td data-seat="w" data-target="s">(計算前)</td>
+        <td data-seat="n" data-target="s" data-suffix="から">南家から</td>
+        <td data-seat="n" data-target="s">(計算前)</td>
+      </tr>
+      <tr>
+        <td data-seat="e" data-target="n" data-suffix="から">北家から</td>
+        <td data-seat="e" data-target="n">(計算前)</td>
+        <td data-seat="s" data-target="n" data-suffix="から">北家から</td>
+        <td data-seat="s" data-target="n">(計算前)</td>
+        <td data-seat="w" data-target="n" data-suffix="から">北家から</td>
+        <td data-seat="w" data-target="n">(計算前)</td>
+        <td data-seat="n" data-target="w" data-suffix="から">西家から</td>
+        <td data-seat="n" data-target="w">(計算前)</td>
+      </tr>
+      <tr>
+        <th rowspan="3">放銃条件</th>
+        <td data-seat="e" data-target="s" data-suffix="へ">南家へ</td>
+        <td data-seat="e" data-target="s">(計算前)</td>
+        <td data-seat="s" data-target="e" data-suffix="へ">東家へ</td>
+        <td data-seat="s" data-target="e">(計算前)</td>
+        <td data-seat="w" data-target="e" data-suffix="へ">東家へ</td>
+        <td data-seat="w" data-target="e">(計算前)</td>
+        <td data-seat="n" data-target="e" data-suffix="へ">東家へ</td>
+        <td data-seat="n" data-target="e">(計算前)</td>
+        <td rowspan="3"></td>
+      </tr>
+      <tr>
+        <td data-seat="e" data-target="w" data-suffix="へ">西家へ</td>
+        <td data-seat="e" data-target="w">(計算前)</td>
+        <td data-seat="s" data-target="w" data-suffix="へ">西家へ</td>
+        <td data-seat="s" data-target="w">(計算前)</td>
+        <td data-seat="w" data-target="s" data-suffix="へ">南家へ</td>
+        <td data-seat="w" data-target="s">(計算前)</td>
+        <td data-seat="n" data-target="s" data-suffix="へ">南家へ</td>
+        <td data-seat="n" data-target="s">(計算前)</td>
+      </tr>
+      <tr>
+        <td data-seat="e" data-target="n" data-suffix="へ">北家へ</td>
+        <td data-seat="e" data-target="n">(計算前)</td>
+        <td data-seat="s" data-target="n" data-suffix="へ">北家へ</td>
+        <td data-seat="s" data-target="n">(計算前)</td>
+        <td data-seat="w" data-target="n" data-suffix="へ">北家へ</td>
+        <td data-seat="w" data-target="n">(計算前)</td>
+        <td data-seat="n" data-target="w" data-suffix="へ">西家へ</td>
+        <td data-seat="n" data-target="w">(計算前)</td>
+      </tr>
+      <tr>
+        <th rowspan="2">流局時条件</th>
+        <td>テンパイ</td>
+        <td data-seat="e">(計算前)</td>
+        <td>テンパイ</td>
+        <td data-seat="e">(計算前)</td>
+        <td>テンパイ</td>
+        <td data-seat="e">(計算前)</td>
+        <td>テンパイ</td>
+        <td data-seat="e">(計算前)</td>
+        <td rowspan="2"></td>
+      </tr>
+      <tr>
+        <td>ノーテン</td>
+        <td data-seat="e">(計算前)</td>
+        <td>ノーテン</td>
+        <td data-seat="e">(計算前)</td>
+        <td>ノーテン</td>
+        <td data-seat="e">(計算前)</td>
+        <td>ノーテン</td>
+        <td data-seat="e">(計算前)</td>
+      </tr>
+    </tbody>
   </table>
 </div>

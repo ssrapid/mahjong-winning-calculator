@@ -1,7 +1,6 @@
 #mainTable {
   width: 100%;
   border-collapse: collapse;
-  /* margin-top: 20px; */
 }
 #mainTable th, #mainTable td {
   padding: 8px;
@@ -18,8 +17,40 @@
   line-height: 1.4;
 }
 
+#tbody_result.hide {
+  display: none;
+}
+
 .tr-kyotaku-tsumibo {
+  /* display: flex; */
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
+}
 
+.tentative-game-point div,
+.tentative-total-point div {
+  display: inline-flex;
+  /* align-items: center; */
+  align-items: baseline;
+  gap: .2em;
+}
+
+.tentative-game-point div .rank {
+  margin-left: clamp(0em, .8em, .8em);
+  /* font-weight: bold; */
+}
+
+.tentative-game-point div .point {
+  text-align: right;
+  margin-left: clamp(.2em, 3vw, 4em);
+}
+
+.tentative-total-point div .point {
+  text-align: right;
+}
+
+.tentative-game-point div .unit,
+.tentative-total-point div .unit {
+  opacity: .7;
+  font-size: .8em;
 }

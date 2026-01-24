@@ -1,9 +1,9 @@
-import { rulePresets } from './rulePresets.js';
+import { rulePresets } from './presets.js';
 
 /**
  * 
  * @param {string} presetRuleId 
- * @returns {import('./ruleDef.js').RuleObject}
+ * @returns {import('./define.js').RuleObject}
  */
 export function getRulePreset(presetRuleId) {
   const preset = rulePresets[presetRuleId]?.rule;

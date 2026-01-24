@@ -1,5 +1,5 @@
-import { state } from "../main.js";
-import { SEAT_ORDER, SEATS, seatToJp } from "../seatUtilities.js";
+import { state } from "../state.js";
+import { SEAT_ORDER, SEATS, seatToJp } from "../seat-utilities/index.js";
 import { selectAllOnFocus, updateState } from './common.js'
 
 /**

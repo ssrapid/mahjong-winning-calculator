@@ -43,7 +43,7 @@
 
 
 /**
- * @typedef {typeof RULE_KEY[keyof typeof RULE_KEY]} RULE_KEY_VALUE
+ * @typedef {typeof RULE_KEY[keyof typeof RULE_KEY]} RuleKeyString
  */
 
 /**
@@ -68,7 +68,7 @@ export const RULE_KEY = {
   END_ON_A_WIN:                "endOnAWin",                                   // アガリやめ(あり:true/なし:false)
   END_ON_A_TENPAI:             "endOnATenpai",                                // テンパイやめ(あり:true/なし:false)
   RENCHAN_RULE:                "renchanRule",                                 // 連荘条件
-  DOUBLE_WIND_HEAD:            "doubleWindHead",                             // 連風牌雀頭の符数(2or4)
+  DOUBLE_WIND_HEAD:            "doubleWindHead",                              // 連風牌雀頭の符数(2or4)
   TIE_SCORE_RULE:              "tieScoreRule",                                // 同点時の順位処理
   KYOTAKU_SETTLEMENT:          "kyotakuSettlement",                           // 終局時の供託処理
   INCREMENT_TSUMIBO:           "incrementTsumibo",                            // 積み棒加算(あり:true/なし:false)

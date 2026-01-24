@@ -60,5 +60,10 @@ button {
   cursor: pointer;
 }
 
-
+#button_increment_tsumibo,
+#button_reset_tsumibo,
+#button_increment_kyotaku,
+#button_reset_kyotaku {
+  width: 4em;
+}
 
