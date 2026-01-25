@@ -7,7 +7,7 @@ input:disabled {
 }
 
 .input-name {
-  width: 7em;
+  width: 8em;
   text-align: center;
 }
 .input-point, .input-score {
@@ -71,5 +71,7 @@ button {
 }
 
 .button-shortcut {
-
+  font-size: .7em;
+  min-width: 4rem;
+  min-height: 1.3rem;
 }
