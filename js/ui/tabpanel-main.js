@@ -339,5 +339,6 @@ function helperForZeroSumScoreCheck() {
 class ZeroSumScoreError extends Error {
   constructor(message, option) {
     super(message);
+    this.option = option;
   }
 }
