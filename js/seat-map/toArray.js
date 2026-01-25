@@ -1,4 +1,4 @@
-import { SEAT_ORDER } from '../seat-utilities';
+import { SEAT_ORDER } from '../seat-utilities/index.js';
 
 /**
  * @typedef {import('../seat-utilities').Seat} Seat

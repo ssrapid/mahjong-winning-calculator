@@ -299,5 +299,45 @@ export function expandTable() {
 }
 
 export function zeroSumScoreCheck() {
+  try {
+    const checkResult = helperForZeroSumScoreCheck();
+    // 点棒を短縮表記した場合に、100倍または1000倍した値をセットし直す
+    SEAT_ORDER.forEach(seat => setScore(seat, state.players[seat].score * checkResult));
+  } catch (e) {
+    if(e instanceof ZeroSumScoreError) {
+      confirm('あ');
+    } else {
+      // 予期しないエラー
+      throw e;
+    }
+  }
+}
 
+function helperForZeroSumScoreCheck() {
+  // 23400 | 234 | 23.4 いずれの書き方にも対応するため、
+  const expected = state.rule[RULE_KEY.INITIAL_SCORE] * 4;
+  const multipliers = [1, 100, 1000];
+  const errors = [];
+  for(const multiplier of multipliers) {
+    // 点棒の合計+供託*1000 = 配給原点*4
+    const sum = SeatMap.reduce(state.players, (acc, obj) => acc + obj.score, 0) * multiplier + state.tableInfo.kyotaku * 1000;
+    if(sum === expected) return multiplier;
+    errors.push({ multiplier, sum, expected, error: Math.abs(expected - sum) });
+  }
+
+
+  // 1倍, 100倍, 1000倍いずれも合計が合わなかったとき
+  const minimum = errors.reduce((a, b) => a.error < b.error ? a : b);
+
+  
+  throw new ZeroSumScoreError('点棒合計が一致しません。', {
+    errors, initialScore: state.rule[RULE_KEY.INITIAL_SCORE]
+  });
+
+}
+
+class ZeroSumScoreError extends Error {
+  constructor(message, option) {
+    super(message);
+  }
 }

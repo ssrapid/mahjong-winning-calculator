@@ -1,4 +1,4 @@
-import { SeatMap } from '../seat-utilities/index.js';
+import * as SeatMap from './index.js';
 
 /**
  * @typedef {import('../seat-utilities').Seat} Seat

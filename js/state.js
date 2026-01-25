@@ -4,9 +4,6 @@ export const state = {
 
 
 
-  /**
-   * 
-   */
   players: SeatMap.create(() => ({
     /** @type {string} */
     name: null,
@@ -19,6 +16,7 @@ export const state = {
   riichi: SeatMap.create(false),
 
   tableInfo: {
+    /** @type {import('./seat-utilities/index.js').Seat} */
     dealer : 'n',
     finalRound: true,
     kyotaku: 0,

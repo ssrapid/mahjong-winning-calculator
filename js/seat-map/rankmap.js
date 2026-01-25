@@ -1,4 +1,4 @@
-import { getRanks } from "../my-utilities/indexs.js";
+import { getRanks } from "../my-utilities/index.js";
 import { fromArray } from "./create.js";
 import { toArray } from "./toArray.js";
 

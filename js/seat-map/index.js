@@ -6,16 +6,16 @@ import { SEAT_ORDER } from '../seat-utilities/index.js';
 export * from './create.js';
 
 
-// export * from './match.js';
-// export * from './wrapSeatMapValueAsObject.js';
-// export * from './mergeSeatMaps.js';
-// export * from './rankmap.js';
-// export * from './reduce.js';
+export * from './match.js';
+export * from './wrap.js';
+export * from './merge.js';
+export * from './rankmap.js';
+export * from './reduce.js';
 
 
-// export * from './toArray.js';
+export * from './toArray.js';
 
-// export * from './predicate.js'
+export * from './predicate.js'
 
 /**
  * @typedef {import("../seat-utilities").Seat} Seat

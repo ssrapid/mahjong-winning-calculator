@@ -3,7 +3,7 @@
   border-collapse: collapse;
 }
 #mainTable th, #mainTable td {
-  padding: 8px;
+  padding: 5px;
   border: 1px solid #ddd;
   text-align: center;
 }
@@ -15,6 +15,9 @@
   word-break: break-word;
   white-space: normal;
   line-height: 1.4;
+}
+#mainTable .button-only {
+  padding: 0px;
 }
 
 #tbody_result.hide {
