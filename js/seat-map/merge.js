@@ -1,6 +1,7 @@
 import { SEAT_ORDER } from "../seat-utilities/index.js";
 
 import { create } from "./create.js";
+import * as SeatMap from './index.js'
 
 /**
  * @typedef {import("../seat-utilities/index.js").Seat} Seat
@@ -33,7 +34,7 @@ import { create } from "./create.js";
  * @returns {SeatMap<object>} 合成済みの新しい seatMap<Object>
  */
 export function merge(...maps) {
-  return create(seat => Object.assign({}, ...maps.map(map => map[seat] ?? {}))
+  return SeatMap.create(seat => Object.assign({}, ...maps.map(map => map[seat] ?? {}))
   );
 }
 

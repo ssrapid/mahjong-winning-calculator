@@ -1,7 +1,7 @@
 import { SEAT_ORDER } from '../seat-utilities/index.js';
 
 /**
- * @typedef {import('../seat-utilities').Seat} Seat
+ * @typedef {import('../seat-utilities/index.js').Seat} Seat
  */
 /**
  * @typedef {import('./index.js').SeatMap<T>} SeatMap
@@ -14,11 +14,10 @@ import { SEAT_ORDER } from '../seat-utilities/index.js';
  * @param {SeatMap<T>} seatMap 変換元のseatMap
  * @returns {[eastValue:T, southValue:T, westValue:T, northValue:T]} 変換後の配列
  */
-
-
 export function toArray(seatMap) {
   return SEAT_ORDER.map(seat => seatMap[seat]);
 }
+
 
 /**
  * シートマップをentryの配列に変換する。

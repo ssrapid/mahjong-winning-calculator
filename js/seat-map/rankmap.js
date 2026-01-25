@@ -1,6 +1,6 @@
 import { getRanks } from "../my-utilities/index.js";
 import { fromArray } from "./create.js";
-import { toArray } from "./toArray.js";
+import { toArray } from "./convert.js";
 
 /**
  * @typedef {import("../seat-utilities").Seat} Seat

@@ -294,8 +294,13 @@ export async function resetScore() {
 }
 
 export function expandTable() {
+  rootNode.querySelector('#tbody_tentative').classList.remove('hide');
   rootNode.querySelector('#tbody_result').classList.remove('hide');
   
+}
+
+export function tentativePoint() {
+  const game = rootNode.querySelectorAll();
 }
 
 export function zeroSumScoreCheck() {

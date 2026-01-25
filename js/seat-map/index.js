@@ -13,7 +13,7 @@ export * from './rankmap.js';
 export * from './reduce.js';
 
 
-export * from './toArray.js';
+export * from './convert.js';
 
 export * from './predicate.js'
 
