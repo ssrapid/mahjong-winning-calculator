@@ -11,7 +11,8 @@ import tabPanel_main from "./ui/tabpanel-main.js";
 import tabPanel_rule from "./ui/tabpanel-rule.js";
 
 // import * as SeatUtilities from './seat-utilities/index.js'
-import { get } from "./game-calculator/agari-template/builder.js";
+import { getTsumoAgariTemplates, getRonAgariTemplates } from "./game-calculator/agari-template/builder.js";
+import * as Rule from './rule/index.js'
 
 // import { state } from "./state.js"
 
@@ -48,6 +49,8 @@ function main() {
   Promise.all([promise_tab1, promise_tab2]).then(() => {
     resetScore();
     setupCalculateButton();
+    console.log(getTsumoAgariTemplates(Rule.getRulePreset(Rule.RULE_IDS.JPML)));
+    console.log(getRonAgariTemplates(Rule.getRulePreset(Rule.RULE_IDS.JPML)));
   })
 
 }

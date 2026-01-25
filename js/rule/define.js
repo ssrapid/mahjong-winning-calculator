@@ -32,7 +32,7 @@
  * @property {boolean} endOnAWin
  * @property {boolean} endOnATenpai
  * @property {RENCHAN_RULE_TYPE} renchanRule
- * @property {number} doubleWindHead
+ * @property {2|4} doubleWindHead
  * @property {TIE_SCORE_RULE_TYPE} tieScoreRule
  * @property {KYOTAKU_SETTLEMENT_TYPE_DEF} kyotakuSettlement
  * @property {boolean} incrementTsumibo

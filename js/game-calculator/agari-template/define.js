@@ -1,4 +1,4 @@
-const Key = {
+export const Key = Object.freeze({
   ID                         : 'templateID',              // テンプレートID
   TYPE                       : 'templateType',            // ロンorツモ
   TSUMO_PAYMENT_TO_CHILD     : 'tsumoPaymentToChild',     // ツモ和了時の子から子への支払い
@@ -19,11 +19,11 @@ const Key = {
   TENPAI_COUNT               : 'tenpaiCount',             // テンパイ人数
   NOTEN_COUNT                : 'notenCount',              // ノーテン人数
   TENPAI_FLAGS               : 'tenpaiFlags',             // テンパイフラグ
-};
+});
 
-const AgariType = {
+const AgariType = Object.freeze({
   TSUMO:    'tsumo',    // ツモ
   RON:      'ron',      // ロン
   RYUKYOKU: 'ryukyoku', // 流局
-};
+});
 
