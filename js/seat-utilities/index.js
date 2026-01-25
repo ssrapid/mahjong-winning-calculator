@@ -2,28 +2,33 @@
 // --- 共通関数と定数の整理 ---
 
 /**
+ * アルファベット小文字1文字の席表記
  * @typedef {"e"|"s"|"w"|"n"} Seat
  */
 
 /**
+ * 漢字1文字の席表記
  * @typedef {typeof SEAT_ORDER_JP[number]} SeatJp
  */
 
 
 
 /**
+ * 日本語の席順
+ * @readonly
  * @type {["東","南","西","北"]}
  */
-export const SEAT_ORDER_JP = ['東', '南', '西', '北'];
+export const SEAT_ORDER_JP = Object.freeze(['東', '南', '西', '北']);
 
 
 /**
  * @typedef {typeof SEAT_ORDER_EN_LOWER[number]} SeatLower
  */
 /**
+ * @readonly
  * @type {["e","s","w","n"]}
  */
-export const SEAT_ORDER_EN_LOWER = ['e', 's', 'w', 'n'];
+export const SEAT_ORDER_EN_LOWER = Object.freeze(['e', 's', 'w', 'n']);
 
 /**
  * @typedef {typeof SEAT_ORDER_EN_UPPER[number]} SeatUpper
@@ -32,23 +37,28 @@ export const SEAT_ORDER_EN_LOWER = ['e', 's', 'w', 'n'];
  * @readonly
  * @type {["E","S","W","N"]}
  */
-export const SEAT_ORDER_EN_UPPER = ["E", "S", "W", "N"];
+export const SEAT_ORDER_EN_UPPER = Object.freeze(["E", "S", "W", "N"]);
 
 
 /**
+ * @readonly
  * @typedef {typeof SEAT_ORDER_EN[number]} SeatEn
  */
-
 export const SEAT_ORDER_EN = SEAT_ORDER_EN_LOWER;
 
+/**
+ * @readonly
+ */
 export const SEAT_ORDER = SEAT_ORDER_EN;
 
-export const SEATS = {
+
+
+export const SEATS = Object.freeze({
   E: SEAT_ORDER[0],
   S: SEAT_ORDER[1],
   W: SEAT_ORDER[2],
   N: SEAT_ORDER[3],
-};
+});
 
 const OBJ_NORMALIZE_SEAT = (() => {
   const ret = {};
