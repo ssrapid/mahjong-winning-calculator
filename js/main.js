@@ -11,7 +11,7 @@ import tabPanel_main from "./ui/tabpanel-main.js";
 import tabPanel_rule from "./ui/tabpanel-rule.js";
 
 // import * as SeatUtilities from './seat-utilities/index.js'
-
+import { get } from "./game-calculator/agari-template/builder.js";
 
 // import { state } from "./state.js"
 

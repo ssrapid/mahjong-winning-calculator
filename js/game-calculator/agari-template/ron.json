@@ -1,0 +1,237 @@
+[
+  {
+    "templateID"              : "ron_1015",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 1000,
+    "ronGainAsDealer"         : 1500,
+    "yakumanLevel"            : 0,
+    "fuAndHan"                : [{ "fu": 30, "han": 1 }],
+    "isUnavailableWhenRiichi" : true,
+    "description"             : "リーチのみは40符以上、リーチ+平和は2翻あるので、リーチで30符1翻はない。"
+  },
+  {
+    "templateID"              : "ron_1320",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 1300,
+    "ronGainAsDealer"         : 2000,
+    "yakumanLevel"            : 0,
+    "fuAndHan"                : [{ "fu": 40, "han": 1 }],
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_1624",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 1600,
+    "ronGainAsDealer"         : 2400,
+    "yakumanLevel"            : 0,
+    "fuAndHan"                : [{ "fu": 25, "han": 2 }, { "fu": 50, "han": 1 }],
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_2029",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 2000,
+    "ronGainAsDealer"         : 2900,
+    "yakumanLevel"            : 0,
+    "fuAndHan"                : [{ "fu": 30, "han": 2 }, { "fu": 60, "han": 1 }],
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_2334",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 2300,
+    "ronGainAsDealer"         : 3400,
+    "yakumanLevel"            : 0,
+    "fuAndHan"                : [{ "fu": 70, "han": 1 }],
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_2639",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 2600,
+    "ronGainAsDealer"         : 3900,
+    "yakumanLevel"            : 0,
+    "fuAndHan"                : [{ "fu": 40, "han": 2 }, { "fu": 80, "han": 1 }],
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_2944",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 2900,
+    "ronGainAsDealer"         : 4400,
+    "yakumanLevel"            : 0,
+    "fuAndHan"                : [{ "fu": 90, "han": 1 }],
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_3248",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 3200,
+    "ronGainAsDealer"         : 4800,
+    "yakumanLevel"            : 0,
+    "fuAndHan"                : [{ "fu": 25, "han": 3 }, { "fu": 50, "han": 2 }, { "fu": 100, "han": 1 }],
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_3653",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 3600,
+    "ronGainAsDealer"         : 5300,
+    "yakumanLevel"            : 0,
+    "fuAndHan"                : [{ "fu": 110, "han": 1 }],
+    "description"             : "110符1翻ロンは連風牌の雀頭が4符の場合のみ。"
+  },
+  {
+    "templateID"              : "ron_3958",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 3900,
+    "ronGainAsDealer"         : 5800,
+    "fuAndHan"                : [{ "fu": 30, "han": 3 }, { "fu": 60, "han": 2 }],
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_4568",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 4500,
+    "ronGainAsDealer"         : 6800,
+    "fuAndHan"                : [{ "fu": 70, "han": 2 }],
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_5277",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 5200,
+    "ronGainAsDealer"         : 7700,
+    "fuAndHan"                : [{ "fu": 40, "han": 3 }, { "fu": 80, "han": 2 }],
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_5887",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 5800,
+    "ronGainAsDealer"         : 8700,
+    "fuAndHan"                : [{ "fu": 90, "han": 2 }],
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_6496",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 6400,
+    "ronGainAsDealer"         : 9600,
+    "fuAndHan"                : [{ "fu": 25, "han": 4 }, { "fu": 50, "han": 3 }, { "fu": 100, "han": 2}],
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_71a6",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 7100,
+    "ronGainAsDealer"         : 10600,
+    "fuAndHan"                : [{ "fu": 110, "han": 2 }],
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_77b6",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 7700,
+    "ronGainAsDealer"         : 11600,
+    "fuAndHan"                : [{ "fu": 30, "han": 4 }, { "fu": 60, "han": 3 }],
+    "yakumanLevel"            : 0,
+    "description"             : "切り上げ満貫採用時は存在しない。"
+  },
+  {
+    "templateID"              : "ron_mangan",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 8000,
+    "ronGainAsDealer"         : 12000,
+    "limitLabel"              : "満貫",
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_haneman",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 12000,
+    "ronGainAsDealer"         : 18000,
+    "limitLabel"              : "跳満",
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_baiman",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 16000,
+    "ronGainAsDealer"         : 24000,
+    "limitLabel"              : "倍満",
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_sanbaiman",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 24000,
+    "ronGainAsDealer"         : 36000,
+    "limitLabel"              : "三倍満",
+    "yakumanLevel"            : 0,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_1yakuman",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 32000,
+    "ronGainAsDealer"         : 48000,
+    "limitLabel"              : "役満",
+    "yakumanLevel"            : 1,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_2yakuman",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 64000,
+    "ronGainAsDealer"         : 96000,
+    "limitLabel"              : "2倍役満",
+    "yakumanLevel"            : 2,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_3yakuman",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 96000,
+    "ronGainAsDealer"         : 144000,
+    "limitLabel"              : "3倍役満",
+    "yakumanLevel"            : 3,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_4yakuman",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 128000,
+    "ronGainAsDealer"         : 192000,
+    "limitLabel"              : "4倍役満",
+    "yakumanLevel"            : 4,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_5yakuman",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 160000,
+    "ronGainAsDealer"         : 240000,
+    "limitLabel"              : "5倍役満",
+    "yakumanLevel"            : 5,
+    "description"             : ""
+  },
+  {
+    "templateID"              : "ron_6yakuman",
+    "templateType"            : "ron",
+    "ronGainAsChild"          : 192000,
+    "ronGainAsDealer"         : 288000,
+    "limitLabel"              : "6倍役満",
+    "yakumanLevel"            : 6,
+    "description"             : ""
+  }
+]

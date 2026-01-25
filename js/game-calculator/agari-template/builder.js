@@ -1,5 +1,7 @@
-import data from "./data.json" assert { type: "json" };
+import * as Rule from '../../rule/index.js'
 
-function get() {
-  return data;
+import data from "./data.json" with { type: "json" };
+
+export function get() {
+  return structuredClone(data);
 }
