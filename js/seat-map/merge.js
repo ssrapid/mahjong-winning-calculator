@@ -1,7 +1,6 @@
 import { SEAT_ORDER } from "../seat-utilities/index.js";
 
 import { create } from "./create.js";
-import * as SeatMap from './index.js'
 
 
 
