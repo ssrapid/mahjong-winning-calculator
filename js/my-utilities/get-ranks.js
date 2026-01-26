@@ -1,4 +1,13 @@
 /**
+ * @template T
+ * @callback CompareFn 要素の順序を決定する関数。
+ * @param {T} a 比較する第一要素。 undefined になることはありません。
+ * @param {T} b 比較する第二要素。 undefined になることはありません。
+ * @param {readonly T[]} group 比較中の全要素が含まれた配列です。比較対象を参照する必要がある場合に使用します。
+ * @returns {number}
+ */
+
+/**
  * getRanks
  * 配列内の各要素に順位（rank）を付与して返すユーティリティ関数。
  *
@@ -11,9 +20,18 @@
  *
  * @template T
  * @param {T[]} values - 順位付け対象の配列。
- * @param {boolean} [allowTies=true] - 同値を同順位とするかどうかのフラグ。同順位を許可しない(false)場合、配列の先頭に近い方から1,2,...となる。
- * @param {...(a: T, b: T, group: readonly T[]) => number} [compareFns] - ソート時に使う比較関数。
+ * @param {boolean} [allowTies=true]
+ * 同値を同順位とするかどうかのフラグ。同順位を許可しない(false)場合、配列の先頭に近い方から1,2,...となる。
+ * @param {...CompareFn<T>} [compareFns]
+ * ソート時に使う比較関数。省略時は、
+ * (a, b) => b - a
+ * という単純降順を指定。
  *   負の値：aがbより小さい、0：同値、正の値：aがbより大きい。
+ * 負の値は、a が b より高順位であることを示します。
+ * 正の値は、a が b より高順位であることを示します。
+ * 0 または NaN は、a と b が同順位とみなされることを示します。
+ * 負の値：aがbより小さい、0：同値、正の値：aがbより大きい。
+ * 
  * @returns {number[]} 元配列と同じ長さで、各要素の順位（1始まり）が格納された配列。
  *
  * @example
@@ -25,8 +43,8 @@
 export function getRanks(values, allowTies = true, ...compareFns) {
 
   // allowTiesの位置に第一比較関数を記述してしまった場合の対処
-  if (typeof allowTies === "function") {
-    console.warn("getRanks: allowTies に compareFn が渡されています。");
+  if (typeof allowTies === 'function') {
+    console.warn('getRanks: allowTies に compareFn が渡されています。');
     console.trace();
     compareFns.unshift(allowTies);
     allowTies = true;
