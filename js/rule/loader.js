@@ -1,5 +1,4 @@
 import rulePresets from './presets.json' with {type: 'json'};
-// import plainTsumoAgariTemplates from './tsumo.json' with { type: 'json' };
 
 
 /**

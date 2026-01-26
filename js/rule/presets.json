@@ -20,7 +20,8 @@
       "kyotakuSettlement"       : "top_shared",
       "incrementTsumibo"        : true,
       "allowWestRound"          : false,
-      "maxYakumanLimit"         : 4
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
@@ -49,7 +50,8 @@
       "kyotakuSettlement"       : "keep",
       "incrementTsumibo"        : true,
       "allowWestRound"          : false,
-      "maxYakumanLimit"         : 4
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
@@ -73,7 +75,8 @@
       "kyotakuSettlement"       : "keep",
       "incrementTsumibo"        : true,
       "allowWestRound"          : false,
-      "maxYakumanLimit"         : 4
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
@@ -97,7 +100,8 @@
       "kyotakuSettlement"       : "keep",
       "incrementTsumibo"        : true,
       "allowWestRound"          : false,
-      "maxYakumanLimit"         : 4
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
@@ -121,7 +125,8 @@
       "kyotakuSettlement"       : "keep",
       "incrementTsumibo"        : true,
       "allowWestRound"          : false,
-      "maxYakumanLimit"         : 4
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
@@ -145,7 +150,8 @@
       "kyotakuSettlement"       : "keep",
       "incrementTsumibo"        : true,
       "allowWestRound"          : false,
-      "maxYakumanLimit"         : 4
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
@@ -169,7 +175,8 @@
       "kyotakuSettlement"       : "keep",
       "incrementTsumibo"        : false,
       "allowWestRound"          : false,
-      "maxYakumanLimit"         : 4
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
@@ -193,7 +200,8 @@
       "kyotakuSettlement"       : "keep",
       "incrementTsumibo"        : true,
       "allowWestRound"          : false,
-      "maxYakumanLimit"         : 4
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
@@ -218,7 +226,8 @@
       "incrementTsumibo"        : true,
       "allowWestRound"          : true,
       "minimumTopScore"         : 30000,
-      "maxYakumanLimit"         : 4
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
@@ -243,12 +252,38 @@
       "incrementTsumibo"        : true,
       "allowWestRound"          : true,
       "minimumTopScore"         : 30000,
-      "maxYakumanLimit"         : 6
+      "maxYakumanLimit"         : 6,
+      "description"             : ""
+    }
+  },
+
+    "mahjongsoul_mbase": {
+    "order"                   : 123,
+    "hidden"                  : false,
+    "rule": {
+      "name"                    : "雀魂 Mリーグ準拠",
+      "baseRule"                : "mahjongsoul",
+      "initialScore"            : 25000,
+      "returnScore"             : 30000,
+      "rankingPoints"           : [50, 10, -10, -30],
+      "tenpaiFee"               : 3000,
+      "roundingMangan"          : true,
+      "allowGameEndByNegative"  : false,
+      "endOnAWin"               : false,
+      "endOnATenpai"            : false,
+      "renchanRule"             : "tenpai_renchan",
+      "doubleWindHead"          : 2,
+      "tieScoreRule"            : "seat_order",
+      "kyotakuSettlement"       : "top_only_seat",
+      "incrementTsumibo"        : true,
+      "allowWestRound"          : false,
+      "maxYakumanLimit"         : 4,
+      "description"             : ""
     }
   },
 
   "mahjongsoul_gyakushu": {
-    "order"                   : 121,
+    "order"                   : 129,
     "hidden"                  : true,
     "rule": {
       "name"                    : "雀魂 逆襲の戦",
@@ -268,7 +303,8 @@
       "incrementTsumibo"        : true,
       "allowWestRound"          : true,
       "minimumTopScore"         : 30000,
-      "maxYakumanLimit"         : 6
+      "maxYakumanLimit"         : 6,
+      "description"             : ""
     }
   }
 
