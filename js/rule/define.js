@@ -2,10 +2,14 @@
 
 
 /**
+ * 順位点定義の配列。
+ * JPMLベースのルールでは、これを浮き人数別に4つ用意し、ラップしたRankingPointsForJPMLを用意すること。
  * @typedef {[number, number, number, number]} RankingPointsArray
  */
 
 /**
+ * JPMLベースのルール向けの順位点定義オブジェクト。
+ * 浮き人数によってウマが変わるので、浮き人数別にRankingPointsArrayを定義。
  * @typedef {{
  *   1: RankingPointsArray,
  *   2: RankingPointsArray,
@@ -15,6 +19,7 @@
  */
 
 /**
+ * 順位点定義オブジェクト。JPML向けはオブジェクトに4つの配列を持ち、それ以外のルール向けには順位点定義配列そのもの。
  * @typedef {RankingPointsArray | RankingPointsForJPML} RankingPointsDef
  */
 
@@ -33,8 +38,8 @@
  * @property {boolean} endOnATenpai
  * @property {RenchanRuleType} renchanRule
  * @property {2|4} doubleWindHead
- * @property {TIE_SCORE_RULE_TYPE} tieScoreRule
- * @property {KYOTAKU_SETTLEMENT_TYPE_DEF} kyotakuSettlement
+ * @property {TieScoreRule} tieScoreRule
+ * @property {KyotakuSettlementType} kyotakuSettlement
  * @property {boolean} incrementTsumibo
  * @property {boolean} allowWestRound
  * @property {number} [minimumTopScore]
@@ -44,14 +49,14 @@
 
 
 /**
- * @typedef {typeof Key[keyof typeof Key]} RuleKey
+ * @typedef {typeof KEY[keyof typeof KEY]} RuleKey
  */
 
 /**
  * @readonly
  * @enum {string}
  */
-export const Key = Object.freeze({
+export const KEY = Object.freeze({
   NAME:                        "name",                                        // ルール名
   BASE:                        "baseRule",                                    // ベースルール(条件分岐に用いる場合がある)
   INITIAL_SCORE:               "initialScore",                                // 配給原点
@@ -84,38 +89,38 @@ export const Key = Object.freeze({
  * @enum {string}
  */
 export const RULE_KEY_LABELS = Object.freeze({
-  [Key.NAME]:                        'ルール名',
-  [Key.BASE]:                        'ベースルール',
-  [Key.INITIAL_SCORE]:               '配給原点',
-  [Key.RETURN_SCORE]:                '返し点',
-  [Key.RANKING_POINTS]:              '順位点',
-  [Key.TENPAI_FEE]:                  'テンパイ料',
-  [Key.ROUNDING_MANGAN]:             '切り上げ満貫',
-  [Key.ALLOW_GAME_END_BY_NEGATIVE]:  'トビ終了',
-  [Key.END_ON_A_WIN]:                'アガリやめ',
-  [Key.END_ON_A_TENPAI]:             'テンパイやめ',
-  [Key.RENCHAN_RULE]:                '連荘条件',
-  [Key.DOUBLE_WIND_HEAD]:            '連風牌雀頭',
-  [Key.TIE_SCORE_RULE]:              '同点時の順位',
-  [Key.KYOTAKU_SETTLEMENT]:          '終局時の供託処理',
-  [Key.INCREMENT_TSUMIBO]:           '積み棒の加算',
-  [Key.ALLOW_WEST_ROUND]:            '西入',
-  [Key.MINIMUN_TOP_SCORE]:           'トップ必要点数',
-  [Key.MAX_YAKUMAN_LIMIT]:           '最大和了点',
-  [Key.DESCRIPTION]:                 'ルールの説明'
+  [KEY.NAME]:                        'ルール名',
+  [KEY.BASE]:                        'ベースルール',
+  [KEY.INITIAL_SCORE]:               '配給原点',
+  [KEY.RETURN_SCORE]:                '返し点',
+  [KEY.RANKING_POINTS]:              '順位点',
+  [KEY.TENPAI_FEE]:                  'テンパイ料',
+  [KEY.ROUNDING_MANGAN]:             '切り上げ満貫',
+  [KEY.ALLOW_GAME_END_BY_NEGATIVE]:  'トビ終了',
+  [KEY.END_ON_A_WIN]:                'アガリやめ',
+  [KEY.END_ON_A_TENPAI]:             'テンパイやめ',
+  [KEY.RENCHAN_RULE]:                '連荘条件',
+  [KEY.DOUBLE_WIND_HEAD]:            '連風牌雀頭',
+  [KEY.TIE_SCORE_RULE]:              '同点時の順位',
+  [KEY.KYOTAKU_SETTLEMENT]:          '終局時の供託処理',
+  [KEY.INCREMENT_TSUMIBO]:           '積み棒の加算',
+  [KEY.ALLOW_WEST_ROUND]:            '西入',
+  [KEY.MINIMUN_TOP_SCORE]:           'トップ必要点数',
+  [KEY.MAX_YAKUMAN_LIMIT]:           '最大和了点',
+  [KEY.DESCRIPTION]:                 'ルールの説明'
 });
 
 export const RULE_OPTIONS = Object.entries(RULE_KEY_LABELS).map(([value, label]) => ({ value, label }));
 
 /**
- * @typedef {typeof IDs[keyof typeof IDs]} RuleID
+ * @typedef {typeof IDS[keyof typeof IDS]} RuleID
  */
 /**
  * ベースルールとなるルールの識別子
  * @readonly
  * @enum {string}
  */
-export const IDs = Object.freeze({
+export const IDS = Object.freeze({
   M_LEAGUE:           "m_league",
   SAIKOUISEN:         "saikouisen",
   SAIKOUISEN_CLASSIC: "saikouisen_classic",
@@ -146,21 +151,21 @@ export const RENCHAN_RULE = Object.freeze({
 });
 
 
-const RENCHAN_RULE_LABELS = Object.freeze({
+const RENCHAN_RULE_LALELS = Object.freeze({
   [RENCHAN_RULE.TENPAI]: 'テンパイ連荘',
   [RENCHAN_RULE.AGARI]:  '和了連荘',
   [RENCHAN_RULE.NONE]:   '連荘なし',
 });
 
 /**
- * @typedef {typeof RENCHAN_RULE_LABELS[keyof typeof RENCHAN_RULE_LABELS]} RENCHAN_RULE_LABELS
+ * @typedef {typeof RENCHAN_RULE_LALELS[keyof typeof RENCHAN_RULE_LALELS]} RenchanRuleLabel
  */
 
-export const RENCHAN_RULE_OPTIONS = Object.entries(RENCHAN_RULE_LABELS).map(([value, label]) => ({ value, label }));
+export const RENCHAN_RULE_OPTIONS = Object.entries(RENCHAN_RULE_LALELS).map(([value, label]) => ({ value, label }));
 
 
 /**
- * @typedef {typeof TIE_SCORE_RULE[keyof typeof TIE_SCORE_RULE]} TIE_SCORE_RULE_TYPE
+ * @typedef {typeof TIE_SCORE_RULE[keyof typeof TIE_SCORE_RULE]} TieScoreRule
  */
 
 /**
@@ -185,13 +190,14 @@ const TIE_SCORE_RULE_LABELS = Object.freeze({
 });
 
 /**
+ * 同点時順位のセレクトボックス用オブジェクトの配列
  * @readonly
  */
 export const TIE_SCORE_RULE_OPTIONS = Object.entries(TIE_SCORE_RULE_LABELS).map(([value, label]) => ({ value, label }));
 
 
 /**
- * @typedef {typeof KYOTAKU_SETTLEMENT_TYPE[keyof typeof KYOTAKU_SETTLEMENT_TYPE]} KYOTAKU_SETTLEMENT_TYPE_DEF
+ * @typedef {typeof KYOTAKU_SETTLEMENT_TYPE[keyof typeof KYOTAKU_SETTLEMENT_TYPE]} KyotakuSettlementType
  */
 
 /**

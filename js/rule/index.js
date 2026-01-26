@@ -25,3 +25,15 @@ export * from './loader.js';
 /**
  * @typedef {import('./define.js').RuleID} RuleID
  */
+
+/**
+ * @typedef {import('./define.js').RenchanRuleType} RenchanRuleType
+ */
+
+/**
+ * @typedef {import('./define.js').TieScoreRule} TieScoreRule
+ */
+
+/**
+ * @typedef {import('./define.js').KyotakuSettlementType} KyotakuSettlementType
+ */

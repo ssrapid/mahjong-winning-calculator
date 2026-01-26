@@ -70,7 +70,7 @@ function getAgariTemplate(ruleObj, type) {
     if(!fuAndHanArray) {
       // arrayがundefinedの場合、満貫以上の和了
 
-      const maxYakumanLimit = ruleObj[Rule.Key.MAX_YAKUMAN_LIMIT];
+      const maxYakumanLimit = ruleObj[Rule.KEY.MAX_YAKUMAN_LIMIT];
       const yakumanLevel = template[AgariTemplate.Key.YAKUMAN_LEVEL];
 
       // 最大点数を超える場合はスキップ
@@ -80,7 +80,7 @@ function getAgariTemplate(ruleObj, type) {
     } else {
       // 満貫未満の場合
 
-      if(ruleObj[Rule.Key.ROUNDING_MANGAN]) {
+      if(ruleObj[Rule.KEY.ROUNDING_MANGAN]) {
         // 切り上げ満貫ありの場合
         // 30符4飜または60符3飜はスキップ(切り上げ満貫となり、この点数が存在しない)
         if(fuAndHanArray.find(({fu, han}) => (fu === 30 && han === 4) || (fu === 60 && han === 3))) {
@@ -88,7 +88,7 @@ function getAgariTemplate(ruleObj, type) {
         }
 
         if(
-          ruleObj[Rule.Key.DOUBLE_WIND_HEAD] !== 4 && type === 'ron' && 
+          ruleObj[Rule.KEY.DOUBLE_WIND_HEAD] !== 4 && type === 'ron' && 
           fuAndHanArray.find(({fu, han}) => fu === 110 && han === 1)
         ) {
           // 連風牌の雀頭が4ではないとき、110符1飜のロン和了はスキップ
