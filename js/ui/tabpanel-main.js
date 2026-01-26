@@ -170,6 +170,7 @@ function initRiichiCheck() {
 function initInputKyotaku() {
   ensureDom();
   input_kyotaku.addEventListener('input', e => setKyotaku(Number(e.target.value)));
+  input_kyotaku.addEventListener('focus', selectAllOnFocus);
   const incButton = rootNode.querySelector('#button_increment_kyotaku');
   const resetButton = rootNode.querySelector('#button_reset_kyotaku');
   incButton.addEventListener('click', () => incrementKyotaku());
@@ -179,6 +180,7 @@ function initInputKyotaku() {
 function initInputTsumibo() {
   ensureDom();
   input_tsumibo.addEventListener('input', e => setTsumibo(Number(e.target.value)));
+  input_tsumibo.addEventListener('focus', selectAllOnFocus);
   const incButton = rootNode.querySelector('#button_increment_tsumibo');
   const resetButton = rootNode.querySelector('#button_reset_tsumibo');
   incButton.addEventListener('click', () => incrementTsumibo());
