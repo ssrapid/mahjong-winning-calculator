@@ -1,16 +1,4 @@
-import { RULE_KEY } from "./define.js"
-
-/**
- * @typedef {Object} presetRule
- * @property {number} order
- * @property {boolean} hidden
- * @property {import("./define.js").RuleObject} rule
- */
-
-/**
- * @type {Record<string, presetRule>}
- */
-export const rulePresets = {
+{
 
   "m_league": {
     "order"                   : 10,

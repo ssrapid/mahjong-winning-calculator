@@ -7,10 +7,10 @@
 
 /**
  * @typedef {{
- *   0: RankingPointsArray,
  *   1: RankingPointsArray,
  *   2: RankingPointsArray,
  *   3: RankingPointsArray,
+ *   0: RankingPointsArray,
  * }} RankingPointsForJPML
  */
 

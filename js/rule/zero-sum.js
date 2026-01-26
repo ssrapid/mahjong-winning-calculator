@@ -2,7 +2,7 @@ import { RULE_IDS, RULE_KEY } from "./define.js";
 import * as SeatMap from "../seat-map/index.js";
 
 /**
- * @typedef {import("./define.js").RuleObject} RuleObject
+ * @typedef {import("./").RuleObject} RuleObject
  */
 
 /**
