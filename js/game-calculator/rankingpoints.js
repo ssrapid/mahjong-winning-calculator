@@ -19,7 +19,7 @@ import { distributePointsAmongPlayers } from './distribute.js';
  * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
  * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
  * @param {{wrap:true, rankingMap?:boolean}} option
- * @returns {import('../seat-map').SeatMap<{rankingPont:number}&object>}
+ * @returns {import('../seat-map').SeatMap<{rankingPoint:number}&object>}
  */
 /**
  * 

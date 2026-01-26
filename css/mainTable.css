@@ -30,30 +30,30 @@
   grid-template-columns: 1fr 2fr 2fr;
 }
 
-.tentative-game-point div,
-.tentative-total-point div {
+.td-tentative-game-point div,
+.td-tentative-total-point div {
   display: inline-flex;
   /* align-items: center; */
   align-items: baseline;
   gap: .2em;
 }
 
-.tentative-game-point div .rank {
+.td-tentative-game-point div .rank {
   margin-left: clamp(0em, .8em, .8em);
   /* font-weight: bold; */
 }
 
-.tentative-game-point div .point {
+.td-tentative-game-point div .point {
   text-align: right;
   margin-left: clamp(.2em, 3vw, 4em);
 }
 
-.tentative-total-point div .point {
+.td-tentative-total-point div .point {
   text-align: right;
 }
 
-.tentative-game-point div .unit,
-.tentative-total-point div .unit {
+.td-tentative-game-point div .unit,
+.td-tentative-total-point div .unit {
   opacity: .9;
   font-size: .8em;
 }

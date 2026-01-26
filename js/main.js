@@ -49,8 +49,7 @@ function main() {
   Promise.all([promise_tab1, promise_tab2]).then(() => {
     resetScore();
     setupCalculateButton();
-    console.log(getTsumoAgariTemplates(Rule.getRulePreset(Rule.IDS.JPML)));
-    console.log(getRonAgariTemplates(Rule.getRulePreset(Rule.IDS.JPML)));
+
   })
 
 }

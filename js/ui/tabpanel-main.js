@@ -7,15 +7,17 @@
 
 import { state } from "../state.js";
 
-import * as SeatMap from '../seat-map/index.js'
-import { selectAllOnFocus } from "./common.js";
-import { SEAT_ORDER } from "../seat-utilities/index.js";
-import { promise_tab2 } from "../main.js";
-import { KEY } from "../rule/define.js";
-import { loadTextFile } from "./html-loader.js";
-import { toBoolean } from "../my-utilities/index.js";
+import * as SeatMap from '../seat-map/index.js';
+import * as Rule from '../rule/index.js';
+import * as GameCalc from '../game-calculator/index.js'
 
-import * as Rule from "../rule/index.js";
+import { SEAT_ORDER, seatToJp } from "../seat-utilities/index.js";
+import { ordinal, toBoolean } from '../my-utilities/index.js';
+
+import { formatPoints, selectAllOnFocus } from "./common.js";
+import { promise_tab2 } from '../main.js';
+import { KEY } from '../rule/define.js';
+import { loadTextFile } from './html-loader.js';
 
 
 /** @type {HTMLElement|Document} */
@@ -77,6 +79,10 @@ let input_kyotaku;
  */
 let input_tsumibo;
 
+/**
+ * @type {import('../seat-map').SeatMap<NodeListOf<HTMLTableCellElement>>}
+ */
+let tdlist_target;
 
 /**
  * 
@@ -89,27 +95,30 @@ export default function activate(root) {
 }
 
 function ensureDom() {
-  if(!inputs_name || inputs_name?.length === 0) {
+  if(!inputs_name || inputs_name?.length == 0) {
     inputs_name = rootNode.querySelectorAll('.input-name');
     inputsMap_name = nodeListToSeatMap(inputs_name);
   }
-  if(!inputs_point || inputs_point?.length === 0) {
+  if(!inputs_point || inputs_point?.length == 0) {
     inputs_point = rootNode.querySelectorAll('.input-point');
     inputsMap_point = nodeListToSeatMap(inputs_point);
   }
-  if(!inputs_score || inputs_score?.length === 0) {
+  if(!inputs_score || inputs_score?.length == 0) {
     inputs_score = rootNode.querySelectorAll('.input-score');
     inputsMap_score = nodeListToSeatMap(inputs_score);
   }
-  if(!radio_dealer || radio_dealer?.length === 0) {
+  if(!radio_dealer || radio_dealer?.length == 0) {
     radio_dealer = rootNode.querySelectorAll('.input-dealer');
   }
-  if(!inputs_riichi || inputs_riichi?.length === 0) {
+  if(!inputs_riichi || inputs_riichi?.length == 0) {
     inputs_riichi = rootNode.querySelectorAll('.input-riichi');
     inputsMap_riichi = nodeListToSeatMap(inputs_riichi);
   }
   if(!input_kyotaku) input_kyotaku = rootNode.querySelector('#input_kyotaku');
   if(!input_tsumibo) input_tsumibo = rootNode.querySelector('#input_tsumibo');
+  if(!tdlist_target || tdlist_target?.length == 0) {
+    tdlist_target = SeatMap.create(seat => rootNode.querySelectorAll(`.td-target[data-target="${seat}"]`));
+  }
 }
 
 function initDom() {
@@ -184,9 +193,7 @@ function initInputTsumibo() {
  * @returns {import("../seat-map/index.js").SeatMap<T>}
  */
 function nodeListToSeatMap(nodeList){
-  return SeatMap.create(seat =>
-    [...nodeList].find(node => node.dataset.seat === seat)
-  );
+  return SeatMap.fromEntries([...nodeList].map(node => [node.dataset?.seat, node]));
 }
 
 
@@ -202,6 +209,12 @@ function setName(seat, value) {
   value = String(value);
   inputsMap_name[seat].value = value;
   state.players[seat].name = value;
+  // 条件表示セルに名前を表示する
+  for(const td of tdlist_target[seat]) {
+    const suffix = td.dataset.suffix;
+    const name = value ? value : seatToJp(seat) + '家';
+    td.textContent = name + suffix;
+  }
   return value;
 }
 
@@ -216,8 +229,10 @@ function setName(seat, value) {
 function setPoint(seat, value) {
   ensureDom();
   value = Number(value);
+  // 表示上は小数表示として、整数の場合は".0"を付与する
   inputsMap_point[seat].value = Number.isNaN(value) ? '' : Number.isInteger(value) ? value.toFixed(1) : value;
-  state.players[seat].point = value;
+  // ポイントは内部では1000倍して点棒とスケールを合わせ、整数で保持する
+  state.players[seat].point = value * 1000;
   return value;
 }
 
@@ -285,7 +300,7 @@ export async function resetScore() {
   ensureDom();
   return promise_tab2.then(() => {
     /** @type {number} */
-    const value = state.rule[KEY.INITIAL_SCORE];
+    const value = state.rule[Rule.KEY.INITIAL_SCORE];
     SEAT_ORDER.forEach(seat => {
       setScore(seat, value);
     });
@@ -296,11 +311,67 @@ export async function resetScore() {
 export function expandTable() {
   rootNode.querySelector('#tbody_tentative').classList.remove('hide');
   rootNode.querySelector('#tbody_result').classList.remove('hide');
-  
 }
 
-export function tentativePoint() {
-  const game = rootNode.querySelectorAll();
+
+/**
+ * 入力値から、暫定のポイントを計算して表示する。
+ */
+export function showTentativePoint() {
+  /** @type {import('../seat-map').SeatMap<number>} */
+  const scoreMap = SeatMap.unwrapValueFromObject(state.players, 'score');
+  const ranking = GameCalc.getRankingPointMap(scoreMap, state.rule, { wrap: true, rankingMap: true });
+  console.log(scoreMap, ranking, state.rule[Rule.KEY.RETURN_SCORE]);
+  const pointMap = SeatMap.create(seat => {
+    const gamePoint = scoreMap[seat] - state.rule[Rule.KEY.RETURN_SCORE] + ranking[seat].rankingPoint;
+    /** @type {number} */
+    const gameRank = ranking[seat].rank;
+    const totalPoint = state.players[seat].point + gamePoint;
+    return {gamePoint, gameRank, totalPoint};
+  });
+
+  const game = rootNode.querySelectorAll('.td-tentative-game-point');
+  const total = rootNode.querySelectorAll('.td-tentative-total-point');
+
+  for(const td of game) {
+    // GamePointとRank
+
+    /** @type {import("../seat-utilities/index.js").Seat} */
+    const seat = td.dataset.seat;
+    /**
+     * 暫定ゲームポイントセルへ適用するテンプレートを取得
+     * @type {HTMLTemplateElement} */
+    const template = rootNode.querySelector('#template-tentative-game-point');
+    const node = template.content.cloneNode(true);
+
+    // 1"st", 2"nd", 3"rd", 4"th"をつける
+    node.querySelector('.rank').textContent = ordinal(pointMap[seat].gameRank);
+    // 表示する際に内部の点棒スケールから1000で割り、フォーマットを整える
+    node.querySelector('.point').textContent = formatPoints(pointMap[seat].gamePoint / 1000, 1, 2);
+
+    td.textContent = "";
+    td.appendChild(node);
+  }
+
+  for(const td of total) {
+    // TotalPoint
+    /** セルに相当する席
+     * @type {import("../seat-utilities/index.js").Seat}
+     * */
+    const seat = td.dataset.seat;
+    /**
+     * 暫定トータルセルへ適用するテンプレートを取得
+     * @type {HTMLTemplateElement} 
+     */
+    const template = rootNode.querySelector('#template-tentative-total-point');
+    const node = template.content.cloneNode(true);
+
+    // 表示する際に内部の点棒スケールから1000で割り、フォーマットを整える
+    node.querySelector('.point').textContent = formatPoints(pointMap[seat].totalPoint / 1000, 1, 2);
+
+    td.textContent = "";
+    td.appendChild(node);
+  }
 }
 
 export function zeroSumScoreCheck() {
@@ -320,7 +391,7 @@ export function zeroSumScoreCheck() {
 
 function helperForZeroSumScoreCheck() {
   // 23400 | 234 | 23.4 いずれの書き方にも対応するため、
-  const expected = state.rule[KEY.INITIAL_SCORE] * 4;
+  const expected = state.rule[Rule.KEY.INITIAL_SCORE] * 4;
   const multipliers = [1, 100, 1000];
   const errors = [];
   for(const multiplier of multipliers) {
@@ -336,7 +407,7 @@ function helperForZeroSumScoreCheck() {
 
   
   throw new ZeroSumScoreError('点棒合計が一致しません。', {
-    errors, initialScore: state.rule[KEY.INITIAL_SCORE]
+    errors, initialScore: state.rule[Rule.KEY.INITIAL_SCORE]
   });
 
 }

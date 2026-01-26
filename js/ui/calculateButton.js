@@ -1,6 +1,6 @@
 import { loadTextFile } from "./html-loader.js";
 import { promise_tab1 } from "../main.js";
-import { expandTable, zeroSumScoreCheck } from "./tabpanel-main.js";
+import { expandTable, showTentativePoint, zeroSumScoreCheck } from "./tabpanel-main.js";
 
 
 
@@ -20,6 +20,7 @@ function calculateButtonHandler() {
   console.log('計算');
   zeroSumScoreCheck();
   expandTable();
+  showTentativePoint();
 
 }
 
