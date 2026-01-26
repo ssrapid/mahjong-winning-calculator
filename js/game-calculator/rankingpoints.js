@@ -81,7 +81,7 @@ export function getRankingPointMap(scoreMap, rule, option={}) {
     const wrappedMap = SeatMap.wrapValueAsObject(rankPointMap, 'rankingPoint');
     if(option?.rankingMap) {
       // 順位情報も付与する場合
-      wrappedMap.forEach(seat => wrappedMap[seat].rank = rankingMap[seat]);
+      SeatMap.forEach((wrapObj, rank) => wrapObj.rank = rank, wrappedMap, rankingMap);
     }
     return wrappedMap;
   }
