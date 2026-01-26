@@ -2,7 +2,7 @@ import { state } from '../state.js';
 import { setSelectOptions, selectAllOnFocus } from './common.js';
 import { toBoolean } from '../my-utilities/index.js';
 
-import { RULE_IDS, RULE_KEY, TIE_SCORE_RULE, TIE_SCORE_RULE_OPTIONS, KYOTAKU_SETTLEMENT_TYPE, KYOTAKU_SETTLEMENT_OPTIONS, RENCHAN_RULE, RENCHAN_RULE_OPTIONS } from "../rule/define.js";
+import { IDs, Key, TIE_SCORE_RULE, TIE_SCORE_RULE_OPTIONS, KYOTAKU_SETTLEMENT_TYPE, KYOTAKU_SETTLEMENT_OPTIONS, RENCHAN_RULE, RENCHAN_RULE_OPTIONS } from "../rule/define.js";
 import { getBaseRuleOptions, getRulePreset } from '../rule/loader.js';
 
 
@@ -80,7 +80,7 @@ export default function activate(root) {
   ensureDom();
   initDom();
 
-  setBaseRule(RULE_IDS.M_LEAGUE);
+  setBaseRule(IDs.M_LEAGUE);
   expandPresetValues();
 }
 
@@ -199,7 +199,7 @@ export function setBaseRule(ruleId){
 
   // '1人浮き'などのラベルをグレーアウトさせる/グレーアウトから復帰する
   for(const el of spans_rowindexOfRankingPoints) {
-    if (curValue === RULE_IDS.JPML) {
+    if (curValue === IDs.JPML) {
       el.classList.add('active');
     } else {
       el.classList.remove('active');
@@ -208,7 +208,7 @@ export function setBaseRule(ruleId){
 
   //
   for (const input of inputs_rankingPoints_for_jpml) {
-    input.disabled = curValue !== RULE_IDS.JPML;
+    input.disabled = curValue !== IDs.JPML;
   }
 
   expandPresetValues();
@@ -229,10 +229,10 @@ function initInputOfRankingPoints() {
        */
       function listener(e){
         const value = Number(e.target.value);
-        if(state.baseRule === RULE_IDS.JPML) {
-          state.rule[RULE_KEY.RANKING_POINTS][floatingCount][ranking-1] = value;
+        if(state.baseRule === IDs.JPML) {
+          state.rule[Key.RANKING_POINTS][floatingCount][ranking-1] = value;
         } else {
-          state.rule[RULE_KEY.RANKING_POINTS][ranking-1] = value;
+          state.rule[Key.RANKING_POINTS][ranking-1] = value;
         }
       };
       return listener;
@@ -252,8 +252,8 @@ function initInputOfRankingPoints() {
        */
       function listener(e){
         const value = Number(e.target.value);
-        if(state.baseRule === RULE_IDS.JPML) {
-          state.rule[RULE_KEY.RANKING_POINTS][floatingCount][ranking-1] = value;
+        if(state.baseRule === IDs.JPML) {
+          state.rule[Key.RANKING_POINTS][floatingCount][ranking-1] = value;
         }
       };
       return listener;
@@ -275,7 +275,7 @@ export function setInitialScore(value) {
   ensureDom();
   value = Number(value);
   input_rule_initialScore.value = Number.isNaN(value) ? '' : value;
-  state.rule[RULE_KEY.INITIAL_SCORE] = value;
+  state.rule[Key.INITIAL_SCORE] = value;
   return value;
 }
 
@@ -288,7 +288,7 @@ export function setReturnScore(value) {
   ensureDom();
   value = Number(value);
   input_rule_returnScore.value = Number.isNaN(value) ? '' : value;
-  state.rule[RULE_KEY.RETURN_SCORE] = value;
+  state.rule[Key.RETURN_SCORE] = value;
   return input_rule_returnScore.value;
 }
 
@@ -299,7 +299,7 @@ export function setReturnScore(value) {
 export function setRankingPoints(rankingPoints) {
   ensureDom();
 
-  state.rule[RULE_KEY.RANKING_POINTS] = rankingPoints;
+  state.rule[Key.RANKING_POINTS] = rankingPoints;
 
   if(Array.isArray(rankingPoints)) {
     // RankingPointsArrayの場合
@@ -328,7 +328,7 @@ export function setTenpaiFee(value) {
   ensureDom();
   value = Number(value);
   input_rule_tenpaiFee.value = Number.isNaN(value) ? '' : value;
-  state.rule[RULE_KEY.TENPAI_FEE] = value;
+  state.rule[Key.TENPAI_FEE] = value;
   return value;
 }
 
@@ -336,7 +336,7 @@ export function setRoundingMangan(value) {
   ensureDom();
   value = toBoolean(value);
   select_rule_roundingMangan.value = value;
-  state.rule[RULE_KEY.ROUNDING_MANGAN] = value;
+  state.rule[Key.ROUNDING_MANGAN] = value;
   return value;
 }
 
@@ -344,7 +344,7 @@ export function setAllowGameEndByNegative(value) {
   ensureDom();
   value = toBoolean(value);
   select_rule_allowGameEndByNegative.value = value;
-  state.rule[RULE_KEY.ALLOW_GAME_END_BY_NEGATIVE] = value;
+  state.rule[Key.ALLOW_GAME_END_BY_NEGATIVE] = value;
   return value;
 }
 
@@ -352,7 +352,7 @@ export function setEndOnAWin(value) {
   ensureDom();
   value = toBoolean(value);
   select_rule_endOnAWin.value = value;
-  state.rule[RULE_KEY.END_ON_A_WIN] = value;
+  state.rule[Key.END_ON_A_WIN] = value;
   return value;
 }
 
@@ -360,7 +360,7 @@ export function setEndOnATenpai(value) {
   ensureDom();
   value = toBoolean(value);
   select_rule_endOnATenpai.value = toBoolean(value);
-  state.rule[RULE_KEY.END_ON_A_TENPAI] = value;
+  state.rule[Key.END_ON_A_TENPAI] = value;
   return value;
 }
 
@@ -373,7 +373,7 @@ function setAllowWestRound(value) {
   ensureDom();
   value = toBoolean(value);
   select_rule_allowWestRound.value = value;
-  state.rule[RULE_KEY.ALLOW_WEST_ROUND] = value;
+  state.rule[Key.ALLOW_WEST_ROUND] = value;
   activateInputOfMinimumTopScore();
   return value;
 }
@@ -383,14 +383,14 @@ function setAllowWestRound(value) {
  */
 function activateInputOfMinimumTopScore() {
   ensureDom();
-  input_rule_minimumTopScore.disabled = !state.rule[RULE_KEY.ALLOW_WEST_ROUND];
+  input_rule_minimumTopScore.disabled = !state.rule[Key.ALLOW_WEST_ROUND];
 }
 
 function setMinimumTopScore(value) {
   ensureDom();
   value = Number(value);
   input_rule_minimumTopScore.value = Number.isNaN(value) ? '' : value;
-  state.rule[RULE_KEY.MINIMUN_TOP_SCORE] = value;
+  state.rule[Key.MINIMUN_TOP_SCORE] = value;
   return value;
 }
 
@@ -398,11 +398,11 @@ function setTieScoreRule(value) {
   ensureDom();
   if(Object.values(TIE_SCORE_RULE).includes(value)) {
     select_rule_tieScoreRule.value = value;
-    state.rule[RULE_KEY.TIE_SCORE_RULE] = value;
+    state.rule[Key.TIE_SCORE_RULE] = value;
   } else {
     // 誤った値を与えたときは、警告を発して現在の値を返す。
     console.warn(`"${value}" is not included in TIE_SCORE_RULE.`);
-    return state.rule[RULE_KEY.TIE_SCORE_RULE];
+    return state.rule[Key.TIE_SCORE_RULE];
   }
 
   // 同点時の順位を席順で決定する場合、終局時供託の同点トップ者山分けを選択不可
@@ -412,7 +412,7 @@ function setTieScoreRule(value) {
     // disabledを指定
     option_top_shared.disabled = true;
     // すでに選択されている場合は、上家取りに変更
-    if(state.rule[RULE_KEY.KYOTAKU_SETTLEMENT] === KYOTAKU_SETTLEMENT_TYPE.TOP_SHARED) {
+    if(state.rule[Key.KYOTAKU_SETTLEMENT] === KYOTAKU_SETTLEMENT_TYPE.TOP_SHARED) {
       setKyotakuSettlement(KYOTAKU_SETTLEMENT_TYPE.TOP_ONLY_SEAT);
     }
   } else {
@@ -427,11 +427,11 @@ function setKyotakuSettlement(value) {
   ensureDom();
   if(Object.values(KYOTAKU_SETTLEMENT_TYPE).includes(value)) {
     select_rule_kyotakuSettlement.value = value;
-    state.rule[RULE_KEY.KYOTAKU_SETTLEMENT] = value;
+    state.rule[Key.KYOTAKU_SETTLEMENT] = value;
   } else {
     // 誤った値を与えたときは、警告を発して現在の値を返す。
     console.warn(`"${value}" is not included in KYOTAKU_SETTLEMENT_TYPE.`);
-    return state.rule[RULE_KEY.KYOTAKU_SETTLEMENT];
+    return state.rule[Key.KYOTAKU_SETTLEMENT];
   }
   return value;
 }
@@ -464,10 +464,10 @@ export function setRenchanRule(value) {
   ensureDom();
   if(Object.values(RENCHAN_RULE).includes(value)) {
     select_rule_renchanRule.value = value;
-    state.rule[RULE_KEY.RENCHAN_RULE] = value;
+    state.rule[Key.RENCHAN_RULE] = value;
   } else {
     console.warn(`"${value}" is not included in RENCHAN_RULE.`);
-    return state.rule[RULE_KEY.RENCHAN_RULE];
+    return state.rule[Key.RENCHAN_RULE];
   }
   return value;
 }
@@ -481,7 +481,7 @@ export function setIncrementTsumibo(value) {
   ensureDom();
   value = toBoolean(value);
   select_rule_incrementTsumibo.value = value;
-  state.rule[RULE_KEY.INCREMENT_TSUMIBO] = value;
+  state.rule[Key.INCREMENT_TSUMIBO] = value;
   return value;
 }
 
@@ -496,7 +496,7 @@ export function setMaxYakumanLimit(value) {
   ensureDom();
   value = Number(value);
   select_rule_maxYakumanLimit.value = Number.isNaN(value) ? '' : value;
-  state.rule[RULE_KEY.MAX_YAKUMAN_LIMIT] = value;
+  state.rule[Key.MAX_YAKUMAN_LIMIT] = value;
   return value;
 }
 
@@ -507,21 +507,21 @@ function expandPresetValues() {
   const preset = getRulePreset(selectValue);
   state.rule = structuredClone(preset);
 
-  setInitialScore(preset[RULE_KEY.INITIAL_SCORE]);
-  setReturnScore(preset[RULE_KEY.RETURN_SCORE]);
-  setRankingPoints(preset[RULE_KEY.RANKING_POINTS]);
-  setTenpaiFee(preset[RULE_KEY.TENPAI_FEE]);
-  setRoundingMangan(preset[RULE_KEY.ROUNDING_MANGAN]);
-  setAllowGameEndByNegative(preset[RULE_KEY.ALLOW_GAME_END_BY_NEGATIVE]);
-  setEndOnAWin(preset[RULE_KEY.END_ON_A_WIN]);
-  setEndOnATenpai(preset[RULE_KEY.END_ON_A_TENPAI]);
-  setAllowWestRound(preset[RULE_KEY.ALLOW_WEST_ROUND]);
-  setMinimumTopScore(preset[RULE_KEY.MINIMUN_TOP_SCORE]);
-  setTieScoreRule(preset[RULE_KEY.TIE_SCORE_RULE]);
-  setKyotakuSettlement(preset[RULE_KEY.KYOTAKU_SETTLEMENT]);
-  setRenchanRule(preset[RULE_KEY.RENCHAN_RULE]);
-  setIncrementTsumibo(preset[RULE_KEY.INCREMENT_TSUMIBO]);
-  setMaxYakumanLimit(preset[RULE_KEY.MAX_YAKUMAN_LIMIT]);
+  setInitialScore(preset[Key.INITIAL_SCORE]);
+  setReturnScore(preset[Key.RETURN_SCORE]);
+  setRankingPoints(preset[Key.RANKING_POINTS]);
+  setTenpaiFee(preset[Key.TENPAI_FEE]);
+  setRoundingMangan(preset[Key.ROUNDING_MANGAN]);
+  setAllowGameEndByNegative(preset[Key.ALLOW_GAME_END_BY_NEGATIVE]);
+  setEndOnAWin(preset[Key.END_ON_A_WIN]);
+  setEndOnATenpai(preset[Key.END_ON_A_TENPAI]);
+  setAllowWestRound(preset[Key.ALLOW_WEST_ROUND]);
+  setMinimumTopScore(preset[Key.MINIMUN_TOP_SCORE]);
+  setTieScoreRule(preset[Key.TIE_SCORE_RULE]);
+  setKyotakuSettlement(preset[Key.KYOTAKU_SETTLEMENT]);
+  setRenchanRule(preset[Key.RENCHAN_RULE]);
+  setIncrementTsumibo(preset[Key.INCREMENT_TSUMIBO]);
+  setMaxYakumanLimit(preset[Key.MAX_YAKUMAN_LIMIT]);
 };
 
 

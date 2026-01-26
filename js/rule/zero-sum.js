@@ -1,4 +1,4 @@
-import { RULE_IDS, RULE_KEY } from "./define.js";
+import { IDs, Key } from "./define.js";
 import * as SeatMap from "../seat-map/index.js";
 
 /**
@@ -12,7 +12,7 @@ import * as SeatMap from "../seat-map/index.js";
  * @param {number} [numberOfPlayers=4] プレーヤー人数。省略した場合4人。
  */
 export function zeroSumCheckForScore(ruleObj, scoreMap, kyotaku = 0, numberOfPlayers = 4) {
-  const sumDef = ruleObj[RULE_KEY.INITIAL_SCORE] * numberOfPlayers;
+  const sumDef = ruleObj[Key.INITIAL_SCORE] * numberOfPlayers;
   return sumDef - (SeatMap.reduce(scoreMap, (acc, value) => acc + value, 0) + kyotaku * 1000);
 }
 
@@ -23,14 +23,14 @@ export function zeroSumCheckForScore(ruleObj, scoreMap, kyotaku = 0, numberOfPla
  * @throws {ZeroSumError} 順位点総計が0になっていないときにZeroSumErrorをスロー。
  */
 export function zeroSumCheckForRankingPoints(ruleObj) {
-  if (ruleObj[RULE_KEY.BASE] === RULE_IDS.JPML) {
+  if (ruleObj[Key.BASE] === IDs.JPML) {
     const floating = [1, 2, 3, 0];
     const checks = floating.map(floatingCount => ({
       floatingCount,
       sum: zeroSumCheckHelper(
-        ruleObj[RULE_KEY.INITIAL_SCORE],
-        ruleObj[RULE_KEY.RETURN_SCORE],
-        ruleObj[RULE_KEY.RANKING_POINTS][floatingCount]
+        ruleObj[Key.INITIAL_SCORE],
+        ruleObj[Key.RETURN_SCORE],
+        ruleObj[Key.RANKING_POINTS][floatingCount]
       )
     }));
 
@@ -54,9 +54,9 @@ export function zeroSumCheckForRankingPoints(ruleObj) {
     );
   } else {
     const sum = zeroSumCheckHelper(
-      ruleObj[RULE_KEY.INITIAL_SCORE],
-      ruleObj[RULE_KEY.RETURN_SCORE],
-      ruleObj[RULE_KEY.RANKING_POINTS]);
+      ruleObj[Key.INITIAL_SCORE],
+      ruleObj[Key.RETURN_SCORE],
+      ruleObj[Key.RANKING_POINTS]);
     if (sum === 0) {
       return 0;
     }

@@ -11,7 +11,7 @@ import * as SeatMap from '../seat-map/index.js'
 import { selectAllOnFocus } from "./common.js";
 import { SEAT_ORDER } from "../seat-utilities/index.js";
 import { promise_tab2 } from "../main.js";
-import { RULE_KEY } from "../rule/define.js";
+import { Key } from "../rule/define.js";
 import { loadTextFile } from "./html-loader.js";
 import { toBoolean } from "../my-utilities/index.js";
 
@@ -285,7 +285,7 @@ export async function resetScore() {
   ensureDom();
   return promise_tab2.then(() => {
     /** @type {number} */
-    const value = state.rule[RULE_KEY.INITIAL_SCORE];
+    const value = state.rule[Key.INITIAL_SCORE];
     SEAT_ORDER.forEach(seat => {
       setScore(seat, value);
     });
@@ -320,7 +320,7 @@ export function zeroSumScoreCheck() {
 
 function helperForZeroSumScoreCheck() {
   // 23400 | 234 | 23.4 いずれの書き方にも対応するため、
-  const expected = state.rule[RULE_KEY.INITIAL_SCORE] * 4;
+  const expected = state.rule[Key.INITIAL_SCORE] * 4;
   const multipliers = [1, 100, 1000];
   const errors = [];
   for(const multiplier of multipliers) {
@@ -336,7 +336,7 @@ function helperForZeroSumScoreCheck() {
 
   
   throw new ZeroSumScoreError('点棒合計が一致しません。', {
-    errors, initialScore: state.rule[RULE_KEY.INITIAL_SCORE]
+    errors, initialScore: state.rule[Key.INITIAL_SCORE]
   });
 
 }

@@ -22,7 +22,7 @@
  * ルールオブジェクト
  * @typedef {Object} RuleObject
  * @property {string} name
- * @property {RULE_ID} baseRule
+ * @property {RuleID} baseRule
  * @property {number} initialScore
  * @property {number} returnScore
  * @property {RankingPointsDef} rankingPoints
@@ -39,18 +39,19 @@
  * @property {boolean} allowWestRound
  * @property {number} [minimumTopScore]
  * @property {number} maxYakumanLimit
+ * @property {string} description
  */
 
 
 /**
- * @typedef {typeof RULE_KEY[keyof typeof RULE_KEY]} RuleKeyString
+ * @typedef {typeof Key[keyof typeof Key]} RuleKey
  */
 
 /**
  * @readonly
  * @enum {string}
  */
-export const RULE_KEY = {
+export const Key = Object.freeze({
   NAME:                        "name",                                        // ルール名
   BASE:                        "baseRule",                                    // ベースルール(条件分岐に用いる場合がある)
   INITIAL_SCORE:               "initialScore",                                // 配給原点
@@ -75,44 +76,46 @@ export const RULE_KEY = {
   ALLOW_WEST_ROUND:            "allowWestRound",                              // 西入(あり:true/なし:false)
   MINIMUN_TOP_SCORE:           "minimumTopScore",                             // トップ必要最低点数(西入ありのとき)
   MAX_YAKUMAN_LIMIT:           "maxYakumanLimit",                             // 最大和了点(一般的に、四暗刻単騎と大四喜をシングル役満とした場合、最大で四倍役満になる)
-};
+  DESCRIPTION:                 "description"                                  // ルールの説明
+});
 
 /**
  * @readonly
  * @enum {string}
  */
-export const RULE_KEY_LABELS = {
-  [RULE_KEY.NAME]:                        'ルール名',
-  [RULE_KEY.BASE]:                        'ベースルール',
-  [RULE_KEY.INITIAL_SCORE]:               '配給原点',
-  [RULE_KEY.RETURN_SCORE]:                '返し点',
-  [RULE_KEY.RANKING_POINTS]:              '順位点',
-  [RULE_KEY.TENPAI_FEE]:                  'テンパイ料',
-  [RULE_KEY.ROUNDING_MANGAN]:             '切り上げ満貫',
-  [RULE_KEY.ALLOW_GAME_END_BY_NEGATIVE]:  'トビ終了',
-  [RULE_KEY.END_ON_A_WIN]:                'アガリやめ',
-  [RULE_KEY.END_ON_A_TENPAI]:             'テンパイやめ',
-  [RULE_KEY.RENCHAN_RULE]:                '連荘条件',
-  [RULE_KEY.DOUBLE_WIND_HEAD]:           '連風牌雀頭',
-  [RULE_KEY.TIE_SCORE_RULE]:              '同点時の順位',
-  [RULE_KEY.KYOTAKU_SETTLEMENT]:          '終局時の供託処理',
-  [RULE_KEY.INCREMENT_TSUMIBO]:           '積み棒の加算',
-  [RULE_KEY.ALLOW_WEST_ROUND]:            '西入',
-  [RULE_KEY.MINIMUN_TOP_SCORE]:           'トップ必要点数',
-  [RULE_KEY.MAX_YAKUMAN_LIMIT]:           '最大和了点',
-};
+export const RULE_KEY_LABELS = Object.freeze({
+  [Key.NAME]:                        'ルール名',
+  [Key.BASE]:                        'ベースルール',
+  [Key.INITIAL_SCORE]:               '配給原点',
+  [Key.RETURN_SCORE]:                '返し点',
+  [Key.RANKING_POINTS]:              '順位点',
+  [Key.TENPAI_FEE]:                  'テンパイ料',
+  [Key.ROUNDING_MANGAN]:             '切り上げ満貫',
+  [Key.ALLOW_GAME_END_BY_NEGATIVE]:  'トビ終了',
+  [Key.END_ON_A_WIN]:                'アガリやめ',
+  [Key.END_ON_A_TENPAI]:             'テンパイやめ',
+  [Key.RENCHAN_RULE]:                '連荘条件',
+  [Key.DOUBLE_WIND_HEAD]:            '連風牌雀頭',
+  [Key.TIE_SCORE_RULE]:              '同点時の順位',
+  [Key.KYOTAKU_SETTLEMENT]:          '終局時の供託処理',
+  [Key.INCREMENT_TSUMIBO]:           '積み棒の加算',
+  [Key.ALLOW_WEST_ROUND]:            '西入',
+  [Key.MINIMUN_TOP_SCORE]:           'トップ必要点数',
+  [Key.MAX_YAKUMAN_LIMIT]:           '最大和了点',
+  [Key.DESCRIPTION]:                 'ルールの説明'
+});
 
 export const RULE_OPTIONS = Object.entries(RULE_KEY_LABELS).map(([value, label]) => ({ value, label }));
 
 /**
- * @typedef {typeof RULE_IDS[keyof typeof RULE_IDS]} RULE_ID
+ * @typedef {typeof IDs[keyof typeof IDs]} RuleID
  */
 /**
  * ベースルールとなるルールの識別子
  * @readonly
  * @enum {string}
  */
-export const RULE_IDS = {
+export const IDs = Object.freeze({
   M_LEAGUE:           "m_league",
   SAIKOUISEN:         "saikouisen",
   SAIKOUISEN_CLASSIC: "saikouisen_classic",
@@ -124,7 +127,7 @@ export const RULE_IDS = {
   TENHOU:             "tenhou",
   MAHJONGSOUL:        "mahjongsoul",
   GYAKUSHU:           "mahjongsoul_gyakushu"
-};
+});
 
 
 /**
@@ -136,18 +139,18 @@ export const RULE_IDS = {
  * @readonly
  * @enum {string}
  */
-export const RENCHAN_RULE = {
+export const RENCHAN_RULE = Object.freeze({
   TENPAI: 'tenpai_renchan',  // テンパイ連荘
   AGARI:  'agari_renchan',   // 和了連荘
   NONE:   'no_renchan',      // 連荘なし
-};
+});
 
 
-const RENCHAN_RULE_LABELS = {
+const RENCHAN_RULE_LABELS = Object.freeze({
   [RENCHAN_RULE.TENPAI]: 'テンパイ連荘',
   [RENCHAN_RULE.AGARI]:  '和了連荘',
   [RENCHAN_RULE.NONE]:   '連荘なし',
-};
+});
 
 /**
  * @typedef {typeof RENCHAN_RULE_LABELS[keyof typeof RENCHAN_RULE_LABELS]} RENCHAN_RULE_LABELS
@@ -165,10 +168,10 @@ export const RENCHAN_RULE_OPTIONS = Object.entries(RENCHAN_RULE_LABELS).map(([va
  * @readonly
  * @enum {string}
  */
-export const TIE_SCORE_RULE = {
+export const TIE_SCORE_RULE = Object.freeze({
   SHARED: 'shared',                     // 順位点を分ける
   SEAT_ORDER: 'seat_order',             // 席順で決定
-};
+});
 
 
 /**
@@ -176,10 +179,10 @@ export const TIE_SCORE_RULE = {
  * @readonly
  * @enum {string}
  */
-const TIE_SCORE_RULE_LABELS = {
+const TIE_SCORE_RULE_LABELS = Object.freeze({
   [TIE_SCORE_RULE.SHARED]:     '同順位として順位点を分ける',
   [TIE_SCORE_RULE.SEAT_ORDER]: '席順で順位を決定',
-};
+});
 
 /**
  * @readonly
@@ -196,22 +199,22 @@ export const TIE_SCORE_RULE_OPTIONS = Object.entries(TIE_SCORE_RULE_LABELS).map(
  * @readonly
  * @enum {string}
  */
-export const KYOTAKU_SETTLEMENT_TYPE = {
+export const KYOTAKU_SETTLEMENT_TYPE = Object.freeze({
   KEEP:          'keep',            // 供託のまま
   TOP_SHARED:    'top_shared',      // トップ取り、同点時分配
   TOP_ONLY_SEAT: 'top_only_seat',   // トップ取り、同点時上家優先
-};
+});
 
 /**
  * 終局時供託のラベル
  * @readonly
  * @enum {string}
  */
-const KYOTAKU_SETTLEMENT_LABELS = {
+const KYOTAKU_SETTLEMENT_LABELS = Object.freeze({
   [KYOTAKU_SETTLEMENT_TYPE.KEEP]:           '供託のまま',
   [KYOTAKU_SETTLEMENT_TYPE.TOP_SHARED]:     'トップ取り（同点時分配）',
   [KYOTAKU_SETTLEMENT_TYPE.TOP_ONLY_SEAT]:  'トップ取り（同点時上家優先）',
-};
+});
 
 // UI用選択肢（label / value）
 export const KYOTAKU_SETTLEMENT_OPTIONS = Object.entries(KYOTAKU_SETTLEMENT_LABELS).map(([value, label]) => ({ value, label }));
