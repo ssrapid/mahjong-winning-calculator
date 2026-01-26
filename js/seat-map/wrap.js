@@ -1,12 +1,4 @@
-import * as SeatMap from './index.js'
-
-/**
- * @typedef {import("../seat-utilities/index.js").Seat} Seat
- */
-/**
- * @template T
- * @typedef {import("./index.js").SeatMap<T>} SeatMap
- */
+import { create } from './create.js';
 
 
 /**
@@ -23,12 +15,12 @@ import * as SeatMap from './index.js'
  *
  * @template T
  * @template {string} K
- * @param {()SeatMap<T>} seatMap - SeatMap 形式のオブジェクト（{ 東: any, 南: any, 西: any, 北: any }）
+ * @param {import('./create.js').SeatMap<T>} seatMap - SeatMap 形式のオブジェクト（{ 東: any, 南: any, 西: any, 北: any }）
  * @param {K} keyName - ラップ時に使用するキー名（例: 'score'）
- * @returns {SeatMap<{ [P in K]: T }>} 新しい SeatMap<Object> （{ 東: { [keyName]: value }, ... }）
+ * @returns {import('./create.js').SeatMap<{ [P in K]: T }>} 新しい SeatMap<Object> （{ 東: { [keyName]: value }, ... }）
  */
 export function wrapValueAsObject(seatMap, keyName) {
-  return SeatMap.create(seat => ({ [keyName]: seatMap[seat] }));
+  return create(seat => ({ [keyName]: seatMap[seat] }));
 }
 
 
@@ -41,11 +33,11 @@ export function wrapValueAsObject(seatMap, keyName) {
  * @example
  * const scoreMap = unwrapSeatMapValueFromObject(wrappedMap, 'score');
  *
- * @param {SeatMap<object>} map - SeatMap<object> 形式のオブジェクト（{ 東: { [key]: value }, 南: ..., ... }）
+ * @param {import('./create.js').SeatMap<object>} map - SeatMap<object> 形式のオブジェクト（{ 東: { [key]: value }, 南: ..., ... }）
  * @param {string} keyName - 抽出するキー名（例: 'score'）
- * @returns {SeatMap<any>} SeatMap<プリミティブ型>（{ 東: value, 南: value, ... }）
+ * @returns {import('./create.js').SeatMap<any>} SeatMap<プリミティブ型>（{ 東: value, 南: value, ... }）
  */
 export function unwrapValueFromObject(map, keyName) {
-  return SeatMap.create(seat => map[seat]?.[keyName] ?? null);
+  return create(seat => map[seat]?.[keyName] ?? null);
 }
 

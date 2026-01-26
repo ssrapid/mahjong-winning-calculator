@@ -1,14 +1,13 @@
 import { SEAT_ORDER } from "../seat-utilities/index.js";
 
-/**
- * @typedef {import("../seat-utilities/index.js").Seat} Seat
- */
+
 /**
  * @template T
- * @typedef {import("./index.js").SeatMap<T>} SeatMap
+ * @callback Comparator
+ * @param {T} a
+ * @param {T} b
+ * @returns {boolean}
  */
-
-
 /**
  * 2つの seatMapオブジェクトの各席の値が一致するかを比較するユーティリティ関数。
  *
@@ -16,9 +15,9 @@ import { SEAT_ORDER } from "../seat-utilities/index.js";
  * comparator 関数を渡すことでカスタム比較も可能。
  *
  * @template T
- * @param {SeatMap<T>} mapA - 比較対象の1つ目の seatMap。
- * @param {SeatMap<T>} mapB - 比較対象の2つ目の seatMap。
- * @param {(a: T, b: T) => boolean} [comparator=(a, b) => a === b] - 各席の値を比較するためのオプションの比較関数。
+ * @param {import("./create.js").SeatMap<T>} mapA - 比較対象の1つ目の seatMap。
+ * @param {import("./create.js").SeatMap<T>} mapB - 比較対象の2つ目の seatMap。
+ * @param {Comparator<T>} [comparator=(a, b) => a === b] - 各席の値を比較するためのオプションの比較関数。
  * @returns {boolean} すべての席で比較が true となれば true、1つでも false であれば false。
  *
  * @example

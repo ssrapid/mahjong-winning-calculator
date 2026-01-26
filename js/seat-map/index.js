@@ -4,26 +4,28 @@ import { SEAT_ORDER } from '../seat-utilities/index.js';
 
 
 export * from './create.js';
-
-
-export * from './match.js';
-export * from './wrap.js';
-export * from './merge.js';
-export * from './rankmap.js';
-export * from './reduce.js';
-
-
 export * from './convert.js';
 
-export * from './predicate.js'
+export * from './wrap.js';
+export * from './merge.js';
+
+export * from './match.js';
+export * from './reduce.js';
+export * from './predicate.js';
+export * from './rankmap.js';
+
+
+
+
+export { SEAT_ORDER } from '../seat-utilities/index.js';
 
 /**
- * @typedef {import("../seat-utilities").Seat} Seat
+ * @typedef {import('../seat-utilities').Seat} Seat
  */
 
 /**
  * @template T
- * @typedef {{e:T,s:T,w:T,n:T}} SeatMap<T>
+ * @typedef {import('./create.js').SeatMap<T>} SeatMap
  */
 
 
@@ -50,7 +52,7 @@ export function validate (seatMap) {
  * 座席ごとの値に対して関数を適用し、新しい seatMap を返す。
  *
  * @template T,U
- * @param {(...args: [...U[], Seat, ...SeatMap<U>[]]) => T} fn - 各座席の値に適用する関数（例: (a, b, seat) => ...）
+ * @param {(...args: [...U[], import("../seat-utilities")Seat, ...SeatMap<U>[]]) => T} fn - 各座席の値に適用する関数（例: (a, b, seat) => ...）
  * @param {...SeatMap<U>} seatMaps - seatMap 形式のオブジェクト群
  * @returns {SeatMap<T>} 新しい seatMap 構造のオブジェクト
  */
@@ -68,7 +70,7 @@ export function map(fn, ...seatMaps) {
  * 座席ごとの値に対して関数を適用する。返り値は使わず副作用のみ行う。
  *
  * @template T
- * @param {(...args: [...T[], Seat, ...SeatMap<T>[]]) => void} fn - 各座席の値に対して実行する関数（例: (a, b, seat) => void）
+ * @param {(...args: [...T[], import("../seat-utilities")Seat, ...SeatMap<T>[]]) => void} fn - 各座席の値に対して実行する関数（例: (a, b, seat) => void）
  * @param {...SeatMap<T>} seatMaps - 同じキーを持つ seatMap 形式のオブジェクト群
  */
 export function forEach(fn, ...seatMaps) {

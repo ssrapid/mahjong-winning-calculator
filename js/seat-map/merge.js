@@ -3,14 +3,6 @@ import { SEAT_ORDER } from "../seat-utilities/index.js";
 import { create } from "./create.js";
 import * as SeatMap from './index.js'
 
-/**
- * @typedef {import("../seat-utilities/index.js").Seat} Seat
- */
-/**
- * @template T
- * @typedef {import("./index.js").SeatMap<T>} SeatMap
- */
-
 
 
 /**
@@ -30,20 +22,16 @@ import * as SeatMap from './index.js'
  * 使用例:
  * const merged = mergeSeatMaps(map1, map2, map3);
  *
- * @param {...SeatMap<object>} maps - 合成する複数の seatMap<Object>
- * @returns {SeatMap<object>} 合成済みの新しい seatMap<Object>
+ * @param {...import("./create.js").SeatMap<object>} maps - 合成する複数の seatMap<Object>
+ * @returns {import("./create.js").SeatMap<object>} 合成済みの新しい seatMap<Object>
  */
 export function merge(...maps) {
-  return SeatMap.create(seat => Object.assign({}, ...maps.map(map => map[seat] ?? {}))
+  return create(seat => Object.assign({}, ...maps.map(map => map[seat] ?? {}))
   );
 }
 
 
 
-/**
- * @template T
- * @typedef {{e:T, s:T, w:T, n:T}} SeatMap
- */
 /**
  * 複数の seatMap<Object> を第一引数の seatMap<Object> に破壊的にマージする。
  *
@@ -61,9 +49,9 @@ export function merge(...maps) {
  * 使用例:
  * mergeSeatMapsInPlace(targetMap, map1, map2);
  *
- * @param {SeatMap<object>} target - マージ先となる seatMap<Object>（破壊される）
- * @param {...SeatMap<object>} maps - マージする複数の seatMap<Object>
- * @returns {SeatMap<object>} マージ後の target を返す
+ * @param {import("./create.js").SeatMap<object>} target - マージ先となる seatMap<Object>（破壊される）
+ * @param {import("./create.js").SeatMap<object>} maps - マージする複数の seatMap<Object>
+ * @returns {import("./create.js").SeatMap<object>} マージ後の target を返す
  */
 export function mergeInPlace(target, ...maps) {
   for (const seat of SEAT_ORDER) {

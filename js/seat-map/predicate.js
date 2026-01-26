@@ -1,18 +1,12 @@
 import { SEAT_ORDER } from '../seat-utilities/index.js';
 
-/**
- * @typedef {import('../seat-utilities').Seat} Seat
- */
-/**
- * @typedef {import('./index.js').SeatMap<T>} SeatMap
- */
 
 /**
  * @template T
  * @callback SeatMapPredicate
  * @param {T} value
- * @param {Seat} seat
- * @param {SeatMap<T>} seatMap
+ * @param {import('../seat-utilities/index.js').Seat} seat
+ * @param {import('./create.js').SeatMap<T>} seatMap
  * @returns {boolean}
  */
 
@@ -20,7 +14,7 @@ import { SEAT_ORDER } from '../seat-utilities/index.js';
  * seatMap の全要素に対して predicate を実行し、すべて true なら true を返す。
  *
  * @template T
- * @param {SeatMap<T>} seatMap - 各席をキーに値を持つSeatMapオブジェクト
+ * @param {import('./create.js').SeatMap<T>} seatMap - 各席をキーに値を持つSeatMapオブジェクト
  * @param {SeatMapPredicate<T>} [predicate] - 各席の値に対して適用する関数(デフォルトはv => Boolean(v))
  * @returns {boolean}
  */
@@ -34,8 +28,8 @@ export function every(seatMap, predicate = v => Boolean(v)) {
  * seatMap の全要素に対して predicate を実行し、すべて true なら true を返す。
  *
  * @template T
- * @param {SeatMap<T>} seatMap
- * @param {(value: T, seat: Seat, seatMap: SeatMap<T>) => boolean} [predicate]
+ * @param {import('./create.js').SeatMap<T>} seatMap
+ * @param {SeatMapPredicate<T>} [predicate]
  * @returns {boolean}
  */
 export function some(seatMap, predicate = v => Boolean(v)) {
@@ -48,7 +42,7 @@ export function some(seatMap, predicate = v => Boolean(v)) {
  * SeatMapの各席に対してpredicateを適用し、trueを返したseatだけを配列で返す。
  *
  * @template T
- * @param {SeatMap<T>} seatMap - 各席をキーに値を持つSeatMapオブジェクト
+ * @param {import('./create.js').SeatMap<T>} seatMap - 各席をキーに値を持つSeatMapオブジェクト
  * @param {SeatMapPredicate<T>} [predicate] - 各席の値に対して適用する関数（デフォルトはv => Boolean(v)）
  * @returns {Seat[]} 条件を満たすseatの配列
  */
@@ -63,7 +57,7 @@ export function filter(seatMap, predicate = v => Boolean(v)) {
  * true を返す要素の数をカウントする汎用ユーティリティ。
  *
  * @template T
- * @param {SeatMap<T>} seatMap - カウント対象の seatMap。
+ * @param {import('./create.js').SeatMap<T>} seatMap - カウント対象の seatMap。
  * @param {SeatMapPredicate<T>} [predicate] - 判定関数、省略時は v => Boolean(v)。
  * @returns {number} predicate が true を返した席の数。
  *

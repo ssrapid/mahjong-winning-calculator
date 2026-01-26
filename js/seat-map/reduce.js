@@ -1,20 +1,20 @@
-import * as SeatMap from './index.js';
-
-/**
- * @typedef {import('../seat-utilities').Seat} Seat
- */
-/**
- * @typedef {import('./index.js').SeatMap<T>} SeatMap
- */
-
+import { toEntries } from './convert.js';
 
 /**
  * @template T, R
  * @callback SeatMapReducer
  * @param {R} accumulator
+ * 前回の SeatMapReducer の呼び出し結果の値です。
+ * 初回の呼び出しでは initialValue が指定されていた場合はその値、
+ * そうでない場合は seatMap[SEAT_ORDER[0]] の値です。
  * @param {T} currentValue
- * @param {Seat} currentSeat
- * @param {SeatMap<T>} seatMap
+ * 現在の要素の値です。初回の呼び出しでは initialValue が指定された場合は
+ *  seatMap[SEAT_ORDER[0]] の値であり、そうでない場合は seatMap[SEAT_ORDER[1]] の値です。
+ * @param {import('../seat-utilities').Seat} currentSeat
+ * currentValue のSeatです。
+ * 初回の呼び出しでは、 initialValue が指定された場合は SEAT_ORDER[0]、そうでない場合は SEAT_ORDER[1] です。
+ * @param {import('./index.js').SeatMap<T>} seatMap
+ * reduce() に与えたSeatMapです。
  * @returns {R}
  */
 
@@ -27,7 +27,7 @@ import * as SeatMap from './index.js';
  * @template T, R
  * @overload
  *
- * @param {SeatMap<T>} seatMap
+ * @param {import('./index.js').SeatMap<T>} seatMap
  * 計算対象のSeatMap
  *
  * @param {SeatMapReducer<T, R>} reducer
@@ -54,7 +54,7 @@ import * as SeatMap from './index.js';
  * @template U
  * @overload
  *
- * @param {SeatMap<U>} seatMap
+ * @param {import('./index.js').SeatMap<U>} seatMap
  * 計算対象のSeatMap
  *
  * @param {SeatMapReducer<U, U>} reducer
@@ -69,13 +69,13 @@ import * as SeatMap from './index.js';
  * seatMap を1つの値に集約する。
  *
  * @template T, R
- * @param {SeatMap<any>} seatMap
- * @param {SeatMapReducer<any, any>} reducer
- * @param {...any} rest
- * @returns {any}
+ * @param {import('./index.js').SeatMap<T>} seatMap
+ * @param {SeatMapReducer<T, R>} reducer
+ * @param {...R} rest
+ * @returns {R}
  */
 export function reduce(seatMap, reducer, ...rest) {
-  const entries = SeatMap.toEntries(seatMap);
+  const entries = toEntries(seatMap);
 
   if (rest.length === 0) {
     entries.shift();
@@ -93,7 +93,7 @@ export function reduce(seatMap, reducer, ...rest) {
 /**
  * SeatMap<number>の各席の値を合計する。
  *
- * @param {SeatMap<number>} seatMap 計算対象のSeatMap
+ * @param {import('./index.js').SeatMap<number>} seatMap 計算対象のSeatMap
  * @returns {number} 各席の値の合計
  */
 export function sum(seatMap) {

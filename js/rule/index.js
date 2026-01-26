@@ -21,3 +21,7 @@ export * from './loader.js';
 /**
  * @typedef {import('./define.js').RankingPointsForJPML} RankingPointsForJPML
  */
+
+/**
+ * @typedef {import('./define.js').RuleID} RuleID
+ */

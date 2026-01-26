@@ -1,16 +1,16 @@
-import { getRanks } from "../my-utilities/index.js";
-import { fromArray } from "./create.js";
-import { toArray } from "./convert.js";
+import { getRanks } from '../my-utilities/index.js';
+import { fromArray } from './create.js';
+import { toArray } from './convert.js';
 
-/**
- * @typedef {import("../seat-utilities").Seat} Seat
- */
+
 /**
  * @template T
- * @typedef {import("../seat-map").SeatMap<T>} SeatMap
+ * @callback RankCompare
+ * @param {T} a 比較対象の要素A
+ * @param {T} b 比較対象の要素B
+ * @param {readonly T[]} group 現在比較対象となっている同順位グループ
+ * @returns {number} a が上位なら負、b が上位なら正、同順位なら 0
  */
-
-
 /**
  * seatMap を順位付けするユーティリティ関数。
  *
@@ -20,14 +20,7 @@ import { toArray } from "./convert.js";
  * 次の比較が行われます。
  *
  * @template T
- *
- * @callback RankCompare
- * @param {T} a 比較対象の要素A
- * @param {T} b 比較対象の要素B
- * @param {readonly T[]} group 現在比較対象となっている同順位グループ
- * @returns {number} a が上位なら負、b が上位なら正、同順位なら 0
- *
- * @param {SeatMap<T>} map 順位付け対象の seatMap
+ * @param {import('./create.js').SeatMap<T>} map 順位付け対象の seatMap
  *
  * @param {boolean} [allowTies=true]
  *   true の場合、すべての比較関数を適用しても同順位が残った場合は
@@ -38,7 +31,7 @@ import { toArray } from "./convert.js";
  *   順位決定に使用する比較関数群。
  *   上から順に適用され、同順位が発生したグループ内のみで次の比較が行われます。
  *
- * @returns {SeatMap<number>}
+ * @returns {import('./create.js').SeatMap<number>}
  *   各席に対応する順位を持つ seatMap を返します。
  */
 export function getRankMap(map, allowTies = true, ...compareFns) {

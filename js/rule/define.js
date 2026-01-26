@@ -31,7 +31,7 @@
  * @property {boolean} allowGameEndByNegative
  * @property {boolean} endOnAWin
  * @property {boolean} endOnATenpai
- * @property {RENCHAN_RULE_TYPE} renchanRule
+ * @property {RenchanRuleType} renchanRule
  * @property {2|4} doubleWindHead
  * @property {TIE_SCORE_RULE_TYPE} tieScoreRule
  * @property {KYOTAKU_SETTLEMENT_TYPE_DEF} kyotakuSettlement
@@ -131,7 +131,7 @@ export const IDs = Object.freeze({
 
 
 /**
- * @typedef {typeof RENCHAN_RULE[keyof typeof RENCHAN_RULE]} RENCHAN_RULE_TYPE
+ * @typedef {typeof RENCHAN_RULE[keyof typeof RENCHAN_RULE]} RenchanRuleType
  */
 
 /**

@@ -1,17 +1,16 @@
 import { SEAT_ORDER } from "../seat-utilities/index.js";
 
+
 /**
- * @typedef {import("./index.js").SeatMap<T>} SeatMap
- */
-/**
- * @typedef {import("../seat-utilities").Seat} Seat
+ * @template T
+ * @typedef {{e:T,s:T,w:T,n:T}} SeatMap<T>
  */
 
 /**
  * "e", "s", "w", "n"をキーとしたオブジェクトを初期化して返す
  * @template T
  * @overload
- * @param {(seat: Seat) => T} factory 初期値または初期化関数(seatを引数にとる)。省略した場合はnull
+ * @param {(seat: import("../seat-utilities").Seat) => T} factory 初期値または初期化関数(seatを引数にとる)。省略した場合はnull
  * @returns {SeatMap<T>} 例: { e: 0, s: 0, w: 0, n: 0 }
  */
 
@@ -67,16 +66,16 @@ export function fromValues(east, south, west, north) {
 /**
  * entries から SeatMap を生成する
  * @template T
- * @param {Iterable<[Seat, T]>} entries ["e", 0]などのような[seat, value]形式のIterable
+ * @param {Iterable<[seat:import("../seat-utilities").Seat, value:T]>} entries ["e", 0]などのような[seat, value]形式のIterable
  * @returns {SeatMap<T>} { e: eastValue, s: southValue, w: westValue, n: northValue }形式のオブジェクト
  */
 export function fromEntries(entries) {
-  const src = Object.fromEntries(entries);
-  const map = {};
-
-  for (const seat of SEAT_ORDER) {
-    map[seat] = seat in src ? src[seat] : null;
+  const retMap = create();  // 一旦nullで初期化
+  for(const [seat, value] of entries) {
+    if(seat in retMap) {
+      retMap[seat] = value;
+    }
   }
+  return retMap;
 
-  return map;
 }

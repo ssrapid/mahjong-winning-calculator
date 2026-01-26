@@ -81,6 +81,7 @@ export function zeroSumCheckForRankingPoints(ruleObj) {
 function zeroSumCheckHelper(initialScore, returnScore, RankingPointsArray) {
   return ((initialScore - returnScore) * 4 + RankingPointsArray.reduce((acc, v) => acc + v, 0) * 1000) / 1000;
 }
+
 export class ZeroSumError extends Error {
   /**
    * @param {string} message
