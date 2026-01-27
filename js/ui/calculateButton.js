@@ -1,8 +1,9 @@
 import { loadTextFile } from "./html-loader.js";
 import { promise_tab1 } from "../main.js";
 import { expandTable, showTentativePoint, zeroSumScoreCheck } from "./tabpanel-main.js";
-
-
+import * as GameCalculator from '../game-calculator/index.js'
+import { state } from '../state.js';
+import * as SeatMap from '../seat-map/index.js'
 
 /**
  * 計算ボタンを有効化する関数
@@ -17,10 +18,13 @@ export function setupCalculateButton() {
  * 計算ボタンの押下時に呼び出す関数
  */
 function calculateButtonHandler() {
-  console.log('計算');
   zeroSumScoreCheck();
   expandTable();
   showTentativePoint();
+  const players = structuredClone(state.players);
+  SeatMap.forEach((obj, riichi) => obj.riichi = riichi, players, state.riichi);
+  console.log(GameCalculator.AgariPattern.build(players, state.tableInfo, state.rule).allPatterns);
+  
 
 }
 

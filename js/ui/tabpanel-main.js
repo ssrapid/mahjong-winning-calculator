@@ -323,7 +323,6 @@ export function showTentativePoint() {
   /** @type {import('../seat-map').SeatMap<number>} */
   const scoreMap = SeatMap.unwrapValueFromObject(state.players, 'score');
   const ranking = GameCalc.getRankingPointMap(scoreMap, state.rule, { wrap: true, rankingMap: true });
-  console.log(scoreMap, ranking, state.rule[Rule.KEY.RETURN_SCORE]);
   const pointMap = SeatMap.create(seat => {
     const gamePoint = scoreMap[seat] - state.rule[Rule.KEY.RETURN_SCORE] + ranking[seat].rankingPoint;
     /** @type {number} */
