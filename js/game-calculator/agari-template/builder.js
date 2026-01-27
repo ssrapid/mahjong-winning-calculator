@@ -1,5 +1,5 @@
 import * as Rule from '../../rule/index.js'
-import * as AgariTemplate from './index.js'
+import { Key } from './define.js';
 
 import plainTsumoAgariTemplates from './tsumo.json' with { type: 'json' };
 import plainRonAgariTemplates from './ron.json' with { type: 'json' };
@@ -8,7 +8,7 @@ import plainRonAgariTemplates from './ron.json' with { type: 'json' };
 /**
  * ツモ和了時の点数などを定義した雛型を提供します。
  * @param {import('../../rule').RuleObject} ruleObj 切り上げ満貫のありなしなどを設定したルールオブジェクトが必要です。
- * @returns {import('./index.js').TsumoAgariTemplate}
+ * @returns {import('./define.js').TsumoAgariTemplate[]}
  */
 export function getTsumoAgariTemplates(ruleObj) {
   return getAgariTemplate(ruleObj, 'tsumo');
@@ -18,7 +18,7 @@ export function getTsumoAgariTemplates(ruleObj) {
 /**
  * ロン和了時の点数などを定義した雛型を提供します。
  * @param {import('../../rule/index.js').RuleObject} ruleObj 切り上げ満貫のありなしなどを設定したルールオブジェクトが必要です。
- * @returns {import('./index.js').RonAgariTemplate}
+ * @returns {import('./index.js').RonAgariTemplate[]}
  */
 export function getRonAgariTemplates(ruleObj) {
   return getAgariTemplate(ruleObj, 'ron');
@@ -29,19 +29,19 @@ export function getRonAgariTemplates(ruleObj) {
  * @overload
  * @param {import('../../rule/index.js').RuleObject} ruleObj 切り上げ満貫のありなしなどを設定したルールオブジェクトが必要です。
  * @param {"tsumo"} type ロンまたはツモ
- * @returns {import('./index.js').TsumoAgariTemplate[]}
+ * @returns {import('./define.js').TsumoAgariTemplate[]}
  */
 /**
  * @overload
  * @param {import('../../rule/index.js').RuleObject} ruleObj 切り上げ満貫のありなしなどを設定したルールオブジェクトが必要です。
  * @param {"ron"} type ロンまたはツモ
- * @returns {import('./index.js').RonAgariTemplate[]}
+ * @returns {import('./define.js').RonAgariTemplate[]}
  */
 /**
  * 
  * @param {import('../../rule/index.js').RuleObject} ruleObj 切り上げ満貫のありなしなどを設定したルールオブジェクトが必要です。 
  * @param {"tsumo"|"ron"} type ロンまたはツモ
- * @returns {AgariTemplate[]}
+ * @returns {import('./define.js').AgariTemplate[]}
  */
 function getAgariTemplate(ruleObj, type) {
   /** @type {AgariTemplate[]} */
@@ -65,13 +65,13 @@ function getAgariTemplate(ruleObj, type) {
 
 
   for(const template of plainTemplates) {
-    const fuAndHanArray = template[AgariTemplate.Key.FU_AND_HAN];
+    const fuAndHanArray = template[Key.FU_AND_HAN];
 
     if(!fuAndHanArray) {
       // arrayがundefinedの場合、満貫以上の和了
 
       const maxYakumanLimit = ruleObj[Rule.KEY.MAX_YAKUMAN_LIMIT];
-      const yakumanLevel = template[AgariTemplate.Key.YAKUMAN_LEVEL];
+      const yakumanLevel = template[Key.YAKUMAN_LEVEL];
 
       // 最大点数を超える場合はスキップ
       if(yakumanLevel > maxYakumanLimit) {
