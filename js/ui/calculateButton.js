@@ -23,7 +23,7 @@ function calculateButtonHandler() {
   showTentativePoint();
   const players = structuredClone(state.players);
   SeatMap.forEach((obj, riichi) => obj.riichi = riichi, players, state.riichi);
-  console.log(GameCalculator.AgariPattern.build(players, state.tableInfo, state.rule).allPatterns);
+  console.log(GameCalculator.AgariPattern.build(players, state.tableInfo, state.rule));
   
 
 }

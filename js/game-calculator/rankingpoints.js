@@ -2,7 +2,7 @@ import * as SeatUtilities from '../seat-utilities/index.js'
 import * as SeatMap from '../seat-map/index.js'
 import * as Rule from '../rule/index.js'
 import * as MyUtilities from '../my-utilities/index.js'
-import { distributePointsAmongPlayers } from './distribute.js';
+import { distributePoints } from './distribute.js';
 
 
 
@@ -64,7 +64,7 @@ export function getRankingPointMap(scoreMap, rule, option={}) {
       // 同点者が複数いる場合
       if(baseRule === Rule.IDS.M_LEAGUE) {
         // Mリーグルールでは、3者同点の場合の処理が明記されているので、個別実装する。
-        const map = distributePointsAmongPlayers(sum, tieRankerSeat);
+        const map = distributePoints(sum, tieRankerSeat);
         tieRankerSeat.forEach(seat => rankPointMap[seat] = map[seat]);
       } else {
         // 協会ルールでは、3者同点の場合の順位点は50/3=16.67と処理されるとのことなので、単純割り算して10点単位に丸める。

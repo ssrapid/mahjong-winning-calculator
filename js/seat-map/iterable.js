@@ -1,6 +1,23 @@
-import { create } from "./create.js";
-import { SEAT_ORDER } from "../seat-utilities/index.js";
+import { create } from './create.js';
+import { SEAT_ORDER } from '../seat-utilities/index.js';
 
+/**
+ * @template T,U
+ * @overload
+ * @param {(value:T, seat:import('../seat-utilities').Seat,
+ *   seatMap:import('./create.js').SeatMap<T>)=>U} fn
+ * @param {import('./create.js').SeatMap<T>} seatMap
+ * @returns {import('./create.js').SeatMap<U>}
+ */
+/**
+ * @template T,U
+ * @overload
+ * @param {(a:T, b:T, seat:import('../seat-utilities').Seat,
+ *   mapA:import('./create.js').SeatMap<T>, mapB:import('./create.js').SeatMap<T>)=>U} fn
+ * @param {import('./create.js').SeatMap<T>} mapA
+ * @param {import('./create.js').SeatMap<T>} mapB
+ * @returns {import('./create.js').SeatMap<U>}
+ */
 /**
  * mapSeatMap
  * 座席ごとの値に対して関数を適用し、新しい seatMap を返す。
@@ -19,6 +36,23 @@ export function map(fn, ...seatMaps) {
   return result;
 }
 
+
+
+/**
+ * @template T
+ * @overload
+ * @param {(value:T, seat:import('../seat-utilities').Seat,
+ *   seatMap:import('./create.js').SeatMap<T>)=>void} fn
+ * @param {import('./create.js').SeatMap<T>} seatMap
+ */
+/**
+ * @template T
+ * @overload
+ * @param {(a:T, b:T, seat:import('../seat-utilities').Seat,
+ *   mapA:import('./create.js').SeatMap<T>, mapB:import('./create.js').SeatMap<T>)=>void} fn
+ * @param {import('./create.js').SeatMap<T>} mapA
+ * @param {import('./create.js').SeatMap<T>} mapB
+ */
 /**
  * forEachSeatMap
  * 座席ごとの値に対して関数を適用する。返り値は使わず副作用のみ行う。

@@ -10,7 +10,7 @@ import { getQuotientAndRemainder } from '../my-utilities/index.js';
  * @param {import('../seat-utilities').Seat[]} seats - 分配対象の座席 ('e','s','w','n'など)
  * @returns {import('../seat-map').SeatMap<number>} seatMap形式で分配結果を返す
  */
-export function distributePointsAmongPlayers(sum, seats) {
+export function distributePoints(sum, seats) {
   sum = Number(sum);
   if(Number.isNaN(sum)) throw new Error(`sumがNaNです。`)
   seats = [...new Set(seats.filter(seat => SeatUtil.SEAT_ORDER.includes(seat)))];

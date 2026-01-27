@@ -1,6 +1,7 @@
 import * as SeatUtil from '../../seat-utilities/index.js';
 import * as SeatMap from '../../seat-map/index.js'
 import * as AgariTemplate from '../agari-template/index.js';
+import * as Rule from '../../rule/index.js'
 import { AGARI_TYPE } from '../define.js';
 
 
@@ -16,17 +17,16 @@ import { AGARI_TYPE } from '../define.js';
  * @typedef {object} RyukyokuPattern
  * @property {typeof import('../define.js').AGARI_TYPE.RYUKYOKU} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {PlayerInfoMinimum&{tenpai:boolean}} playersInfo 対局者情報
+ * @property {import('../../seat-map').SeatMap<PlayerInfoMinimum&{tenpai:boolean}>} playersInfo 対局者情報
  * @property {TableInfoMinimum} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../../seat-utilities/index.js').Seat[]} tenpai テンパイ者(配列)
- * @property {import('../../seat-utilities/index.js').Seat[]} noten ノーテン者(配列)
  */
 /**
  * @typedef {object} AgariPattern
  * @property {typeof import('../define.js').AGARI_TYPE.TSUMO|typeof import('../define.js').AGARI_TYPE.RON} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {PlayerInfoMinimum} playersInfo 対局者情報
+ * @property {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo 対局者情報
  * @property {TableInfoMinimum} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../agari-template/index.js').AgariTemplate} template 和了テンプレート
@@ -37,7 +37,7 @@ import { AGARI_TYPE } from '../define.js';
  * @typedef {object} TsumoAgariPattern
  * @property {typeof import('../define.js').AGARI_TYPE.TSUMO} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {PlayerInfoMinimum} playersInfo 対局者情報
+ * @property {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo 対局者情報
  * @property {TableInfoMinimum} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../agari-template/index.js').TsumoAgariTemplate} template 和了テンプレート
@@ -47,7 +47,7 @@ import { AGARI_TYPE } from '../define.js';
  * @typedef {object} RonAgariPattern
  * @property {typeof import('../define.js').AGARI_TYPE.RON} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {PlayerInfoMinimum} playersInfo 対局者情報
+ * @property {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo 対局者情報
  * @property {TableInfoMinimum} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../agari-template/index.js').RonAgariTemplate} template 和了テンプレート
@@ -78,9 +78,9 @@ import { AGARI_TYPE } from '../define.js';
  * }} PatternContext
  */
 /**
- * @param {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo 
- * @param {TableInfoMinimum} tableInfo 
- * @param {import('../../rule/index.js').RuleObject} ruleObj 
+ * @param {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo
+ * @param {TableInfoMinimum} tableInfo
+ * @param {import('../../rule/index.js').RuleObject} ruleObj
  * @returns {PatternContext}
  */
 export function create(playersInfo, tableInfo, ruleObj) {
@@ -139,36 +139,64 @@ export function create(playersInfo, tableInfo, ruleObj) {
   }
 
   // 流局パターン
-  const flagMaps = Array.from({ length: 16 }, (_, i) => SeatMap.create(seat => Boolean((i >>> SeatUtil.seatToIndex(seat)) & 1)));
-  for(const tenpaiMap of flagMaps) {
-    const tenpai = SeatMap.filter(tenpaiMap, v => v);
-    const noten = SeatMap.filter(tenpaiMap, v => !v);
-    // 全者が テンパイしている または リーチしていない ことが実現可能条件
-    const available = SeatMap.every(SeatMap.map((tenpai, {riichi}) => tenpai | !riichi, tenpaiMap, playersInfo));
-    /**
-     * @type {RyukyokuPattern}
-     */
-    const pattern = {
-      agariType: AGARI_TYPE.RYUKYOKU,
-      tenpai,
-      noten,
-      available,
-      playersInfo: structuredClone(playersInfo),
-      tableInfo: structuredClone(tableInfo),
-      ruleObj // ルールオブジェクトはコピーしない
+  const renchanRule = ruleObj[Rule.KEY.RENCHAN_RULE];
+  const tenpaiFee = ruleObj[Rule.KEY.TENPAI_FEE];
+  if(renchanRule !== Rule.RENCHAN_RULE.TENPAI && tenpaiFee === 0) {
+    // テンパイ料が0のルールの場合
+
+    // テンパイ連荘以外のルールでテンパイ料が0に設定されている場合、
+    // 誰がテンパイかという情報が意味をなさないため、全員ノーテン扱いの1パターンのみ生成する。
+    // テンパイ料がなく、テンパイ連荘のルールのとき、
+    // 親がテンパイか否かのみが必要な情報であるため、その2通りのパターンのみを生成する。
+
+    const tenpaiPattern = [[]];
+    if(renchanRule === Rule.RENCHAN_RULE.TENPAI) tenpaiPattern.push([dealer]);
+    for (const tenpai of tenpaiPattern) {
+      const pattern = {
+        agariType: AGARI_TYPE.RYUKYOKU,
+        tenpai,
+        available: true,
+        playersInfo : structuredClone(playersInfo),
+        tableInfo : structuredClone(tableInfo),
+        ruleObj // ルールオブジェクトはコピーしない
+      };
+      allPatterns.push(pattern);
+      ryukyokuPatterns.push(pattern);
     }
-    // コピーしたplayersInfoにテンパイ情報を付加
-    console.log( pattern.playersInfo, tenpaiMap);
-    SeatMap.forEach((playerObj, tenpai) => playerObj.tenpai = tenpai, pattern.playersInfo, tenpaiMap);
-    allPatterns.push(pattern);
-    ryukyokuPatterns.push(pattern);
+
+  } else {
+    // テンパイ連荘のルール または テンパイ料が0でないルールの時は、16通りのパターンを用意
+    const flagMaps = Array.from({ length: 16 }, (_, i) => SeatMap.create(seat => Boolean((i >>> SeatUtil.seatToIndex(seat)) & 1)));
+    for(const tenpaiMap of flagMaps) {
+      const tenpai = SeatMap.filter(tenpaiMap, v => v);
+      /** 
+       * 各者が "テンパイしている" または "リーチしていない" ことが実現可能条件。
+       * ただし、アガリ放棄の裁定を受けた場合には、 "リーチかつノーテン扱い" という状況が発生するので、厳密には全パターン起こりうる。
+       */
+      const available = SeatMap.every(SeatMap.map((tenpai, {riichi}) => tenpai | !riichi, tenpaiMap, playersInfo));
+      /**
+       * @type {RyukyokuPattern}
+       */
+      const pattern = {
+        agariType: AGARI_TYPE.RYUKYOKU,
+        tenpai,
+        available,
+        playersInfo: structuredClone(playersInfo),
+        tableInfo: structuredClone(tableInfo),
+        ruleObj // ルールオブジェクトはコピーしない
+      }
+      // コピーしたplayersInfoにテンパイ情報を付加
+      SeatMap.forEach((playerObj, tenpai) => playerObj.tenpai = tenpai, pattern.playersInfo, tenpaiMap);
+      allPatterns.push(pattern);
+      ryukyokuPatterns.push(pattern);
+    }
   }
 
   const returnObj = {
     state: 'ready',
     allPatterns,
-    tsumoPatterns: tsumoAgariPatterns,
-    ronPatterns: ronAgariPatterns,
+    tsumoAgariPatterns,
+    ronAgariPatterns,
     ryukyokuPatterns
   };
   return returnObj;
