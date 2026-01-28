@@ -10,7 +10,9 @@ export const state = {
     /** @type {number} */
     point: 0,
     /** @type {number} */
-    score: null
+    score: null,
+    /** @type {boolean} */
+    riichi: false
   })),
 
   riichi: SeatMap.create(false),

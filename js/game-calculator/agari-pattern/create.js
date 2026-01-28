@@ -9,64 +9,76 @@ import { AGARI_TYPE } from '../define.js';
  * @typedef {object} Pattern
  * @property {import('../define.js').AgariType} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo 対局者情報
- * @property {TableInfoMinimum} tableInfo 対局情報
+ * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
+ * @property {string} [agariLabel] 和了点の表示用文字列
  */
 /**
  * @typedef {object} RyukyokuPattern
  * @property {typeof import('../define.js').AGARI_TYPE.RYUKYOKU} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfoMinimum&{tenpai:boolean}>} playersInfo 対局者情報
- * @property {TableInfoMinimum} tableInfo 対局情報
+ * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../../seat-utilities/index.js').Seat[]} tenpai テンパイ者(配列)
+ * @property {string} [agariLabel] 和了点の表示用文字列
  */
 /**
  * @typedef {object} AgariPattern
  * @property {typeof import('../define.js').AGARI_TYPE.TSUMO|typeof import('../define.js').AGARI_TYPE.RON} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo 対局者情報
- * @property {TableInfoMinimum} tableInfo 対局情報
+ * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../agari-template/index.js').AgariTemplate} template 和了テンプレート
  * @property {import('../../seat-utilities/index.js').Seat} winner 和了者
  * @property {import('../../seat-utilities/index.js').Seat} [discarder] 放銃者
+ * @property {string} [agariLabel] 和了点の表示用文字列
  */
 /**
  * @typedef {object} TsumoAgariPattern
  * @property {typeof import('../define.js').AGARI_TYPE.TSUMO} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo 対局者情報
- * @property {TableInfoMinimum} tableInfo 対局情報
+ * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../agari-template/index.js').TsumoAgariTemplate} template 和了テンプレート
  * @property {import('../../seat-utilities/index.js').Seat} winner 和了者
+ * @property {string} [agariLabel] 和了点の表示用文字列
  */
 /**
  * @typedef {object} RonAgariPattern
  * @property {typeof import('../define.js').AGARI_TYPE.RON} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo 対局者情報
- * @property {TableInfoMinimum} tableInfo 対局情報
+ * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../agari-template/index.js').RonAgariTemplate} template 和了テンプレート
  * @property {import('../../seat-utilities/index.js').Seat} winner 和了者
- * @property {import('../../seat-utilities/index.js').Seat} [discarder] 放銃者
+ * @property {import('../../seat-utilities/index.js').Seat} discarder 放銃者
+ * @property {string} [agariLabel] 和了点の表示用文字列
  */
 /**
- * @typedef {object} PlayerInfoMinimum
- * @property {string} name
- * @property {number} score
- * @property {number} point
- * @property {boolean} riichi
+ * @typedef {object} PlayerInfo
+ * @property {string} name 対局者名(表示名)
+ * @property {number} score 点棒
+ * @property {number} point ポイント
+ * @property {boolean} riichi リーチしているかどうか
+ * @property {number} [delta] この局の点棒変化
+ * @property {number} [gamePoint] この半荘のポイント
+ * @property {number} [rank] この半荘の順位
+ * @property {number} [rankingPoint] この半荘の順位点
  */
 /**
- * @typedef {object} TableInfoMinimum
- * @property {import('../../seat-utilities').Seat} dealer
- * @property {number} kyotaku
- * @property {number} tsumibo
- * @property {boolean} finalRound
+ * @typedef {object} TableInfo
+ * @property {import('../../seat-utilities').Seat} dealer 親番(席で指定)
+ * @property {number} kyotaku 供託の本数
+ * @property {number} prevKyotaku 前の供託本数
+ * @property {number} tsumibo 積み棒の本数
+ * @property {boolean} finalRound この局がオーラスであるか
+ * @property {boolean} [renchanFlag] 次局連荘となるかのフラグ
+ * @property {boolean} [gameEnd] この局をもって対局終了かを表すフラグ
  */
 /**
  * @typedef {{
@@ -78,22 +90,23 @@ import { AGARI_TYPE } from '../define.js';
  * }} PatternContext
  */
 /**
- * @param {import('../../seat-map').SeatMap<PlayerInfoMinimum>} playersInfo
- * @param {TableInfoMinimum} tableInfo
+ * @param {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo
+ * @param {TableInfo} tableInfo
  * @param {import('../../rule/index.js').RuleObject} ruleObj
  * @returns {PatternContext}
  */
 export function create(playersInfo, tableInfo, ruleObj) {
-  console.log('playersInfo', playersInfo);
+
   /** @type {(TsumoAgariPattern|RonAgariPattern|RyukyokuPattern)[]} */
   const allPatterns = [];
   const tsumoAgariPatterns = [];
   const ronAgariPatterns = [];
   const ryukyokuPatterns = [];
 
+  // ツモ和了のパターン生成
   const tsumoTemplates = AgariTemplate.getTsumoAgariTemplates(ruleObj);
-  for(const template of tsumoTemplates) {
-    for(const winner of SeatUtil.SEAT_ORDER) {
+  for(const winner of SeatUtil.SEAT_ORDER) {
+    for(const template of tsumoTemplates) {
       // リーチの和了には成立しない点数が存在する
       const available = !(playersInfo[winner]?.riichi && template[AgariTemplate.Key.IS_UNAVAILABLE_WHEN_RIICHI]);
       /** @type {TsumoAgariPattern} */
@@ -111,14 +124,16 @@ export function create(playersInfo, tableInfo, ruleObj) {
     }
   }
 
+  // ロン和了のパターン生成
   const ronAgariTemplate = AgariTemplate.getRonAgariTemplates(ruleObj);
-  for(const template of ronAgariTemplate) {
-    for(const winner of SeatUtil.SEAT_ORDER) {
-      for(const discarder of SeatUtil.SEAT_ORDER) {
-        if(winner === discarder) {
-          // 和了者と放銃者が同じにはならないのでcontinue
-          continue;
-        }
+  for(const winner of SeatUtil.SEAT_ORDER) {
+    for(const discarder of SeatUtil.SEAT_ORDER) {
+      if(winner === discarder) {
+        // 和了者と放銃者が同じにはならないのでcontinue
+        continue;
+      }
+
+      for(const template of ronAgariTemplate) {
         // リーチの和了には成立しない点数が存在する
         const available = !(playersInfo[winner]?.riichi && template[AgariTemplate.Key.IS_UNAVAILABLE_WHEN_RIICHI]);
         /** @type {RonAgariPattern} */
@@ -165,7 +180,9 @@ export function create(playersInfo, tableInfo, ruleObj) {
     }
 
   } else {
-    // テンパイ連荘のルール または テンパイ料が0でないルールの時は、16通りのパターンを用意
+    /**
+     * テンパイ連荘のルール または テンパイ料が0でないルールの時は、16通りのパターンを用意
+     */
     const flagMaps = Array.from({ length: 16 }, (_, i) => SeatMap.create(seat => Boolean((i >>> SeatUtil.seatToIndex(seat)) & 1)));
     for(const tenpaiMap of flagMaps) {
       const tenpai = SeatMap.filter(tenpaiMap, v => v);
@@ -186,7 +203,7 @@ export function create(playersInfo, tableInfo, ruleObj) {
         ruleObj // ルールオブジェクトはコピーしない
       }
       // コピーしたplayersInfoにテンパイ情報を付加
-      SeatMap.forEach((playerObj, tenpai) => playerObj.tenpai = tenpai, pattern.playersInfo, tenpaiMap);
+      // SeatMap.forEach((playerObj, tenpai) => playerObj.tenpai = tenpai, pattern.playersInfo, tenpaiMap);
       allPatterns.push(pattern);
       ryukyokuPatterns.push(pattern);
     }
