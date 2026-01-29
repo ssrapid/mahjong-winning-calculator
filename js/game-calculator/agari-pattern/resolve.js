@@ -284,9 +284,9 @@ function applyDelta(pattern) {
 
   /**
    * 順位と順位点が含まれたオブジェクトを持つシートマップ
-   * @type {import('../../seat-map').SeatMap<{rankingPoint:number, rank:number}>} 
+   * @type {import('../../seat-map').SeatMap<{rankingPoint:number, gameRank:number}>} 
    */
-  const rankMap = getRankingPointMap(SeatMap.unwrapValueFromObject(playersInfo, 'score'), ruleObj, {wrap: true, rankingMap: true});
+  const rankMap = getRankingPointMap(SeatMap.unwrapValueFromObject(playersInfo, 'score'), ruleObj, {wrap: true, rankingMap: true, keyOfRank:'gameRank'});
   // playersシートマップにマージする
   SeatMap.mergeInPlace(playersInfo, rankMap);
 
@@ -336,7 +336,7 @@ function finalizeGame(pattern) {
   /**
    * トップ者の席
    */
-  let topSeats = SeatMap.filter(playersInfo, player => player.rank === 1);
+  let topSeats = SeatMap.filter(playersInfo, player => player.gameRank === 1);
   if(kyotakuSettlement == Rule.KYOTAKU_SETTLEMENT_TYPE.TOP_ONLY_SEAT) {
     // 上家取りの場合
     topSeats = [SeatUtil.sortSeats(topSeats)[0]];
@@ -402,7 +402,7 @@ function checkGameEnd(pattern) {
     const { dealer } = tableInfo;
 
     // 親がトップであることが、アガリやめ、テンパイやめの必要条件
-    if (playersInfo[dealer].rank === 1) {
+    if (playersInfo[dealer].gameRank === 1) {
       if(agariType === AGARI_TYPE.RYUKYOKU && ruleObj[Rule.KEY.END_ON_A_TENPAI]) {
         // 流局時、テンパイやめ判定
         const endOnATenpai = ruleObj[Rule.KEY.END_ON_A_TENPAI];

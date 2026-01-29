@@ -33,9 +33,11 @@ export function wrapValueAsObject(seatMap, keyName) {
  * @example
  * const scoreMap = unwrapSeatMapValueFromObject(wrappedMap, 'score');
  *
- * @param {import('./create.js').SeatMap<object>} map - SeatMap<object> 形式のオブジェクト（{ 東: { [key]: value }, 南: ..., ... }）
- * @param {string} keyName - 抽出するキー名（例: 'score'）
- * @returns {import('./create.js').SeatMap<any>} SeatMap<プリミティブ型>（{ 東: value, 南: value, ... }）
+ * @template T
+ * @template {string} K
+ * @param {import('./create.js').SeatMap<{ [P in K]: T }>} map - SeatMap<object> 形式のオブジェクト（{ 東: { [key]: value }, 南: ..., ... }）
+ * @param {K} keyName - 抽出するキー名（例: 'score'）
+ * @returns {import('./create.js').SeatMap<T>} SeatMap<プリミティブ型>（{ 東: value, 南: value, ... }）
  */
 export function unwrapValueFromObject(map, keyName) {
   return create(seat => map[seat]?.[keyName] ?? null);

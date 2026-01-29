@@ -11,21 +11,82 @@ import { distributePoints } from './distribute.js';
  * @overload
  * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
  * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
- * @param {{wrap?:false|undefined, rankingMap?:any}} [option]
+ * @param {{wrap?:false|undefined}} [option]
  * @returns {import('../seat-map').SeatMap<number>}
  */
 /**
  * @overload
  * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
  * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
- * @param {{wrap:true, rankingMap?:boolean}} option
- * @returns {import('../seat-map').SeatMap<{rankingPoint:number}&object>}
+ * @param {{wrap:true,rank?:false,keyOfRankingPoint:undefined}} option
+ * @returns {import('../seat-map').SeatMap<{rankingPoint:number}>}
+ */
+/**
+ * @template {string} K
+ * @overload
+ * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
+ * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
+ * @param {{wrap:true,rank?:false,keyOfRankingPoint:K}} option
+ * @returns {import('../seat-map').SeatMap<{[P in K]:number}>}
+ */
+/**
+ * @overload
+ * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
+ * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
+ * @param {{wrap:true,rank:true}} option
+ * @returns {import('../seat-map').SeatMap<{rankingPoint:number,rank:number}>}
+ */
+/**
+ * @template {string} K1
+ * @overload
+ * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
+ * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
+ * @param {{wrap:true,rank:true,keyOfRankingPoint:K1}} option
+ * @returns {import('../seat-map').SeatMap<{[P in K1]:number,rank:number}>}
+ */
+/**
+ * @template {string} K2
+ * @overload
+ * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
+ * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
+ * @param {{wrap:true,rank:true,keyOfRank:K2}} option
+ * @returns {import('../seat-map').SeatMap<{rankingPoint:number,[P in K2]:number}>}
+ */
+/**
+ * @template {string} K1
+ * @template {string} K2
+ * @overload
+ * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
+ * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
+ * @param {{wrap:true,rank:true,keyOfRankingPoint:K1,keyOfRank:K2}} option
+ * @returns {import('../seat-map').SeatMap<{rankingPoint:number,[P in K1]:number,[Q in K2]:number}>}
+ */
+/**
+ * @overload
+ * @template {string} P
+ * @template {string} R
+ * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
+ * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
+ * @param {{
+ *   wrap:true,
+ *   rankingMap?:true,
+ *   keyOfRankingPoint?:P,
+ *   keyOfRank?:R
+ * }} option
+ * @returns {import('../seat-map').SeatMap<{
+ *   [Q in P]:number
+ *   [S in R]:number}>}
  */
 /**
  * 
  * @param {import('../seat-map').SeatMap<number>} scoreMap 点棒状況を持つ SeatMap ({e: 25000, s: 30000,...} など)
  * @param {import('../rule').RuleObject} rule ルール設定オブジェクト
- * @param {{wrap?:boolean, rankingMap?:boolean}} [option]
+ * @param {{
+ *   wrap?:boolean,
+ *   rankingMap?:boolean,
+ *   keyOfRankingPoint?:string,
+ *   keyOfRank?:string
+ * }} [option]
  * @returns {import('../seat-map').SeatMap<number>|import('../seat-map').SeatMap<{rankingPoint:number}&object>}
  */
 export function getRankingPointMap(scoreMap, rule, option={}) {
@@ -78,10 +139,12 @@ export function getRankingPointMap(scoreMap, rule, option={}) {
 
   if(option?.wrap) {
     // ラップオプションが付加されていた場合
-    const wrappedMap = SeatMap.wrapValueAsObject(rankPointMap, 'rankingPoint');
+    const keyOfRankingPoint = option?.keyOfRankingPoint ?? 'rankingPoint';
+    const wrappedMap = SeatMap.wrapValueAsObject(rankPointMap, keyOfRankingPoint);
     if(option?.rankingMap) {
       // 順位情報も付与する場合
-      SeatMap.forEach((wrapObj, rank) => wrapObj.rank = rank, wrappedMap, rankingMap);
+      const keyOfRank = option?.keyOfRank ?? 'rank';
+      SeatMap.forEach((wrapObj, rank) => wrapObj[keyOfRank] = rank, wrappedMap, rankingMap);
     }
     return wrappedMap;
   }
