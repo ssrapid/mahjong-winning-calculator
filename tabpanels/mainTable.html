@@ -161,10 +161,10 @@
               <label>供託:
                 <input type="number" id="input_kyotaku" value="0" data-field="kyotaku">
               </label>
-              <button id="button_increment_kyotaku" type="button" data-field="kyotaku" data-add="+1" tabindex="-1">
+              <button id="button_increment_kyotaku" data-field="kyotaku" data-add="+1" tabindex="-1">
                 +1
               </button>
-              <button id="button_reset_kyotaku" type="button" data-field="kyotaku" data-value="0" tabindex="-1">
+              <button id="button_reset_kyotaku" data-field="kyotaku" data-value="0" tabindex="-1">
                 Reset
               </button>
             </div>
@@ -207,22 +207,30 @@
     <tbody id="tbody_tentative" class="mainTable-tbody">
       <tr>
         <th>Game</th>
-        <td class="td-tentative-game-point" colspan="2" data-seat="e">(計算前)</td>
-        <td class="td-tentative-game-point" colspan="2" data-seat="s">(計算前)</td>
-        <td class="td-tentative-game-point" colspan="2" data-seat="w">(計算前)</td>
-        <td class="td-tentative-game-point" colspan="2" data-seat="n">(計算前)</td>
-        <td></td>
+        <td colspan="2" class="td-tentative-game-point" data-seat="e">(計算前)</td>
+        <td colspan="2" class="td-tentative-game-point" data-seat="s">(計算前)</td>
+        <td colspan="2" class="td-tentative-game-point" data-seat="w">(計算前)</td>
+        <td colspan="2" class="td-tentative-game-point" data-seat="n">(計算前)</td>
+        <td rowspan="2" class="button-only">
+          <button id="button_compute_tentative" class="button-shortcut" tabindex="-1">
+            計算
+          </button>
+        </td>
       </tr>
       <tr>
         <th>Total</th>
-        <td class="td-tentative-total-point" colspan="2" data-seat="e">(計算前)</td>
-        <td class="td-tentative-total-point" colspan="2" data-seat="s">(計算前)</td>
-        <td class="td-tentative-total-point" colspan="2" data-seat="w">(計算前)</td>
-        <td class="td-tentative-total-point" colspan="2" data-seat="n">(計算前)</td>
+        <td colspan="2" class="td-tentative-total-point" data-seat="e">(計算前)</td>
+        <td colspan="2" class="td-tentative-total-point" data-seat="s">(計算前)</td>
+        <td colspan="2" class="td-tentative-total-point" data-seat="w">(計算前)</td>
+        <td colspan="2" class="td-tentative-total-point" data-seat="n">(計算前)</td>
+      </tr>
+      <tr>
+        <th>条件</th>
+        <td colspan="8"></td>
         <td></td>
       </tr>
     </tbody>
-    <tbody id="tbody_result" class="mainTable-tbody">
+    <tbody id="tbody_result" class="mainTable-tbody hide">
       <tr>
         <th>ツモ条件</th>
         <td colspan="2" data-seat="e">(計算前)</td>
@@ -233,66 +241,66 @@
       </tr>
       <tr>
         <th rowspan="3">ロン条件</th>
-        <td class="td-target" data-seat="e" data-target="s" data-suffix="から">南家から</td>
+        <td class="td-target td-target-s" data-seat="e" data-target="s" data-suffix="から">南家から</td>
         <td data-seat="e" data-target="s">(計算前)</td>
-        <td class="td-target" data-seat="s" data-target="e" data-suffix="から">東家から</td>
+        <td class="td-target td-target-e" data-seat="s" data-target="e" data-suffix="から">東家から</td>
         <td data-seat="s" data-target="e">(計算前)</td>
-        <td class="td-target" data-seat="w" data-target="e" data-suffix="から">東家から</td>
+        <td class="td-target td-target-e" data-seat="w" data-target="e" data-suffix="から">東家から</td>
         <td data-seat="w" data-target="e">(計算前)</td>
-        <td class="td-target" data-seat="n" data-target="e" data-suffix="から">東家から</td>
+        <td class="td-target td-target-e" data-seat="n" data-target="e" data-suffix="から">東家から</td>
         <td data-seat="n" data-target="e">(計算前)</td>
         <td rowspan="3"></td>
       </tr>
       <tr>
-        <td class="td-target" data-seat="e" data-target="w" data-suffix="から">西家から</td>
+        <td class="td-target td-target-w" data-seat="e" data-target="w" data-suffix="から">西家から</td>
         <td data-seat="e" data-target="w">(計算前)</td>
-        <td class="td-target" data-seat="s" data-target="w" data-suffix="から">西家から</td>
+        <td class="td-target td-target-w" data-seat="s" data-target="w" data-suffix="から">西家から</td>
         <td data-seat="s" data-target="w">(計算前)</td>
-        <td class="td-target" data-seat="w" data-target="s" data-suffix="から">南家から</td>
+        <td class="td-target td-target-s" data-seat="w" data-target="s" data-suffix="から">南家から</td>
         <td data-seat="w" data-target="s">(計算前)</td>
-        <td class="td-target" data-seat="n" data-target="s" data-suffix="から">南家から</td>
+        <td class="td-target td-target-s" data-seat="n" data-target="s" data-suffix="から">南家から</td>
         <td data-seat="n" data-target="s">(計算前)</td>
       </tr>
       <tr>
-        <td class="td-target" data-seat="e" data-target="n" data-suffix="から">北家から</td>
+        <td class="td-target td-target-n" data-seat="e" data-target="n" data-suffix="から">北家から</td>
         <td data-seat="e" data-target="n">(計算前)</td>
-        <td class="td-target" data-seat="s" data-target="n" data-suffix="から">北家から</td>
+        <td class="td-target td-target-n" data-seat="s" data-target="n" data-suffix="から">北家から</td>
         <td data-seat="s" data-target="n">(計算前)</td>
-        <td class="td-target" data-seat="w" data-target="n" data-suffix="から">北家から</td>
+        <td class="td-target td-target-n" data-seat="w" data-target="n" data-suffix="から">北家から</td>
         <td data-seat="w" data-target="n">(計算前)</td>
-        <td class="td-target" data-seat="n" data-target="w" data-suffix="から">西家から</td>
+        <td class="td-target td-target-w" data-seat="n" data-target="w" data-suffix="から">西家から</td>
         <td data-seat="n" data-target="w">(計算前)</td>
       </tr>
       <tr>
         <th rowspan="3">放銃条件</th>
-        <td class="td-target" data-seat="e" data-target="s" data-suffix="へ">南家へ</td>
+        <td class="td-target td-target-s" data-seat="e" data-target="s" data-suffix="へ">南家へ</td>
         <td data-seat="e" data-target="s">(計算前)</td>
-        <td class="td-target" data-seat="s" data-target="e" data-suffix="へ">東家へ</td>
+        <td class="td-target td-target-e" data-seat="s" data-target="e" data-suffix="へ">東家へ</td>
         <td data-seat="s" data-target="e">(計算前)</td>
-        <td class="td-target" data-seat="w" data-target="e" data-suffix="へ">東家へ</td>
+        <td class="td-target td-target-e" data-seat="w" data-target="e" data-suffix="へ">東家へ</td>
         <td data-seat="w" data-target="e">(計算前)</td>
-        <td class="td-target" data-seat="n" data-target="e" data-suffix="へ">東家へ</td>
+        <td class="td-target td-target-e" data-seat="n" data-target="e" data-suffix="へ">東家へ</td>
         <td data-seat="n" data-target="e">(計算前)</td>
         <td rowspan="3"></td>
       </tr>
       <tr>
-        <td class="td-target" data-seat="e" data-target="w" data-suffix="へ">西家へ</td>
+        <td class="td-target td-target-w" data-seat="e" data-target="w" data-suffix="へ">西家へ</td>
         <td data-seat="e" data-target="w">(計算前)</td>
-        <td class="td-target" data-seat="s" data-target="w" data-suffix="へ">西家へ</td>
+        <td class="td-target td-target-w" data-seat="s" data-target="w" data-suffix="へ">西家へ</td>
         <td data-seat="s" data-target="w">(計算前)</td>
-        <td class="td-target" data-seat="w" data-target="s" data-suffix="へ">南家へ</td>
+        <td class="td-target td-target-s" data-seat="w" data-target="s" data-suffix="へ">南家へ</td>
         <td data-seat="w" data-target="s">(計算前)</td>
-        <td class="td-target" data-seat="n" data-target="s" data-suffix="へ">南家へ</td>
+        <td class="td-target td-target-s" data-seat="n" data-target="s" data-suffix="へ">南家へ</td>
         <td data-seat="n" data-target="s">(計算前)</td>
       </tr>
       <tr>
-        <td class="td-target" data-seat="e" data-target="n" data-suffix="へ">北家へ</td>
+        <td class="td-target td-target-n" data-seat="e" data-target="n" data-suffix="へ">北家へ</td>
         <td data-seat="e" data-target="n">(計算前)</td>
-        <td class="td-target" data-seat="s" data-target="n" data-suffix="へ">北家へ</td>
+        <td class="td-target td-target-n" data-seat="s" data-target="n" data-suffix="へ">北家へ</td>
         <td data-seat="s" data-target="n">(計算前)</td>
-        <td class="td-target" data-seat="w" data-target="n" data-suffix="へ">北家へ</td>
+        <td class="td-target td-target-n" data-seat="w" data-target="n" data-suffix="へ">北家へ</td>
         <td data-seat="w" data-target="n">(計算前)</td>
-        <td class="td-target" data-seat="n" data-target="w" data-suffix="へ">西家へ</td>
+        <td class="td-target td-target-w" data-seat="n" data-target="w" data-suffix="へ">西家へ</td>
         <td data-seat="n" data-target="w">(計算前)</td>
       </tr>
       <tr>
@@ -320,6 +328,50 @@
     </tbody>
   </table>
 </div>
+
+
+
+
+<template>
+
+</template>
+
+
+<template>
+  <tr>
+    <th rowspan="2">流局時条件</th>
+    <td>テンパイ</td>
+    <td data-seat="e">(計算前)</td>
+    <td>テンパイ</td>
+    <td data-seat="s">(計算前)</td>
+    <td>テンパイ</td>
+    <td data-seat="w">(計算前)</td>
+    <td>テンパイ</td>
+    <td data-seat="n">(計算前)</td>
+    <td rowspan="2"></td>
+  </tr>
+  <tr>
+    <td>ノーテン</td>
+    <td data-seat="e">(計算前)</td>
+    <td>ノーテン</td>
+    <td data-seat="s">(計算前)</td>
+    <td>ノーテン</td>
+    <td data-seat="w">(計算前)</td>
+    <td>ノーテン</td>
+    <td data-seat="n">(計算前)</td>
+  </tr>
+</template>
+
+<template>
+  <tr>
+    <th >流局時条件</th>
+    <td colspan="2" data-seat="e">(計算前)</td>
+    <td colspan="2" data-seat="s">(計算前)</td>
+    <td colspan="2" data-seat="w">(計算前)</td>
+    <td colspan="2" data-seat="n">(計算前)</td>
+    <td rowspan="2"></td>
+  </tr>
+</template>
 
 <template id="template-tentative-game-point">
   <div>

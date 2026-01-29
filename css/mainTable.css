@@ -20,7 +20,7 @@
   padding: 0px;
 }
 
-#tbody_result.hide {
+.mainTable-tbody.hide {
   display: none;
 }
 

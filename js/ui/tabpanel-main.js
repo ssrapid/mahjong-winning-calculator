@@ -86,6 +86,11 @@ let tdlist_target;
 
 /**
  * 
+ */
+const collectionMapOfTargetNameTd = SeatMap.create(seat => rootNode.getElementsByClassName(`td-target-${seat}`));
+
+/**
+ * 
  * @param {HTMLElement} root 
  */
 export default function activate(root) {
@@ -140,6 +145,7 @@ function initDom() {
 
   rootNode.querySelector('#button_reset_point').addEventListener('click', () => SEAT_ORDER.forEach(seat => setPoint(seat, 0)));
   rootNode.querySelector('#button_reset_score').addEventListener('click', () => resetScore());
+  rootNode.querySelector('#button_compute_tentative').addEventListener('click', () => computeTentativePoint());
 
   initDealerRadio();
   initRiichiCheck();
@@ -220,7 +226,6 @@ function setName(seat, value) {
   return value;
 }
 
-// const setName = setterFactoryForPlayerInfo('name', 'string', inputs_name);
 
 /**
  * 
@@ -235,6 +240,8 @@ function setPoint(seat, value) {
   inputsMap_point[seat].value = Number.isNaN(value) ? '' : Number.isInteger(value) ? value.toFixed(1) : value;
   // ポイントは内部では1000倍して点棒とスケールを合わせ、整数で保持する
   state.players[seat].point = value * 1000;
+  // ポイントが変化した場合、Totalが変化するため、再計算
+  computeTentativePoint();
   return value;
 }
 
@@ -250,6 +257,10 @@ function setScore(seat, value) {
   value = Number(value);
   inputsMap_score[seat].value = Number.isNaN(value) ? '' : value;
   state.players[seat].score = value;
+  // 1者の点棒が変化すると、暫定ポイントが意味をなさなくなるため、隠す
+  if(state.showTentative) {
+    hideTentativePoint();
+  }
   return value;
 }
 
@@ -275,6 +286,10 @@ export function setKyotaku(value) {
   return value;
 }
 
+/**
+ * 
+ * @returns {number}
+ */
 export function incrementKyotaku() {
   const prev = state.tableInfo.kyotaku;
   return setKyotaku(prev + 1);
@@ -294,11 +309,20 @@ export function setTsumibo(value) {
   return value;
 }
 
+/**
+ * 
+ * @returns {number} 変更後の値
+ */
 export function incrementTsumibo() {
   const prev = state.tableInfo.tsumibo;
   return setTsumibo(prev + 1);
 }
 
+
+/**
+ * 
+ * @returns {number} 新しい点棒の値
+ */
 export async function resetScore() {
   ensureDom();
   return promise_tab2.then(() => {
@@ -311,16 +335,23 @@ export async function resetScore() {
   });
 }
 
+
+/**
+ * 
+ */
 export function expandTable() {
   rootNode.querySelector('#tbody_tentative').classList.remove('hide');
   rootNode.querySelector('#tbody_result').classList.remove('hide');
 }
 
 
+const td_tentative_game = rootNode.getElementsByClassName('td-tentative-game-point');
+const td_tentative_total = rootNode.getElementsByClassName('td-tentative-total-point');
+
 /**
  * 入力値から、暫定のポイントを計算して表示する。
  */
-export function showTentativePoint() {
+export function computeTentativePoint() {
   /** @type {import('../seat-map').SeatMap<number>} */
   const scoreMap = SeatMap.unwrapValueFromObject(state.players, 'score');
   const ranking = GameCalc.getRankingPointMap(scoreMap, state.rule, { wrap: true, rankingMap: true });
@@ -329,13 +360,11 @@ export function showTentativePoint() {
     /** @type {number} */
     const gameRank = ranking[seat].rank;
     const totalPoint = state.players[seat].point + gamePoint;
-    return {gamePoint, gameRank, totalPoint};
+    return { gamePoint, gameRank, totalPoint };
   });
 
-  const game = rootNode.querySelectorAll('.td-tentative-game-point');
-  const total = rootNode.querySelectorAll('.td-tentative-total-point');
 
-  for(const td of game) {
+  for(const td of td_tentative_game) {
     // GamePointとRank
 
     /** @type {import("../seat-utilities/index.js").Seat} */
@@ -355,7 +384,7 @@ export function showTentativePoint() {
     td.appendChild(node);
   }
 
-  for(const td of total) {
+  for(const td of td_tentative_total) {
     // TotalPoint
     /** セルに相当する席
      * @type {import("../seat-utilities/index.js").Seat}
@@ -374,7 +403,18 @@ export function showTentativePoint() {
     td.textContent = "";
     td.appendChild(node);
   }
+
+  return state.showTentative = true;
 }
+
+export function hideTentativePoint() {
+  for(const td of [...td_tentative_game, ...td_tentative_total]) {
+    td.textContent = "(計算前)";
+  }
+  return state.showTentative = false;
+}
+
+
 
 export function zeroSumScoreCheck() {
   try {

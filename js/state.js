@@ -3,7 +3,9 @@ import * as SeatMap  from './seat-map/index.js';
 export const state = {
 
 
-
+  /**
+   * プレイヤー情報入力欄の状態
+   */
   players: SeatMap.create(() => ({
     /** @type {string} */
     name: null,
@@ -15,8 +17,14 @@ export const state = {
     riichi: false
   })),
 
+  /**
+   * リーチのチェックボックスの状態
+   */
   riichi: SeatMap.create(false),
 
+  /**
+   * 対局情報の入力状態
+   */
   tableInfo: {
     /** @type {import('./seat-utilities/index.js').Seat} */
     dealer : 'n',
@@ -26,15 +34,28 @@ export const state = {
   },
 
   /**
-   * @type {import("./rulemodule/ruleDef.js").RULE_ID} 
+   * 設定されているベースルールのID
+   * @type {import("./rule/index.js").RuleID} 
    */
   baseRule: null,
 
   /**
    * ルールオブジェクト
-   * @type {import("./rulemodule/ruleDef.js").RuleObject}
+   * @type {import("./rule/index.js").RuleObject}
    */
-  rule : null
+  rule : null,
+
+
+  /**
+   * 暫定ポイントを表示中かのフラグ
+   */
+  showTentative : false,
+
+
+  /**
+   * 計算が行われたかのフラグ
+   */
+  hasCalculated: false
 
 }
 
