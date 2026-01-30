@@ -30,6 +30,39 @@
   grid-template-columns: 1fr 2fr 2fr;
 }
 
+/* 条件行 */
+#div-addCondition {
+  display: flex;
+  align-items: stretch;   /* ← center ではなく stretch */
+  /* align-items: center; */
+  gap: 8px;
+  width: 100%;
+}
+
+#button-addCondition {
+  height: auto;
+  padding: 0 .5em;
+  border-radius: .4em;
+}
+
+#conditionContainer {
+  flex: 1 1 auto;
+  min-height: 2.1em;
+  border: 1px solid #999;
+  background-color: #fff;
+  padding: .2em .4em;
+  border-radius: .4em;
+  box-sizing: border-box;
+}
+
+.condition-container:empty::before {
+  content: "左のボタンから条件を追加";
+  color: #aaa;
+}
+
+
+
+/* 暫定ポイント表示 */
 .td-tentative-game-point div,
 .td-tentative-total-point div {
   display: inline-flex;
