@@ -229,13 +229,13 @@
         <td colspan="8" id="td-addCondition">
           <div id="div-addCondition">
             <button id="button-addCondition">＋ 追加</button>
-            <div id="conditionContainer" class="condition-container"></div>
+            <div id="conditionContainer" class="condition-container is-empty"></div>
           </div>
         </td>
         <td></td>
       </tr>
     </tbody>
-    <tbody id="tbody_result" class="mainTable-tbody hide">
+    <tbody id="tbody_result" class="mainTable-tbody">
       <tr>
         <th>ツモ条件</th>
         <td colspan="2" data-seat="e">(計算前)</td>
@@ -392,3 +392,33 @@
     <span class="unit">pt</span>
   </div>
 </template>
+
+<!-- ===== Modal ===== -->
+<dialog id="conditionModal">
+  <form method="dialog" id="form-condition">
+    <h3>条件設定</h3>
+
+    <label>
+      条件名
+      <input name="title" required>
+    </label>
+
+    <menu>
+      <button value="ok">条件を追加</button>
+      <button type="button" value="cancel">キャンセル</button>
+    </menu>
+  </form>
+</dialog>
+
+<!-- ===== Card Template ===== -->
+<template id="template-conditionCard">
+  <div class="condition-card">
+    <span class="condition-card-label"></span>
+    <div class="condition-card-actions">
+      <button class="condition-card-edit-btn">編集</button>
+      <button class="condition-card-delete-btn">削除</button>
+    </div>
+  </div>
+</template>
+
+<div id="mouseHintForCard">クリックで編集</div>

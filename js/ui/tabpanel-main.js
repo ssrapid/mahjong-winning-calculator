@@ -16,7 +16,7 @@ import { ordinal, toBoolean } from '../my-utilities/index.js';
 
 import { formatPoints, selectAllOnFocus } from "./common.js";
 import { promise_tab2 } from '../main.js';
-import { KEY } from '../rule/define.js';
+import { setUpConditionForm } from './add-condition.js';
 import { loadTextFile } from './html-loader.js';
 
 
@@ -84,10 +84,12 @@ let input_tsumibo;
  */
 let tdlist_target;
 
+
+
 /**
- * 
+ * @type {import('../seat-map').SeatMap<HTMLSpanElement>}
  */
-const collectionMapOfTargetNameTd = SeatMap.create(seat => rootNode.getElementsByClassName(`td-target-${seat}`));
+const collectionMapOfTargetName = SeatMap.create(seat => rootNode.getElementsByClassName(`span-targetname-${seat}`));
 
 /**
  * 
@@ -97,6 +99,7 @@ export default function activate(root) {
   rootNode = root;
   ensureDom();
   initDom();
+  setUpConditionForm();
 }
 
 function ensureDom() {
@@ -143,14 +146,22 @@ function initDom() {
     input.addEventListener('focus', selectAllOnFocus);
   }
 
+  // スタート時ポイントのリセットボタン
   rootNode.querySelector('#button_reset_point').addEventListener('click', () => SEAT_ORDER.forEach(seat => setPoint(seat, 0)));
+  // 点棒のリセットボタン
   rootNode.querySelector('#button_reset_score').addEventListener('click', () => resetScore());
+  // 暫定ポイントの計算ボタン
   rootNode.querySelector('#button_compute_tentative').addEventListener('click', () => computeTentativePoint());
 
+  // 親番設定のラジオボタン
   initDealerRadio();
+  // リーチのチェックボックス
   initRiichiCheck();
+  // 供託の入力ボックスとその付属ボタン
   initInputKyotaku();
+  // 積み棒の入力ボックスとその付属ボタン
   initInputTsumibo();
+  // オーラスのチェックボックス
   rootNode.querySelector('#input_finalRound').addEventListener('change', e => state.tableInfo.finalRound = toBoolean(e.target.checked));
 
 }

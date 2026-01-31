@@ -45,6 +45,13 @@ export const state = {
    */
   rule : null,
 
+  /**
+   * 
+   */
+  conditions: [],
+
+  selectedCondition: null,
+
 
   /**
    * 暫定ポイントを表示中かのフラグ
