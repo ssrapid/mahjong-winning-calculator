@@ -79,14 +79,11 @@ let input_kyotaku;
  */
 let input_tsumibo;
 
-/**
- * @type {import('../seat-map').SeatMap<NodeListOf<HTMLTableCellElement>>}
- */
-let tdlist_target;
 
 
 
 /**
+ * 条件の対象になるプレーヤー名の表示Span
  * @type {import('../seat-map').SeatMap<HTMLSpanElement>}
  */
 const collectionMapOfTargetName = SeatMap.create(seat => rootNode.getElementsByClassName(`span-targetname-${seat}`));
@@ -124,9 +121,6 @@ function ensureDom() {
   }
   if(!input_kyotaku) input_kyotaku = rootNode.querySelector('#input_kyotaku');
   if(!input_tsumibo) input_tsumibo = rootNode.querySelector('#input_tsumibo');
-  if(!tdlist_target || tdlist_target?.length == 0) {
-    tdlist_target = SeatMap.create(seat => rootNode.querySelectorAll(`.td-target[data-target="${seat}"]`));
-  }
 }
 
 function initDom() {
@@ -229,10 +223,8 @@ function setName(seat, value) {
   inputsMap_name[seat].value = value;
   state.players[seat].name = value;
   // 条件表示セルに名前を表示する
-  for(const td of tdlist_target[seat]) {
-    const suffix = td.dataset.suffix;
-    const name = value ? value : seatToJp(seat) + '家';
-    td.textContent = name + suffix;
+  for(const span of collectionMapOfTargetName[seat]) {
+    span.textContent = value ? value : seatToJp(seat)  +'家';
   }
   return value;
 }
