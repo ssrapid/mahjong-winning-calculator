@@ -29,6 +29,7 @@ import { toArray } from './convert.js';
  *
  * @param {...RankCompare<T>} compareFns
  *   順位決定に使用する比較関数群。
+ *   a が上位なら負、b が上位なら正、同順位なら 0
  *   上から順に適用され、同順位が発生したグループ内のみで次の比較が行われます。
  *
  * @returns {import('./create.js').SeatMap<number>}

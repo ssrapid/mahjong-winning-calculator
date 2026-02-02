@@ -60,27 +60,6 @@ import { AGARI_TYPE } from '../define.js';
  * @property {string} [agariLabel] 和了点の表示用文字列
  */
 /**
- * @typedef {object} PlayerInfo
- * @property {string} name 対局者名(表示名)
- * @property {number} score 点棒
- * @property {number} point ポイント
- * @property {boolean} riichi リーチしているかどうか
- * @property {number} [delta] この局の点棒変化
- * @property {number} [gamePoint] この半荘のポイント
- * @property {number} [rank] この半荘の順位
- * @property {number} [rankingPoint] この半荘の順位点
- */
-/**
- * @typedef {object} TableInfo
- * @property {import('../../seat-utilities').Seat} dealer 親番(席で指定)
- * @property {number} kyotaku 供託の本数
- * @property {number} prevKyotaku 前の供託本数
- * @property {number} tsumibo 積み棒の本数
- * @property {boolean} finalRound この局がオーラスであるか
- * @property {boolean} [renchanFlag] 次局連荘となるかのフラグ
- * @property {boolean} [gameEnd] この局をもって対局終了かを表すフラグ
- */
-/**
  * @typedef {{
  *   state: string,
  *   allPatterns: Pattern[],
