@@ -39,11 +39,11 @@ export class Condition {
   /**
    * このメソッドは、必ず子クラスでオーバーライドして使います。
    * オーバーライドせずに実行された場合、エラーになります。
-   * @param {import('../game-calculator').GameInfo} gameInfo 
-   * @param {import('../game-calculator').PlayerInfo[]} [outsidePlayers=[]] 
+   * @param {import('../game-calculator').PlayersMap} _playersInfo 
+   * @param {import('../game-calculator').PlayerInfo[]} [_outsidePlayers=[]] 
    * @returns {import('../game-calculator').GameInfo}
    */
-  evaluate(gameInfo, outsidePlayers=[]) {
+  evaluate(_playersInfo, _outsidePlayers=[]) {
     throw new Error("evaluate() must be implemented");
   }
 

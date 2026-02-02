@@ -73,13 +73,12 @@ export class TotalPointCondition extends Condition {
 
   /**
    * @override
-   * @param {import('../game-calculator/index.js').GameInfo} gameInfo 
+   * @param {import('../game-calculator/index.js').PlayersMap} playersInfo
    * @param {import('../game-calculator/index.js').PlayerInfo[]} [_outsidePlayers=[]] 
    * @returns {import('../game-calculator/index.js').GameInfo} 引数に与えたGameInfo
    */
-  evaluate(gameInfo, _outsidePlayers) {
+  evaluate(playersInfo, _outsidePlayers) {
     const def = TotalPointCondition.DEFINE[this.type];
-    const playersInfo = gameInfo.playersInfo;
 
     SeatMap.forEach(player => {
       // 配列が未定義の場合、新しい配列を用意
@@ -90,6 +89,6 @@ export class TotalPointCondition extends Condition {
       });
     }, playersInfo);
 
-    return gameInfo;
+    return playersInfo;
   }
 }
