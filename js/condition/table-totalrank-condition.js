@@ -1,13 +1,13 @@
-import { CATEGORY, TIE_BREAKER_TYPE } from './define.js';
+import { CATEGORY, TYPE as CONDITION_TYPE , TIE_BREAKER_TYPE} from './define.js';
 import { Condition } from './condition.js';
 import * as SeatMap from '../seat-map/index.js';
 
 
-export class TableTotalRankCondition extends Condition {
-  static CATEGORY = CATEGORY.TABLE_TOTAL_RANK;
+export class TableRankCondition extends Condition {
+  static CATEGORY = CATEGORY.TABLE_RANK;
 
   /**
-   * @typedef {typeof TableTotalRankCondition.TYPE[keyof typeof TableTotalRankCondition.TYPE]} Type
+   * @typedef {typeof TableRankCondition.TYPE[keyof typeof TableRankCondition.TYPE]} Type
    */
   /**
    * @readonly
@@ -15,33 +15,32 @@ export class TableTotalRankCondition extends Condition {
    */
   static TYPE = Object.freeze({
     /** トータルが卓内○位 */
-    IS: 'Is',
-    /** トータルが卓内○位以上 */
-    AT_LEAST: 'AtLeast',
+    IS: CONDITION_TYPE.TABLE_TOTAL_RANK_IS,
+    /** トータルが卓内○位以内 */
+    AT_MOST: CONDITION_TYPE.TABLE_TOTAL_RANK_AT_MOST,
     /** トータルが卓内○位以下 */
-    AT_MOST: 'AtMost'
+    AT_LEAST: CONDITION_TYPE.TABLE_TOTAL_RANK_AT_LEAST,
   });
 
   /**
    * @readonly
    */
   static DEFINE = Object.freeze({
-    [TableTotalRankCondition.TYPE.IS]: {
+    [TableRankCondition.TYPE.IS]: {
       description: 'トータルが卓内○位',
       labelFn: (value) => `卓内${value}位`,
       evaluate: (rank, value) => rank === value
     },
-    [TableTotalRankCondition.TYPE.AT_LEAST]: {
-      description: 'トータルが卓内○位以上',
-      labelFn: (value) => `卓内${value}位以上`,
-      evaluate: (rank, value) => rank >= value
-
+    [TableRankCondition.TYPE.AT_MOST]: {
+      description: 'トータルが卓内○位以内',
+      labelFn: (value) => `卓内${value}位以内`,
+      evaluate: (rank, value) => rank <= value
     },
-    [TableTotalRankCondition.TYPE.AT_MOST]: {
+    [TableRankCondition.TYPE.AT_LEAST]: {
       description: 'トータルが卓内○位以下',
       labelFn: (value) => `卓内${value}位以下`,
-      evaluate: (rank, value) => rank <= value
-    }
+      evaluate: (rank, value) => rank >= value
+    },
   });
 
 
@@ -50,12 +49,12 @@ export class TableTotalRankCondition extends Condition {
    * @param {Type} type 
    * @returns {string}
    */
-  static getDescription = (type) => TableTotalRankCondition.DEFINE[type].description;
+  static getDescription = (type) => TableRankCondition.DEFINE[type].description;
 
   /**
    * 
    * @param {{
-   *   category: typeof TableTotalRankCondition.CATEGORY,
+   *   category: typeof TableRankCondition.CATEGORY,
    *   type: Type,
    *   value: number,
    *   tieBreaker: import('./define.js').TieBreakerType
@@ -63,7 +62,7 @@ export class TableTotalRankCondition extends Condition {
    */
   constructor(options) {
     super(options);
-    if (!TableTotalRankCondition.DEFINE[options.type]) {
+    if (!TableRankCondition.DEFINE[options.type]) {
       throw new Error(`Unknown type: ${options.type}`);
     }
     this.type = options.type;
@@ -72,7 +71,7 @@ export class TableTotalRankCondition extends Condition {
   }
 
   get label() {
-    return TableTotalRankCondition.DEFINE[this.type].labelFn(this.value);
+    return TableRankCondition.DEFINE[this.type].labelFn(this.value);
   }
 
   /**
@@ -82,7 +81,7 @@ export class TableTotalRankCondition extends Condition {
    * @returns {import('../game-calculator/index.js').GameInfo} 引数に与えたGameInfo
    */
   evaluate(playersInfo, _outsidePlayers) {
-    const def = TableTotalRankCondition.DEFINE[this.type];
+    const def = TableRankCondition.DEFINE[this.type];
     const tableRank = SeatMap.getRankMap(playersInfo, false,
       (a, b) => b.point - a.point,
       this.tieBreaker === TIE_BREAKER_TYPE.TIE_BREAKER_RANK ?

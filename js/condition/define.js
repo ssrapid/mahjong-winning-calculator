@@ -10,11 +10,11 @@
 export const TYPE = Object.freeze({
   // トータル順位（全体＝卓外含む）
   /** トータル順位が全体○位 */
-  OVERALL_TOTAL_RANK_IS       : 'OVERALL_TOTAL_RANK_IS',
+  OVERALL_RANK_IS       : 'OVERALL_TOTAL_RANK_IS',
   /** トータル順位が全体○位以下 */
-  OVERALL_TOTAL_RANK_AT_MOST  : 'OVERALL_TOTAL_RANK_AT_MOST',
+  OVERALL_RANK_AT_MOST  : 'OVERALL_TOTAL_RANK_AT_MOST',
   /** トータル順位が全体○位以上 */
-  OVERALL_TOTAL_RANK_AT_LEAST : 'OVERALL_TOTAL_RANK_AT_LEAST',
+  OVERALL_RANK_AT_LEAST : 'OVERALL_TOTAL_RANK_AT_LEAST',
 
   // 
   /** トータル順位が卓内○位 */
@@ -66,8 +66,8 @@ export const TYPE = Object.freeze({
  * @readonly
  */
 export const CATEGORY = Object.freeze({
-  OVERALL_TOTAL_RANK: 'OVERALL_TOTAL_RANK',
-  TABLE_TOTAL_RANK: 'TABLE_TOTAL_RANK',
+  OVERALL_TOTAL_RANK: 'OVERALL_RANK',
+  TABLE_RANK: 'TABLE_RANK',
   TOTAL_POINT: 'TOTAL_POINTS',
   THISGAME_RANK: 'THISGAME_RANK',
   THISGAME_POINT: 'THISGAME_POINT',

@@ -1,4 +1,4 @@
-import { CATEGORY } from './define.js';
+import { CATEGORY, TYPE as CONDITION_TYPE } from './define.js';
 import { Condition } from './condition.js';
 import * as SeatMap from '../seat-map/index.js';
 import { formatPoints } from '../ui/common.js';
@@ -20,8 +20,8 @@ export class TotalPointCondition extends Condition {
    * @readonly
    */
   static TYPE = Object.freeze({
-    AT_LEAST: 'AtLeast',
-    AT_MOST: 'AtMost',
+    AT_LEAST: CONDITION_TYPE.TOTAL_POINTS_AT_LEAST,
+    AT_MOST: CONDITION_TYPE.TOTAL_POINTS_AT_MOST,
   });
 
   /**

@@ -1,12 +1,12 @@
 import { TotalPointCondition } from './totalpoint-condition.js';
-import { TableTotalRankCondition } from './table-totalrank-condition.js';
+import { TableRankCondition } from './table-totalrank-condition.js';
 
 
 /**
  * @type {Map<import('./define.js').ConditionCategory, typeof import('./condition.js').Condition>}
  */
 export const registry = new Map(
-  [TotalPointCondition, TableTotalRankCondition]
+  [TotalPointCondition, TableRankCondition]
   .map(c => [c.CATEGORY, c]));
 
 
