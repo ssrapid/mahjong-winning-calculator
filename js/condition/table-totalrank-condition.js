@@ -1,5 +1,5 @@
 import { CATEGORY, TIE_BREAKER_TYPE } from './define.js';
-import { Condition } from './factory.js'; // 仮
+import { Condition } from './condition.js';
 import * as SeatMap from '../seat-map/index.js';
 
 
