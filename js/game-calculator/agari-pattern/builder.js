@@ -10,9 +10,10 @@ import { resolve } from './resolve.js';
  * 対局者情報(SeatMap形式)
  * @param {import('./create.js').TableInfo} tableInfo 対局情報
  * @param {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
+ * @param {import('../../condition/index.js').Condition[]} [conditions=[]] 
  * @returns 
  */
-export function build(playersInfo, tableInfo, ruleObj) {
+export function build(playersInfo, tableInfo, ruleObj, conditions=[]) {
   // リーチパターン16通りを生成
   const riichiMaps = Array.from({ length: 16 }, (_, i) =>
     SeatMap.create(seat => Boolean((i >>> SeatUtil.seatToIndex(seat)) & 1)));

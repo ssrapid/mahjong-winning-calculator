@@ -10,7 +10,7 @@ export const state = {
     /** @type {string} */
     name: null,
     /** @type {number} */
-    point: 0,
+    startPoint: 0,
     /** @type {number} */
     score: null,
     /** @type {boolean} */

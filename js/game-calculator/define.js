@@ -22,7 +22,8 @@ export const AGARI_TYPE = Object.freeze({
  * @property {string} name 対局者名(表示名)
  * @property {number} [tieBreakRank] 同点時に参照する順位(前年度順位、期首順位、予選通過順位など)
  * @property {number} score 点棒
- * @property {number} point ポイント
+ * @property {number} startPoint ゲーム前ポイント
+ * @property {number} [point] ポイント
  * @property {boolean} riichi リーチしているかどうか
  * @property {number} [delta] この局の点棒変化
  * @property {number} [gamePoint] この半荘のポイント
@@ -47,4 +48,5 @@ export const AGARI_TYPE = Object.freeze({
  * @typedef {object} GameInfo
  * @property {PlayersMap} playersInfo
  * @property {TableInfo} tableInfo
+ * @property {import('../rule/index.js').RuleObject}
  */

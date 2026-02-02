@@ -44,7 +44,7 @@ export function getRonAgariTemplates(ruleObj) {
  * @returns {import('./define.js').AgariTemplate[]}
  */
 function getAgariTemplate(ruleObj, type) {
-  /** @type {AgariTemplate[]} */
+  /** @type {import('./define.js').AgariTemplate[]} */
   const retArray = [];
 
   let plainTemplates;

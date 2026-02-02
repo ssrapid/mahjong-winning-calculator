@@ -213,7 +213,7 @@ function nodeListToSeatMap(nodeList){
 
 /**
  * 
- * @param {import("../seatUtilities").Seat} seat  seat("e", "s", "w", "n"のいずれか)
+ * @param {import("../seat-utilities").Seat} seat  seat("e", "s", "w", "n"のいずれか)
  * @param {string} value 新しい値
  * @returns {string} 変更後の値
  */
@@ -232,7 +232,7 @@ function setName(seat, value) {
 
 /**
  * 
- * @param {import("../seatUtilities").Seat} seat  seat("e", "s", "w", "n"のいずれか) 
+ * @param {import("../seat-utilities").Seat} seat  seat("e", "s", "w", "n"のいずれか) 
  * @param {number} value 新しい値
  * @returns {number} 変更後の値
  */
@@ -242,7 +242,7 @@ function setPoint(seat, value) {
   // 表示上は小数表示として、整数の場合は".0"を付与する
   inputsMap_point[seat].value = Number.isNaN(value) ? '' : Number.isInteger(value) ? value.toFixed(1) : value;
   // ポイントは内部では1000倍して点棒とスケールを合わせ、整数で保持する
-  state.players[seat].point = value * 1000;
+  state.players[seat].startPoint = value * 1000;
   // ポイントが変化した場合、Totalが変化するため、再計算
   computeTentativePoint();
   return value;
@@ -251,7 +251,7 @@ function setPoint(seat, value) {
 
 /**
  * 
- * @param {import("../seatUtilities").Seat} seat seat("e", "s", "w", "n"のいずれか)
+ * @param {import("../seat-utilities").Seat} seat seat("e", "s", "w", "n"のいずれか)
  * @param {number} value 新しい値
  * @returns {number} 変更後の値
  */
@@ -326,7 +326,7 @@ export function incrementTsumibo() {
  * 
  * @returns {number} 新しい点棒の値
  */
-export async function resetScore() {
+export function resetScore() {
   ensureDom();
   return promise_tab2.then(() => {
     /** @type {number} */
@@ -362,7 +362,7 @@ export function computeTentativePoint() {
     const gamePoint = scoreMap[seat] - state.rule[Rule.KEY.RETURN_SCORE] + ranking[seat].rankingPoint;
     /** @type {number} */
     const gameRank = ranking[seat].rank;
-    const totalPoint = state.players[seat].point + gamePoint;
+    const totalPoint = state.players[seat].startPoint + gamePoint;
     return { gamePoint, gameRank, totalPoint };
   });
 
@@ -389,7 +389,8 @@ export function computeTentativePoint() {
 
   for(const td of td_tentative_total) {
     // TotalPoint
-    /** セルに相当する席
+    /**
+     * セルに相当する席
      * @type {import("../seat-utilities/index.js").Seat}
      * */
     const seat = td.dataset.seat;

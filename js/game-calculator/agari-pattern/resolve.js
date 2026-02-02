@@ -25,7 +25,7 @@ export function resolve(patternContext) {
 
 
 /**
- * 
+ * ツモ和了のパターンに対して、点棒変化を計算する
  * @param {import('./create').TsumoAgariPattern} pattern 
  * @returns {import('./create').TsumoAgariPattern}
  */
@@ -115,7 +115,7 @@ function computeDeltaForTsumo(pattern) {
 
 
 /**
- * 
+ * ロン和了のパターンに対して、点棒変化を計算する
  * @param {import('./create').RonAgariPattern} pattern 
  * @returns {import('./create').RonAgariPattern}
  */
@@ -201,7 +201,7 @@ function computeDeltaForRon(pattern) {
 
 
 /**
- * 
+ * 流局のパターンに対して、点棒変動を計算する
  * @param {import('./create').RyukyokuPattern} pattern 
  * @returns {import('./create').RyukyokuPattern}
  */
@@ -268,7 +268,7 @@ function computeDeltaForRyukyoku (pattern) {
 
 
 /**
- * 
+ * 計算された点棒変化を適用し、局後の点棒を求める。
  * @param {import('./create.js').Pattern} pattern 
  */
 function applyDelta(pattern) {
@@ -301,9 +301,8 @@ function applyDelta(pattern) {
   // point, gamePoint を付与する。
   SeatMap.forEach(player => {
     const gamePoint = (player.score - ruleObj[Rule.KEY.RETURN_SCORE] + player.rankingPoint);
-    player.prevPoint = player.point;
     player.gamePoint = gamePoint;
-    player.point = player.point + gamePoint;
+    player.point = player.startPoint + gamePoint;
   }, playersInfo);
 
 }

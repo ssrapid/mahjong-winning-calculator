@@ -9,7 +9,7 @@ import { AGARI_TYPE } from '../define.js';
  * @typedef {object} Pattern
  * @property {import('../define.js').AgariType} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {import('../define.js').PlayersMap} playersInfo 対局者情報
  * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {string} [agariLabel] 和了点の表示用文字列
@@ -18,7 +18,7 @@ import { AGARI_TYPE } from '../define.js';
  * @typedef {object} RyukyokuPattern
  * @property {typeof import('../define.js').AGARI_TYPE.RYUKYOKU} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {import('../define.js').PlayersMap} playersInfo 対局者情報
  * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../../seat-utilities/index.js').Seat[]} tenpai テンパイ者(配列)
@@ -28,7 +28,7 @@ import { AGARI_TYPE } from '../define.js';
  * @typedef {object} AgariPattern
  * @property {typeof import('../define.js').AGARI_TYPE.TSUMO|typeof import('../define.js').AGARI_TYPE.RON} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {import('../define.js').PlayersMap} playersInfo 対局者情報
  * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../agari-template/index.js').AgariTemplate} template 和了テンプレート
@@ -40,7 +40,7 @@ import { AGARI_TYPE } from '../define.js';
  * @typedef {object} TsumoAgariPattern
  * @property {typeof import('../define.js').AGARI_TYPE.TSUMO} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {import('../define.js').PlayersMap} playersInfo 対局者情報
  * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../agari-template/index.js').TsumoAgariTemplate} template 和了テンプレート
@@ -51,7 +51,7 @@ import { AGARI_TYPE } from '../define.js';
  * @typedef {object} RonAgariPattern
  * @property {typeof import('../define.js').AGARI_TYPE.RON} agariType 和了タイプ
  * @property {boolean} available 実現可能性
- * @property {import('../../seat-map').SeatMap<PlayerInfo>} playersInfo 対局者情報
+ * @property {import('../define.js').PlayersMap} playersInfo 対局者情報
  * @property {TableInfo} tableInfo 対局情報
  * @property {import('../../rule/index.js').RuleObject} ruleObj ルールオブジェクト
  * @property {import('../agari-template/index.js').RonAgariTemplate} template 和了テンプレート
