@@ -135,58 +135,61 @@ export function create(playersInfo, tableInfo, ruleObj) {
   // 流局パターン
   const renchanRule = ruleObj[Rule.KEY.RENCHAN_RULE];
   const tenpaiFee = ruleObj[Rule.KEY.TENPAI_FEE];
-  if(renchanRule !== Rule.RENCHAN_RULE.TENPAI && tenpaiFee === 0) {
-    // テンパイ料が0のルールの場合
+  /**
+   * @type {{tenpai:import('../../seat-utilities/index.js').Seat[], available:boolean}}
+   */
+  const tenpaiPatterns = (()=>{
+    if(renchanRule !== Rule.RENCHAN_RULE.TENPAI && tenpaiFee === 0) {
+      // テンパイ料が0のルールの場合
 
-    // テンパイ連荘以外のルールでテンパイ料が0に設定されている場合、
-    // 誰がテンパイかという情報が意味をなさないため、全員ノーテン扱いの1パターンのみ生成する。
-    // テンパイ料がなく、テンパイ連荘のルールのとき、
-    // 親がテンパイか否かのみが必要な情報であるため、その2通りのパターンのみを生成する。
-
-    const tenpaiPattern = [[]];
-    if(renchanRule === Rule.RENCHAN_RULE.TENPAI) tenpaiPattern.push([dealer]);
-    for (const tenpai of tenpaiPattern) {
-      const pattern = {
-        agariType: AGARI_TYPE.RYUKYOKU,
-        tenpai,
-        available: true,
-        playersInfo : structuredClone(playersInfo),
-        tableInfo : structuredClone(tableInfo),
-        ruleObj // ルールオブジェクトはコピーしない
-      };
-      allPatterns.push(pattern);
-      ryukyokuPatterns.push(pattern);
-    }
-
-  } else {
-    /**
-     * テンパイ連荘のルール または テンパイ料が0でないルールの時は、16通りのパターンを用意
-     */
-    const flagMaps = Array.from({ length: 16 }, (_, i) => SeatMap.create(seat => Boolean((i >>> SeatUtil.seatToIndex(seat)) & 1)));
-    for(const tenpaiMap of flagMaps) {
-      const tenpai = SeatMap.filter(tenpaiMap, v => v);
-      /** 
-       * 各者が "テンパイしている" または "リーチしていない" ことが実現可能条件。
-       * ただし、アガリ放棄の裁定を受けた場合には、 "リーチかつノーテン扱い" という状況が発生するので、厳密には全パターン起こりうる。
-       */
-      const available = SeatMap.every(SeatMap.map((tenpai, {riichi}) => tenpai | !riichi, tenpaiMap, playersInfo));
+      // テンパイ連荘以外のルールでテンパイ料が0に設定されている場合、
+      // 誰がテンパイかという情報が意味をなさないため、全員ノーテン扱いの1パターンのみ生成する。
+      // テンパイ料がなく、テンパイ連荘のルールのとき、
+      // 親がテンパイか否かのみが必要な情報であるため、その2通りのパターンのみを生成する。
       /**
-       * @type {RyukyokuPattern}
+       * @type {{tenpai:import('../../seat-utilities/index.js').Seat[], available:boolean}}
        */
-      const pattern = {
-        agariType: AGARI_TYPE.RYUKYOKU,
-        tenpai,
-        available,
-        playersInfo: structuredClone(playersInfo),
-        tableInfo: structuredClone(tableInfo),
-        ruleObj // ルールオブジェクトはコピーしない
-      }
-      // コピーしたplayersInfoにテンパイ情報を付加
-      // SeatMap.forEach((playerObj, tenpai) => playerObj.tenpai = tenpai, pattern.playersInfo, tenpaiMap);
-      allPatterns.push(pattern);
-      ryukyokuPatterns.push(pattern);
+      const tenpaiPattern = [{tenpai: [], available: true}];
+      if(renchanRule === Rule.RENCHAN_RULE.TENPAI) tenpaiPattern.push({tenpai: [dealer], available: true});
+      return tenpaiPattern;
     }
+
+    /**
+     * テンパイ連荘のルール または テンパイ料が0でないルールの時は、16通りのパターンを用意。
+     */
+    const flagMaps = Array
+      .from({ length: 16 }, (_, i) => SeatMap.create(seat => Boolean((i >>> SeatUtil.seatToIndex(seat)) & 1)))
+      .map(tenpaiMap => {
+        const tenpai = SeatMap.filter(tenpaiMap, v => v);
+        /** 
+         * 各者が "テンパイしている" または "リーチしていない" ことが実現可能条件。
+         * ただし、アガリ放棄の裁定を受けた場合には、 "リーチかつノーテン扱い" という状況が発生するので、厳密には全パターン起こりうる。
+         */
+        const available = SeatMap.every(SeatMap.map((tenpai, {riichi}) => tenpai | !riichi, tenpaiMap, playersInfo));
+        return {tenpai, available};
+      });
+    return flagMaps;
+  })();
+
+
+  for(const { tenpai, available } of tenpaiPatterns) {
+    /**
+     * @type {RyukyokuPattern}
+     */
+    const pattern = {
+      agariType: AGARI_TYPE.RYUKYOKU,
+      tenpai,
+      available,
+      playersInfo: structuredClone(playersInfo),
+      tableInfo: structuredClone(tableInfo),
+      ruleObj // ルールオブジェクトはコピーしない
+    }
+    // コピーしたplayersInfoにテンパイ情報を付加
+    // SeatMap.forEach((playerObj, tenpai) => playerObj.tenpai = tenpai, pattern.playersInfo, tenpaiMap);
+    allPatterns.push(pattern);
+    ryukyokuPatterns.push(pattern);
   }
+
 
   const returnObj = {
     state: 'ready',
