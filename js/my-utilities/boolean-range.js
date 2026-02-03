@@ -33,37 +33,88 @@ export function findBooleanRanges(array, target = true) {
  *
  * @param {boolean[]} array - boolean 配列
  * @param {boolean} [target=true] - true または false（デフォルト: true）
- * @returns {{ start: number, end: number, except: number? }[]} 範囲配列 
+ * @returns {{ start: number, end: number, except?: number[] }[]} 範囲配列 
  */
-export function findBooleanRangesWithException(array, target = true) {
+export function findBooleanRangesWithExceptions(array, target = true, options={}) {
   const ranges = findBooleanRanges(array, target);
 
+  // rangeが複数存在しなければ、そのままreturn
   if (ranges.length <= 1) return ranges;
 
+  /** 何マスまで穴を許容するか */
+  const maxGap = options.maxGap ?? 2;
+  /** except 最大数 */
+  const maxExcept = options.maxExcept ?? 2;
+
   const merged = [];
-  let i = 0;
 
-  while (i < ranges.length) {
-    const current = ranges[i];
-    const next = ranges[i + 1];
-
-    // 範囲間に1つだけ非target値がある場合、except付きで統合
-    if (next && current.end + 2 === next.start) {
-      const exceptIndex = current.end + 1;
-      if (array[exceptIndex] !== target) {
-        merged.push({
-          start: current.start,
-          end: next.end,
-          except: exceptIndex
-        });
-        i += 2;
-        continue;
-      }
-    }
-
-    merged.push(current);
-    i += 1;
+  /**
+   * 
+   */
+  let current = {
+    start: ranges[0].start,
+    end: ranges[0].end,
+    except: []
   }
+
+  for (let i = 1; i < ranges.length; i++) {
+    const next = ranges[i];
+
+    const gapStart = current.end + 1;
+    const gapEnd = next.start -1;
+    const gapSize = gapEnd - gapStart + 1;
+
+    if (gapSize <= maxGap && current.except.length + gapSize <= maxExcept) {
+      // 現在の範囲と次の範囲の間隔が条件を満たしている場合にマージ
+      for (let j = gapStart; j <= gapEnd; j++) {
+        // 間の index を except に追加
+        if (array[j] !== target) current.except.push(j);
+      }
+      // 末尾を次の範囲の末尾に変更
+      current.end = next.end;
+    } else {
+      // exceptが空であれば消去
+      if (!current.except.length) delete current.except;
+      // 完成配列に追加
+      merged.push(current);
+
+      // 処理中の範囲を初期化
+      current = {
+        start: next.start,
+        end: next.end,
+        except: []
+      };
+    }
+  }
+    
+  // 最後に残った範囲を追加
+  if (!current.except.length) delete current.except;
+  merged.push(current);
+
+  return merged;
+  // let i = 0;
+
+  // while (i < ranges.length) {
+  //   const current = ranges[i];
+  //   const next = ranges[i + 1];
+
+  //   // 範囲間に1つだけ非target値がある場合、except付きで統合
+  //   if (next && current.end + 2 === next.start) {
+  //     const exceptIndex = current.end + 1;
+  //     if (array[exceptIndex] !== target) {
+  //       merged.push({
+  //         start: current.start,
+  //         end: next.end,
+  //         except: exceptIndex
+  //       });
+  //       i += 2;
+  //       continue;
+  //     }
+  //   }
+
+  //   merged.push(current);
+  //   i += 1;
+  // }
 
   return merged;
 }
