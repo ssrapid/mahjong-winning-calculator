@@ -92,29 +92,4 @@ export function findBooleanRangesWithExceptions(array, target = true, options={}
   merged.push(current);
 
   return merged;
-  // let i = 0;
-
-  // while (i < ranges.length) {
-  //   const current = ranges[i];
-  //   const next = ranges[i + 1];
-
-  //   // 範囲間に1つだけ非target値がある場合、except付きで統合
-  //   if (next && current.end + 2 === next.start) {
-  //     const exceptIndex = current.end + 1;
-  //     if (array[exceptIndex] !== target) {
-  //       merged.push({
-  //         start: current.start,
-  //         end: next.end,
-  //         except: exceptIndex
-  //       });
-  //       i += 2;
-  //       continue;
-  //     }
-  //   }
-
-  //   merged.push(current);
-  //   i += 1;
-  // }
-
-  return merged;
 }
