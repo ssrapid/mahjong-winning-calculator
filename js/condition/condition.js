@@ -8,6 +8,16 @@ import { registry } from './factory.js';
  * @property {*} [target]
  * @property {import('./define.js').TieBreakerType} [tieBreaker]
  */
+
+/**
+ * 条件評価の結果を含むオブジェクト。メタデータとしてこのほかにもプロパティを持つことがある。
+ * @typedef {object} EvaluateObject
+ * @property {boolean} fulfilled
+ */
+/**
+ * @typedef {import('../seat-map').SeatMap<EvaluateObject>} EvaluateMap
+ */
+
 export class Condition {
   /** @readonly */
   static CATEGORY = 'NoTypeCondition';
@@ -37,11 +47,11 @@ export class Condition {
   static getDescription = (_type) => '';
 
   /**
-   * このメソッドは、必ず子クラスでオーバーライドして使います。
-   * オーバーライドせずに実行された場合、エラーになります。
+   * プレーヤーが条件を満たしているかを評価する。
+   * 
    * @param {import('../game-calculator').PlayersMap} _playersInfo 
    * @param {import('../game-calculator').PlayerInfo[]} [_outsidePlayers=[]] 
-   * @returns {import('../game-calculator').GameInfo}
+   * @returns {EvaluateMap}
    */
   evaluate(_playersInfo, _outsidePlayers=[]) {
     throw new Error("evaluate() must be implemented");

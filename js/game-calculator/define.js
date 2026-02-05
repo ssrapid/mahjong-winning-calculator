@@ -29,7 +29,7 @@ export const AGARI_TYPE = Object.freeze({
  * @property {number} [gamePoint] この半荘のポイント
  * @property {number} [rank] この半荘の順位
  * @property {number} [rankingPoint] この半荘の順位点
- * @property {{condition:Condition, fulfilled:boolean}[]} [conditions] 条件の達成可否情報
+ * @property {Map<Condition, import('../condition/condition.js').EvaluateObject>} [conditions] 条件の達成可否情報
  */
 /**
  * @typedef {object} TableInfo 対局情報

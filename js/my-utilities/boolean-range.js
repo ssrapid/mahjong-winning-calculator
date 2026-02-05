@@ -33,6 +33,7 @@ export function findBooleanRanges(array, target = true) {
  *
  * @param {boolean[]} array - boolean 配列
  * @param {boolean} [target=true] - true または false（デフォルト: true）
+ * @param {{maxGap?:number,maxExcept?:number}} options
  * @returns {{ start: number, end: number, except?: number[] }[]} 範囲配列 
  */
 export function findBooleanRangesWithExceptions(array, target = true, options={}) {

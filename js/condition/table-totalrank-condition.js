@@ -78,11 +78,11 @@ export class TableRankCondition extends Condition {
    * @override
    * @param {import('../game-calculator/index.js').PlayersMap} playersInfo 
    * @param {import('../game-calculator/index.js').PlayerInfo[]} [_outsidePlayers=[]] 
-   * @returns {import('../game-calculator/index.js').GameInfo} 引数に与えたGameInfo
+   * @returns {import('./condition.js').EvaluateMap}
    */
   evaluate(playersInfo, _outsidePlayers) {
     const def = TableRankCondition.DEFINE[this.type];
-    const tableRank = SeatMap.getRankMap(playersInfo, false,
+    const tableRankMap = SeatMap.getRankMap(playersInfo, false,
       (a, b) => b.point - a.point,
       this.tieBreaker === TIE_BREAKER_TYPE.TIE_BREAKER_RANK ?
         (a, b) => (a.tieBreakRank ?? Infinity) - (b.tieBreakRank ?? Infinity) :
@@ -92,16 +92,10 @@ export class TableRankCondition extends Condition {
         /* "先行有利" が既定値 */
         (a, b) => (b.startPoint ?? b.point ?? -Infinity) - (a.startPoint ?? a.point ?? -Infinity)
     );
-    SeatMap.forEach((player, tableRank) => {
-      // 配列が未定義の場合、新しい配列を用意
-      if(!player.conditions) player.conditions = [];
-      player.conditions.push({
-        condition: this,
-        rank: tableRank,
-        fulfilled: def.evaluate(tableRank, this.value)
-      });
-    }, playersInfo, tableRank);
+    return SeatMap.map(tableRank => ({
+      rank: tableRank,
+      fulfilled: def.evaluate(tableRank, this.value)
+    }), tableRankMap);
 
-    return playersInfo;
   }
 }
