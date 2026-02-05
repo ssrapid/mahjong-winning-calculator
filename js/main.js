@@ -24,8 +24,8 @@ export const promise_tab1 = insertHTML(
   "tabpanels/main.html"
 ).then(async panel => {
   const root = panel.querySelector("#main-table-root");
-  await insertHTML(root, "tabpanels/mainTable.html");
-  tabPanel_main(root);
+  // await insertHTML(root, "tabpanels/mainTable.html");
+  tabPanel_main(panel);
   return panel;
 });
 
