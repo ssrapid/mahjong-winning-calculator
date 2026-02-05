@@ -23,14 +23,15 @@ function calculateButtonHandler() {
   expandTable();
   computeTentativePoint();
   const players = structuredClone(state.players);
-  SeatMap.forEach((obj, riichi) => obj.riichi = riichi, players, state.riichi);
+  const tableInfo = structuredClone(state.tableInfo);
+  const rule = structuredClone(state.rule);
 
   // 仮で固定入力
   const conditions = [Condition.create({category: Condition.CATEGORY.TABLE_RANK, type:Condition.TableRankCondition.TYPE.AT_MOST, value:2})];
   console.log(GameCalculator.AgariPattern.build(
     players,
-    state.tableInfo,
-    state.rule,
+    tableInfo,
+    rule,
     conditions
   ));
   

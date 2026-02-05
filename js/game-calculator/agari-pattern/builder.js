@@ -16,19 +16,8 @@ import * as Condition from '../../condition/index.js';
  * @returns 
  */
 export function build(playersInfo, tableInfo, ruleObj, conditions=[]) {
-  // リーチパターン16通りを生成
-  const riichiMaps = Array.from({ length: 16 }, (_, i) =>
-    SeatMap.create(seat => Boolean((i >>> SeatUtil.seatToIndex(seat)) & 1)));
-
-  const patternCollections = riichiMaps.map(riichiMap => {
-    // playersInfoはここで一部書き換えるので、この時点でクローン化
-    const players = structuredClone(playersInfo);
-    SeatMap.forEach((player, riichi) => player.riichi = riichi, players, riichiMap);
-    const patternCollection = create(playersInfo, tableInfo, ruleObj);
-    resolve(patternCollection);
-    evaluate(patternCollection, conditions);
-    return {riichiMap, patternCollection};
-  });
-
-  return patternCollections;
+  const patternCollection = create(playersInfo, tableInfo, ruleObj);
+  resolve(patternCollection);
+  evaluate(patternCollection, conditions);
+  return patternCollection;
 }

@@ -272,7 +272,6 @@ function setRiichi(seat, value) {
   value = toBoolean(value);
   inputsMap_riichi[seat].checked = value;
   state.players[seat].riichi = value;
-  state.riichi[seat] = value;
   return value;
 }
 
