@@ -50,7 +50,9 @@ function main() {
     resetScore();
     setupCalculateButton();
 
-  })
+  }).catch(err => {
+    console.error("Promise.all failed:", err);
+  });
 
 }
 

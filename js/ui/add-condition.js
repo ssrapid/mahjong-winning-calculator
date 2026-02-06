@@ -201,7 +201,7 @@ function editCard(card, formData) {
   const value = formData.get('value');
   const obj = Object.fromEntries(formData.entries());
   console.log(obj);
-  const condition = Condition.create(Object.fromEntries(formData.entries()));
+  const condition = formToCondition(formData);
   console.log(condition);
 
   /**
@@ -209,7 +209,6 @@ function editCard(card, formData) {
    */
   const label = card.querySelector('.condition-card-label');
   label.textContent = condition.label; // 仮の表示。
-  // const condition = new Condition.Condition();//Condition.create();
   state.conditions.set(card, condition);
   updateEmptyState();
 }
