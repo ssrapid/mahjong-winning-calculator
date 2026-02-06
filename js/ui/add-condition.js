@@ -68,7 +68,7 @@ export function setUpConditionForm(){
 function initTypeSelect() {
   ensureDom();
   const select = form.querySelector('select[name="type"]');
-  const classes = Condition.registry.values();
+  const classes = [...Condition.registry.values()];
   for(const conditionClass of classes) {
     for(const type of Object.values(conditionClass.TYPE)) {
       const description = conditionClass.getDescription(type);
