@@ -11,6 +11,7 @@ import { formatPoints } from '../ui/common.js';
 export class TotalPointCondition extends Condition {
   /** @readonly */
   static CATEGORY = CATEGORY.TOTAL_POINT;
+  
 
   /**
    * @typedef {typeof TotalPointCondition.TYPE[keyof typeof TotalPointCondition.TYPE]} Type
@@ -68,7 +69,7 @@ export class TotalPointCondition extends Condition {
   }
 
   get label() {
-    return DEFINE[this.type].labelFn(this.value);
+    return TotalPointCondition.DEFINE[this.type].labelFn(this.value);
   }
 
   /**

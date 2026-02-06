@@ -18,11 +18,6 @@ export const state = {
   })),
 
   /**
-   * リーチのチェックボックスの状態
-   */
-  riichi: SeatMap.create(false),
-
-  /**
    * 対局情報の入力状態
    */
   tableInfo: {
@@ -46,10 +41,15 @@ export const state = {
   rule : null,
 
   /**
-   * 
+   * 入力の条件(CardをキーにしたMapで保持)
+   * @type {Map<HTMLDivElement, import('./condition').Condition>}
    */
-  conditions: [],
+  conditions: new Map(),
 
+  /**
+   * 選択中の条件
+   * @type {import('./condition').Condition?}
+   */
   selectedCondition: null,
 
 
@@ -62,7 +62,12 @@ export const state = {
   /**
    * 計算が行われたかのフラグ
    */
-  hasCalculated: false
+  hasCalculated: false,
+
+  /**
+   * @type {import('./game-calculator/agari-pattern').PatternContext}
+   */
+  result: null
 
 }
 

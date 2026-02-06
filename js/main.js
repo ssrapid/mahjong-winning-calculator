@@ -4,7 +4,7 @@
 
 
 import { insertHTML } from "./ui/html-loader.js";
-import { setupCalculateButton } from "./ui/calculateButton.js";
+import { setupCalculateButton } from "./ui/calculate-button.js";
 import { resetScore } from "./ui/tabpanel-main.js";
 
 import tabPanel_main from "./ui/tabpanel-main.js";

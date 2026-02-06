@@ -235,7 +235,7 @@ function computeDeltaForRyukyoku (pattern) {
     }
     SeatMap.forEach(player => {
       player.delta = 0;
-      if(player.riichi) delta -= 1000;
+      if(player.riichi) player.delta -= 1000; // リーチ者は1000点支出
     }, players);
   } else {
     const tenpaiFeeMap = distributePoints(defTenpaiFee, tenpaiSeats);
@@ -243,7 +243,7 @@ function computeDeltaForRyukyoku (pattern) {
     SeatMap.forEach((player, tenpaiFee, notenPayment, seat) => {
       const delta = tenpaiFee ?? -notenPayment ?? 0;
       players.delta = delta;
-      if(player.riichi) delta -= 1000;  // リーチ者は1000点支出
+      if(player.riichi) player.delta -= 1000;  // リーチ者は1000点支出
     }, players, tenpaiFeeMap, notenPaymentMap)
   }
 

@@ -24,9 +24,11 @@ export class Condition {
   static description = 'description';
 
   /**
-   * @typedef {typeof Condition.Type[keyof typeof Condition.Type]} Type
+   * @enum {string}
    */
-  static Type = Object.freeze({});
+  static TYPE = Object.freeze({
+    TYPE: 'type'
+  });
 
   /**
    * @param {ConditionOptions} _options

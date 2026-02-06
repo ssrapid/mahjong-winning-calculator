@@ -75,3 +75,7 @@ button {
   min-width: 4rem;
   min-height: 1.3rem;
 }
+
+#conditionModal input[type="number"]{
+  width: 5em;
+}

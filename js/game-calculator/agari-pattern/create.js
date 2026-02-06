@@ -156,7 +156,7 @@ export function create(playersInfo, tableInfo, ruleObj) {
        * @type {{tenpai:import('../../seat-utilities/index.js').Seat[], available:boolean}}
        */
       const tenpaiPattern = [{tenpai: [], available: true}];
-      if(renchanRule === Rule.RENCHAN_RULE.TENPAI) tenpaiPattern.push({tenpai: [dealer], available: true});
+      if(renchanRule === Rule.RENCHAN_RULE.TENPAI) tenpaiPattern.push({tenpai: [tableInfo.dealer], available: true});
       return tenpaiPattern;
     }
 

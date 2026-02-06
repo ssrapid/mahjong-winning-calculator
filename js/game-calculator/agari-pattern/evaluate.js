@@ -4,7 +4,7 @@ import * as SeatMap from '../../seat-map/index.js'
 /**
  * 
  * @param {import("./create").PatternContext} patternContext 
- * @param {Condition.Condition[]} conditions 
+ * @param {Condition.Condition[]} conditions
  * @param {import('../define.js').PlayerInfo[]} [outsidePlayers=[]]
  * @returns {import('./create').PatternContext}
  */

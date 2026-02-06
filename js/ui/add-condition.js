@@ -2,7 +2,9 @@
  * 
  */
 
+import * as Condition from "../condition/index.js";
 import { state } from "../state.js";
+import { setSelectOptions } from "./common.js";
 import { attachHoverHint } from "./hoverhint.js";
 
 
@@ -56,26 +58,49 @@ export function setUpConditionForm(){
   // submitイベント
   form.addEventListener('submit', submitHandler);
 
+  initTypeSelect();
+  
+
+
 }
 
 
+function initTypeSelect() {
+  ensureDom();
+  const select = form.querySelector('select[name="type"]');
+  const classes = Condition.registry.values();
+  for(const conditionClass of classes) {
+    for(const type of Object.values(conditionClass.TYPE)) {
+      const description = conditionClass.getDescription(type);
+      const option = document.createElement('option');
+      option.value = type;
+      option.textContent = description;
+      select.appendChild(option);
+    }
+  }
+
+  setSelectOptions(select, classes);
+
+}
 
 
 /**
  * 現在編集中のDOM
- * @type {{card:HTMLDivElement, conditionObj:object}|null}
+ * @type {HTMLDivElement}
  */
 let nowEditing = null;
 
 
 /**
  * 
- * @param {{card:HTMLDivElement, conditionObj:object}} [condObj=null]
+ * @param {{card:HTMLDivElement, conditionObj:object}} [card=null]
  */
-function showAddConditionModall(condObj=null) {
+function showAddConditionModall(card = null) {
   form.reset();
-  nowEditing = condObj;
+  nowEditing = card;
   if(nowEditing) {
+    // フォームの値セット
+
 
   }
 
@@ -93,13 +118,14 @@ function submitHandler(e) {
   e.preventDefault();
 
   const formData = new FormData(form);
-  console.log(...formData.entries());
+  // console.log(formData);
+  // console.log(...formData.entries());
   // 
   if(!nowEditing) {
     nowEditing = createCard();
   }
   // createCard(formData);
-  editCard(nowEditing.card, nowEditing.conditionObj, formData);
+  editCard(nowEditing, formData);
   modal.close();
 }
 
@@ -107,70 +133,100 @@ function updateEmptyState() {
   console.log(conditionContainer.children.length);
   conditionContainer.classList.toggle(
     'is-empty',
-    !conditionContainer.children.length
+    !state.conditions.size
   );
 }
 
 
 
 
-/**
- * 
- * @param {FormData} formData 
- */
-function createCard(formData) {
+function createCard() {
   const flag = template_conditionCard.content.cloneNode(true);
-  const card = flag.firstElementChild;
-
-  const conditionObj = {};
-
   /**
-   * マウスオーバーヒント
+   * カードのdivコンテナ。state.conditionsのキーになる。
    * @type {HTMLDivElement}
    */
-  const hint = document.getElementById("mouseHintForCard");
+  const card = flag.firstElementChild;
 
-  const detachHint = attachHoverHint(card, hint, { delay: 400 });
+  // const conditionObj = {};
+
+  // /**
+  //  * マウスオーバーヒント
+  //  * @type {HTMLDivElement}
+  //  */
+  // const hint = document.getElementById("mouseHintForCard");
+
+  // const detachHint = attachHoverHint(card, hint, { delay: 400 });
 
   card.addEventListener('click', e => {
     if(e.target.closest('.condition-card-delete-btn')) {
       // 削除ボタン
       console.log('delete');
+      state.conditions.delete(card);
       card.remove();
       updateEmptyState();
-      detachHint();
+      // detachHint();
     } else if (e.target.closest('.condition-card-edit-btn')) {
       // 編集ボタン
       console.log('edit');
-      showAddConditionModall({ card, conditionObj });
+      showAddConditionModall(card);
     } else {
       // カード選択
       console.log('card');
-      state.selectedCondition = conditionObj;
+      selectCard(card);
     }
   });
 
-
-
-
-
-  state.conditions.push(conditionObj);
   conditionContainer.appendChild(flag);
-  updateEmptyState();
-  return {card, conditionObj};
+  return card;
 
 }
 
+/**
+ * 
+ * @param {FormData} formData 
+ * @returns 
+ */
+function formToCondition(formData) {
+  return Condition.create(Object.fromEntries(formData.entries()));
+}
 
 /**
  * 
  * @param {FormData} formData 
  */
-function editCard(card, conditionObj, formData) {
+function editCard(card, formData) {
+  console.log(...formData.entries());
+  const type = formData.get('type');
+  const value = formData.get('value');
+  const obj = Object.fromEntries(formData.entries());
+  console.log(obj);
+  const condition = Condition.create(Object.fromEntries(formData.entries()));
+  console.log(condition);
+
   /**
    * @type {HTMLDivElement}
    */
   const label = card.querySelector('.condition-card-label');
-  label.textContent = 'トータル2位以上'; // 仮の表示。
+  label.textContent = condition.label; // 仮の表示。
+  // const condition = new Condition.Condition();//Condition.create();
+  state.conditions.set(card, condition);
+  updateEmptyState();
+}
 
+/**
+ * 
+ * @param {HTMLDivElement} card 
+ */
+function selectCard(card) {
+  for(const everycard of state.conditions.keys()) {
+    everycard.classList.remove('selected');
+  }
+  card.classList.add('selected');
+  state.selectedCondition = state.conditions.get(card);
+}
+
+function addCondition(condition) {
+  const card = createCard();
+  state.conditions.set(card, condition);
 }

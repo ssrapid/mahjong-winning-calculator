@@ -18,22 +18,28 @@ export function setupCalculateButton() {
 /**
  * 計算ボタンの押下時に呼び出す関数
  */
-function calculateButtonHandler() {
+export function calculateButtonHandler() {
   zeroSumScoreCheck();
   expandTable();
   computeTentativePoint();
-  const players = structuredClone(state.players);
+  const playersInfo = structuredClone(state.players);
   const tableInfo = structuredClone(state.tableInfo);
-  const rule = structuredClone(state.rule);
+  const ruleObj = structuredClone(state.rule);
+  const conditions = Array.from(state.conditions.values());
 
-  // 仮で固定入力
-  const conditions = [Condition.create({category: Condition.CATEGORY.TABLE_RANK, type:Condition.TableRankCondition.TYPE.AT_MOST, value:2})];
-  console.log(GameCalculator.AgariPattern.build(
-    players,
+  const result = GameCalculator.AgariPattern.build(
+    playersInfo,
     tableInfo,
-    rule,
+    ruleObj,
     conditions
-  ));
+  );
+
+  // 計算結果をstateに保持
+  state.result = result;
+  // 計算済みフラグを立てる
+  state.hasCalculated = true;
+
+  console.log(result);
   
 
 }

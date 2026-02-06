@@ -16,6 +16,7 @@ import * as Condition from '../../condition/index.js';
  * @returns 
  */
 export function build(playersInfo, tableInfo, ruleObj, conditions=[]) {
+  console.log('input:', playersInfo, tableInfo, ruleObj, conditions);
   const patternCollection = create(playersInfo, tableInfo, ruleObj);
   resolve(patternCollection);
   evaluate(patternCollection, conditions);

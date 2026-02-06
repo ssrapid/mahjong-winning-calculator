@@ -23,6 +23,9 @@ import { loadTextFile } from './html-loader.js';
 /** @type {HTMLElement|Document} */
 let rootNode = document;
 
+/** @type {HTMLTableElement} */
+let mainTable;
+
 /**
  * 対局者名の入力ボックス
  * @type {NodeListOf<HTMLInputElement>}
@@ -100,6 +103,8 @@ export default function activate(root) {
 }
 
 function ensureDom() {
+  if(!mainTable) mainTable = rootNode.querySelector('#mainTable');
+
   if(!inputs_name || inputs_name?.length == 0) {
     inputs_name = rootNode.querySelectorAll('.input-name');
     inputsMap_name = nodeListToSeatMap(inputs_name);
@@ -342,8 +347,19 @@ export function resetScore() {
  * 
  */
 export function expandTable() {
-  rootNode.querySelector('#tbody_tentative').classList.remove('hide');
-  rootNode.querySelector('#tbody_result').classList.remove('hide');
+  // rootNode.querySelector('#tbody_tentative').classList.remove('hide');
+  // rootNode.querySelector('#tbody_result')?.classList?.remove('hide');
+  const oldtbody = rootNode.querySelector('.maintable-tbody-summary');
+  if(oldtbody) oldtbody.remove();
+
+  const t = rootNode.querySelector('.template-result-agari').content.cloneNode(true);
+  const r = (state.rule[Rule.KEY.TENPAI_FEE] !== 0 ?
+    rootNode.querySelector('.template-result-ryukyoku-2lines') :
+    rootNode.querySelector('.template-result-ryukyoku-1line')).content.cloneNode(true);
+  const tbody = document.createElement('tbody');
+  tbody.classList.add('mainTable-tbody', 'maintable-tbody-summary');
+  tbody.append(t, r);
+  mainTable.append(tbody);
 }
 
 
