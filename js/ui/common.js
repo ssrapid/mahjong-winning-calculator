@@ -8,12 +8,13 @@ import * as SeatMap from '../seat-map/index.js';
  * @param {{value:string, label:string}[]} entries 
  */
 export function setSelectOptions(selectElement, entries) {
-  entries.forEach(({value, label}) => {
+  console.log(entries);
+  for(const { value, label } of entries) {
     const option = document.createElement('option');
     option.value = value;
     option.textContent = label;
     selectElement.appendChild(option);
-  });
+  };
   return selectElement;
 }
 
