@@ -22,8 +22,6 @@ export const typeMap = new Map([...registry.values()].flatMap(ctor => Object.val
  * @returns {Condition}
  */
 export function create(options) {
-  // const { category } = options;
-  console.log(typeMap)
   const { category, type } = options;
   const ctor = registry.get(category) ?? typeMap.get(type);
   if(!ctor) {

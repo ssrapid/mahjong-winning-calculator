@@ -5,11 +5,10 @@ import * as SeatMap from '../seat-map/index.js';
 /**
  * 
  * @param {HTMLSelectElement} selectElement 
- * @param {{value:string, label:string}[]} entries 
+ * @param {{value:string, label:string}[]} elements 
  */
-export function setSelectOptions(selectElement, entries) {
-  console.log(entries);
-  for(const { value, label } of entries) {
+export function setSelectOptions(selectElement, elements) {
+  for(const { value, label } of elements) {
     const option = document.createElement('option');
     option.value = value;
     option.textContent = label;

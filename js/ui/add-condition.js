@@ -130,7 +130,6 @@ function submitHandler(e) {
 }
 
 function updateEmptyState() {
-  console.log(conditionContainer.children.length);
   conditionContainer.classList.toggle(
     'is-empty',
     !state.conditions.size
@@ -196,13 +195,10 @@ function formToCondition(formData) {
  * @param {FormData} formData 
  */
 function editCard(card, formData) {
-  console.log(...formData.entries());
   const type = formData.get('type');
   const value = formData.get('value');
   const obj = Object.fromEntries(formData.entries());
-  console.log(obj);
   const condition = formToCondition(formData);
-  console.log(condition);
 
   /**
    * @type {HTMLDivElement}
@@ -210,6 +206,7 @@ function editCard(card, formData) {
   const label = card.querySelector('.condition-card-label');
   label.textContent = condition.label; // 仮の表示。
   state.conditions.set(card, condition);
+  selectCard(card);
   updateEmptyState();
 }
 

@@ -250,146 +250,434 @@
 <template class="template-result-agari">
   <tr>
     <th>ツモ条件</th>
-    <td colspan="2" data-seat="e">(計算前)</td>
-    <td colspan="2" data-seat="s">(計算前)</td>
-    <td colspan="2" data-seat="w">(計算前)</td>
-    <td colspan="2" data-seat="n">(計算前)</td>
+    <td class="td-result td-result-tsumo" colspan="2" data-agari-type="tsumo" data-seat="e" data-winner="e">(計算前)</td>
+    <td class="td-result td-result-tsumo" colspan="2" data-agari-type="tsumo" data-seat="s" data-winner="s">(計算前)</td>
+    <td class="td-result td-result-tsumo" colspan="2" data-agari-type="tsumo" data-seat="w" data-winner="w">(計算前)</td>
+    <td class="td-result td-result-tsumo" colspan="2" data-agari-type="tsumo" data-seat="n" data-winner="n">(計算前)</td>
     <td></td>
   </tr>
   <tr>
     <th rowspan="3">ロン条件</th>
     <td class="td-target td-target-s" data-seat="e" data-target="s">
-      <span class="span-targetname-s">南家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="e" data-target="s">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="e" data-discarder="s">
+      (計算前)
+    </td>
     <td class="td-target td-target-e" data-seat="s" data-target="e">
-      <span class="span-targetname-e">東家</span>
-      <span class="span-targetsuffix">から</span>
-    <td data-seat="s" data-target="e">(計算前)</td>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">から</span>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="s"  data-discarder="e">
+      (計算前)
+    </td>
     <td class="td-target td-target-e" data-seat="w" data-target="e">
-      <span class="span-targetname-e">東家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="w" data-target="e">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="w" data-discarder="e">
+      (計算前)
+    </td>
     <td class="td-target td-target-e" data-seat="n" data-target="e">
-      <span class="span-targetname-e">東家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="n" data-target="e">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="n" data-discarder="e">
+      (計算前)
+    </td>
     <td rowspan="3"></td>
   </tr>
   <tr>
     <td class="td-target td-target-w" data-seat="e" data-target="w">
-      <span class="span-targetname-w">西家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="e" data-target="w">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="e" data-discarder="w">
+      (計算前)
+    </td>
     <td class="td-target td-target-w" data-seat="s" data-target="w">
-      <span class="span-targetname-w">西家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="s" data-target="w">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="s" data-discarder="w">
+      (計算前)
+    </td>
     <td class="td-target td-target-s" data-seat="w" data-target="s">
-      <span class="span-targetname-s">南家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="w" data-target="s">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="w" data-discarder="s">
+      (計算前)
+    </td>
     <td class="td-target td-target-s" data-seat="n" data-target="s">
-      <span class="span-targetname-s">南家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="n" data-target="s">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="n" data-discarder="s">
+      (計算前)
+    </td>
   </tr>
   <tr>
     <td class="td-target td-target-n" data-seat="e" data-target="n">
-      <span class="span-targetname-n">北家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="e" data-target="n">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="e" data-discarder="n">
+      (計算前)
+    </td>
     <td class="td-target td-target-n" data-seat="s" data-target="n">
-      <span class="span-targetname-n">北家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="s" data-target="n">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="s" data-discarder="n">
+      (計算前)
+    </td>
     <td class="td-target td-target-n" data-seat="w" data-target="n">
-      <span class="span-targetname-n">北家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="w" data-target="n">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="w" data-discarder="n">
+      (計算前)
+    </td>
     <td class="td-target td-target-w" data-seat="n" data-target="w">
-      <span class="span-targetname-w">西家</span>
-      <span class="span-targetsuffix">から</span>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">から</span>
     </td>
-    <td data-seat="n" data-target="w">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="n" data-discarder="w">
+      (計算前)
+    </td>
   </tr>
   <tr>
     <th rowspan="3">放銃条件</th>
     <td class="td-target td-target-s" data-seat="e" data-target="s">
-      <span class="span-targetname-s">南家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="e" data-target="s">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="s" data-discarder="e">
+      (計算前)
+    </td>
     <td class="td-target td-target-e" data-seat="s" data-target="e">
-      <span class="span-targetname-e">東家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="s" data-target="e">(計算前)</td>
-    <td class="td-target td-target-e" data-seat="w" data-target="e">
-      <span class="span-targetname-e">東家</span>
-      <span class="span-targetsuffix">へ</span>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="e" data-discarder="s">
+      (計算前)
     </td>
-    <td data-seat="w" data-target="e">(計算前)</td>
+    <td class="td-target td-target-e" data-seat="w" data-winner="e" data-discarder="w">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">へ</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="e" data-discarder="w">
+      (計算前)
+    </td>
     <td class="td-target td-target-e" data-seat="n" data-target="e">
-      <span class="span-targetname-e">東家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="n" data-target="e">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="e" data-discarder="n">
+      (計算前)
+    </td>
     <td rowspan="3"></td>
   </tr>
   <tr>
     <td class="td-target td-target-w" data-seat="e" data-target="w">
-      <span class="span-targetname-w">西家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="e" data-target="w">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="w" data-discarder="e">
+      (計算前)
+    </td>
     <td class="td-target td-target-w" data-seat="s" data-target="w">
-      <span class="span-targetname-w">西家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="s" data-target="w">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="w" data-discarder="s">
+      (計算前)
+    </td>
     <td class="td-target td-target-s" data-seat="w" data-target="s">
-      <span class="span-targetname-s">南家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="w" data-target="s">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="s" data-discarder="w">
+      (計算前)
+    </td>
     <td class="td-target td-target-s" data-seat="n" data-target="s">
-      <span class="span-targetname-s">南家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="n" data-target="s">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="s" data-discarder="n">
+      (計算前)
+    </td>
   </tr>
   <tr>
     <td class="td-target td-target-n" data-seat="e" data-target="n">
-      <span class="span-targetname-n">北家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="e" data-target="n">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="n" data-discarder="e">
+      (計算前)
+    </td>
     <td class="td-target td-target-n" data-seat="s" data-target="n">
-      <span class="span-targetname-n">北家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="s" data-target="n">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="n" data-discarder="s">
+      (計算前)
+    </td>
     <td class="td-target td-target-n" data-seat="w" data-target="n">
-      <span class="span-targetname-n">北家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="w" data-target="n">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="n" data-discarder="w">
+      (計算前)
+    </td>
     <td class="td-target td-target-w" data-seat="n" data-target="w">
-      <span class="span-targetname-w">西家</span>
-      <span class="span-targetsuffix">へ</span>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">へ</span>
     </td>
-    <td data-seat="n" data-target="w">(計算前)</td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="w" data-discarder="n">
+      (計算前)
+    </td>
+  </tr>
+  <tr>
+    <th rowspan="3">被ツモ条件</th>
+    <td class="td-target td-target-s" data-seat="e" data-target="s">
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="e" data-winner="s">
+      (計算前)
+    </td>
+    <td class="td-target td-target-e" data-seat="s" data-target="e">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="s" data-winner="e">
+      (計算前)
+    </td>
+    <td class="td-target td-target-e" data-seat="w" data-winner="e">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="w" data-winner="e">
+      (計算前)
+    </td>
+    <td class="td-target td-target-e" data-seat="n" data-target="e">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="n" data-winner="e">
+      (計算前)
+    </td>
+    <td rowspan="3"></td>
+  </tr>
+  <tr>
+    <td class="td-target td-target-w" data-seat="e" data-target="w">
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="e" data-winner="w">
+      (計算前)
+    </td>
+    <td class="td-target td-target-w" data-seat="s" data-target="w">
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="s" data-winner="w">
+      (計算前)
+    </td>
+    <td class="td-target td-target-s" data-seat="w" data-winner="s">
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="w" data-winner="s">
+      (計算前)
+    </td>
+    <td class="td-target td-target-s" data-seat="n" data-target="s">
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="n" data-winner="s">
+      (計算前)
+    </td>
+    <td rowspan="3"></td>
+  </tr>
+  <tr>
+    <td class="td-target td-target-n" data-seat="e" data-target="n">
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="e" data-winner="n">
+      (計算前)
+    </td>
+    <td class="td-target td-target-n" data-seat="s" data-target="n">
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="s" data-winner="n">
+      (計算前)
+    </td>
+    <td class="td-target td-target-n" data-seat="w" data-winner="n">
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="w" data-winner="n">
+      (計算前)
+    </td>
+    <td class="td-target td-target-w" data-seat="n" data-target="w">
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">がツモ</span>
+    </td>
+    <td class="td-result td-result-tsumo" data-agari-type="tsumo" data-seat="n" data-winner="w">
+      (計算前)
+    </td>
+    <td rowspan="3"></td>
+  </tr>
+  <tr>
+    <th rowspan="6">横移動条件</th>
+    <td class="td-target td-target-s td-target-w" data-seat="e">
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="s" data-discarder="w">
+      (計算前)
+    </td>
+    <td class="td-target td-target-e td-target-w" data-seat="s">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="e" data-discarder="w">
+      (計算前)
+    </td>
+    <td class="td-target td-target-e td-target-s" data-seat="w">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="e" data-discarder="s">
+      (計算前)
+    </td>
+    <td class="td-target td-target-e td-target-s" data-seat="n">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="e" data-discarder="s">
+      (計算前)
+    </td>
+    <td rowspan="6"></td>
+  </tr>
+  <tr>
+    <td class="td-target td-target-s td-target-n" data-seat="e">
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="s" data-discarder="n">
+      (計算前)
+    </td>
+    <td class="td-target td-target-e td-target-n" data-seat="s">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="e" data-discarder="n">
+      (計算前)
+    </td>
+    <td class="td-target td-target-e td-target-n" data-seat="w">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="e" data-discarder="n">
+      (計算前)
+    </td>
+    <td class="td-target td-target-e td-target-w" data-seat="n">
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="e" data-discarder="w">
+      (計算前)
+    </td>
+  </tr>
+  <tr>
+    <td class="td-target td-target-w td-target-s" data-seat="e">
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="w" data-discarder="s">
+      (計算前)
+    </td>
+    <td class="td-target td-target-w td-target-e" data-seat="s">
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="w" data-discarder="e">
+      (計算前)
+    </td>
+    <td class="td-target td-target-s td-target-e" data-seat="w">
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="s" data-discarder="e">
+      (計算前)
+    </td>
+    <td class="td-target td-target-s td-target-e" data-seat="n">
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="s" data-discarder="e">
+      (計算前)
+    </td>
+  </tr>
+  <tr>
+    <td class="td-target td-target-w td-target-n" data-seat="e">
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="w" data-discarder="n">
+      (計算前)
+    </td>
+    <td class="td-target td-target-w td-target-n" data-seat="s">
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="w" data-discarder="n">
+      (計算前)
+    </td>
+    <td class="td-target td-target-s td-target-n" data-seat="w">
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="s" data-discarder="n">
+      (計算前)
+    </td>
+    <td class="td-target td-target-s td-target-w" data-seat="n">
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="s" data-discarder="w">
+      (計算前)
+    </td>
+  </tr>
+  <tr>
+    <td class="td-target td-target-n td-target-s" data-seat="e">
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="n" data-discarder="s">
+      (計算前)
+    </td>
+    <td class="td-target td-target-n td-target-e" data-seat="s">
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="n" data-discarder="e">
+      (計算前)
+    </td>
+    <td class="td-target td-target-n td-target-e" data-seat="w">
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="n" data-discarder="e">
+      (計算前)
+    </td>
+    <td class="td-target td-target-w td-target-e" data-seat="n">
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-e">東家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="w" data-discarder="e">
+      (計算前)
+    </td>
+  </tr>
+  <tr>
+    <td class="td-target td-target-n td-target-w" data-seat="e">
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="e" data-winner="n" data-discarder="w">
+      (計算前)
+    </td>
+    <td class="td-target td-target-n td-target-w" data-seat="s">
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="s" data-winner="n" data-discarder="w">
+      (計算前)
+    </td>
+    <td class="td-target td-target-n td-target-s" data-seat="w">
+      <span class="span-targetname-n">北家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="w" data-winner="n" data-discarder="s">
+      (計算前)
+    </td>
+    <td class="td-target td-target-w td-target-s" data-seat="n">
+      <span class="span-targetname-w">西家</span><span class="span-targetsuffix">がロン</span><br>
+      <span class="span-targetname-s">南家</span><span class="span-targetsuffix">が放銃</span>
+    </td>
+    <td class="td-result td-result-ron" data-agari-type="ron" data-seat="n" data-winner="w" data-discarder="s">
+      (計算前)
+    </td>
   </tr>
 </template>
 
@@ -398,50 +686,52 @@
   <tr>
     <th rowspan="2">流局時条件</th>
     <td>テンパイ</td>
-    <td data-seat="e">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" data-seat="e" data-state-tenpai="tenpai">(計算前)</td>
     <td>テンパイ</td>
-    <td data-seat="s">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" data-seat="s" data-state-tenpai="tenpai">(計算前)</td>
     <td>テンパイ</td>
-    <td data-seat="w">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" data-seat="w" data-state-tenpai="tenpai">(計算前)</td>
     <td>テンパイ</td>
-    <td data-seat="n">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" data-seat="n" data-state-tenpai="tenpai">(計算前)</td>
     <td rowspan="2"></td>
   </tr>
   <tr>
     <td>ノーテン</td>
-    <td data-seat="e">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" data-seat="e" data-state-tenpai="noten">(計算前)</td>
     <td>ノーテン</td>
-    <td data-seat="s">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" data-seat="s" data-state-tenpai="noten">(計算前)</td>
     <td>ノーテン</td>
-    <td data-seat="w">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" data-seat="w" data-state-tenpai="noten">(計算前)</td>
     <td>ノーテン</td>
-    <td data-seat="n">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" data-seat="n" data-state-tenpai="noten">(計算前)</td>
   </tr>
 </template>
 
 <template class="template-result-ryukyoku template-result-ryukyoku-1line">
   <tr>
     <th >流局時条件</th>
-    <td colspan="2" data-seat="e">(計算前)</td>
-    <td colspan="2" data-seat="s">(計算前)</td>
-    <td colspan="2" data-seat="w">(計算前)</td>
-    <td colspan="2" data-seat="n">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" colspan="2" data-seat="e" data-state-tenpai="undefined">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" colspan="2" data-seat="s" data-state-tenpai="undefined">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" colspan="2" data-seat="w" data-state-tenpai="undefined">(計算前)</td>
+    <td class="td-result td-result-ryukyoku" colspan="2" data-seat="n" data-state-tenpai="undefined">(計算前)</td>
     <td rowspan="2"></td>
   </tr>
 </template>
 
+<!-- 暫定Gameポイント用テンプレート -->
 <template id="template-tentative-game-point">
   <div>
     <span class="rank"></span>
     <span class="point"></span>
-    <span class="unit">pt</span>
+    <span class="unit">Pt</span>
   </div>
 </template>
 
+<!-- 暫定Totalポイント用テンプレート -->
 <template id="template-tentative-total-point">
   <div>
     <span class="point"></span>
-    <span class="unit">pt</span>
+    <span class="unit">Pt</span>
   </div>
 </template>
 

@@ -210,7 +210,7 @@ function computeDeltaForRyukyoku (pattern) {
     return pattern;
   }
 
-  const {playersInfo: players, tableInfo, ruleObj, tenpai:tenpaiSeats } = pattern;
+  const {playersInfo, tableInfo, ruleObj, tenpai: tenpaiSeats } = pattern;
   const notenSeats = SeatUtil.SEAT_ORDER.filter(seat => !tenpaiSeats.includes(seat));
 
   const { dealer, kyotaku } = tableInfo;
@@ -224,7 +224,7 @@ function computeDeltaForRyukyoku (pattern) {
   if(tenpaiCount === 0 || notenCount === 0 || defTenpaiFee === 0) {
     if(defTenpaiFee === 0) {
       if (renchanRule === Rule.RENCHAN_RULE.TENPAI) {
-        pattern.agariLabel = `流局(${tenpaiSeats.map(seat => players[seat].name).join(', ')}テンパイ)`
+        pattern.agariLabel = `流局(${tenpaiSeats.map(seat => playersInfo[seat].name || (SeatUtil.seatToJp(seat) + '家')).join(', ')}テンパイ)`
       } else {
         pattern.agariLabel = '流局';
       }
@@ -236,15 +236,15 @@ function computeDeltaForRyukyoku (pattern) {
     SeatMap.forEach(player => {
       player.delta = 0;
       if(player.riichi) player.delta -= 1000; // リーチ者は1000点支出
-    }, players);
+    }, playersInfo);
   } else {
     const tenpaiFeeMap = distributePoints(defTenpaiFee, tenpaiSeats);
     const notenPaymentMap = distributePoints(defTenpaiFee, notenSeats);
     SeatMap.forEach((player, tenpaiFee, notenPayment, seat) => {
       const delta = tenpaiFee ?? -notenPayment ?? 0;
-      players.delta = delta;
+      player.delta = delta;
       if(player.riichi) player.delta -= 1000;  // リーチ者は1000点支出
-    }, players, tenpaiFeeMap, notenPaymentMap)
+    }, playersInfo, tenpaiFeeMap, notenPaymentMap)
   }
 
 
@@ -256,7 +256,7 @@ function computeDeltaForRyukyoku (pattern) {
   //   (renchanRule === Rule.RENCHAN_RULE.AGARI || renchanRule === Rule.RENCHAN_RULE.TENPAI);
 
   // 流局時は供託は据え置き
-  const riichiCount = SeatMap.count(players, player => player.riichi);
+  const riichiCount = SeatMap.count(playersInfo, player => player.riichi);
   tableInfo.prevKyotaku = kyotaku;
   tableInfo.kyotaku += riichiCount;
 

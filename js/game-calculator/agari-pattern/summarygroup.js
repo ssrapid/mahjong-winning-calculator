@@ -42,7 +42,7 @@ function convertToKey(options) {
  * @property {import('../../seat-utilities/index.js').Seat} [discarder]
  * @property {import('./create.js').Pattern[]} patterns
  * @property {boolean} summarized
- * @property {import('../../seat-map/index.js').SeatMap<string>} [summary]
+ * @property {Map<import('../../condition').Condition, import('../../seat-map/index.js').SeatMap<string>>} [summary]
  */
 export class SummaryGroup {
   constructor(){
@@ -89,7 +89,22 @@ export class SummaryGroup {
 
   }
 
+  /**
+   * 
+   * @param {SummaryGroupKey} keyObj 
+   * @param {import('../../condition').Condition} condition 
+   * @param {import('../../seat-utilities').Seat} seat 
+   * @returns {{ text: string, fulfilled: boolean }|undefined}
+   */
+  getSummary(keyObj, condition, seat) {
+    const group = this.get(keyObj);
+    const summaryMap = group.summary.get(condition);
+    if(!summaryMap) return undefined;
+    return summaryMap[seat];
+  }
+
 }
+
 
 
 /**
@@ -169,6 +184,8 @@ function buildSummaryMap(group, condition) {
     
   });
 }
+
+
 
 /**
  * 

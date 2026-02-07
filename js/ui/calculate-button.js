@@ -5,6 +5,7 @@ import * as GameCalculator from '../game-calculator/index.js'
 import { state } from '../state.js';
 import * as SeatMap from '../seat-map/index.js'
 import * as Condition from '../condition/index.js'
+import { showSummary } from "./showsummary.js";
 
 /**
  * 計算ボタンを有効化する関数
@@ -38,6 +39,8 @@ export function calculateButtonHandler() {
   state.result = result;
   // 計算済みフラグを立てる
   state.hasCalculated = true;
+
+  showSummary();
 
   console.log(result);
   
