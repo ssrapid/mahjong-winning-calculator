@@ -44,7 +44,15 @@ function showTsumoSummary() {
     const seat = td.dataset.seat;
     const winner = td.dataset.winner;
 
-    const { text: summarytext, fulfilled } = state.result.summaryGroup.getSummary({agariType,winner}, condition, seat);
+    const summary = state.result.summaryGroup.getSummary({agariType,winner}, condition, seat);
+
+    if(summary == null) {
+      td.innerHTML = '計算エラー';
+      td.classList.remove('fulfilled');
+      continue;
+    }
+
+    const { text: summarytext, fulfilled } = summary;
     
     td.innerHTML = '<div class="condition-result">'
       + (fulfilled ? agariSummaryToHTML(summarytext): (summarytext ?? "-"))
@@ -62,7 +70,16 @@ function showRonSummary() {
     const winner = td.dataset.winner;
     const discarder = td.dataset.discarder;
 
-    const { text: summarytext, fulfilled } = state.result.summaryGroup.getSummary({agariType, winner, discarder}, condition, seat);
+    const summary = state.result.summaryGroup.getSummary({agariType, winner, discarder}, condition, seat);
+
+    if(summary == null) {
+      td.innerHTML = '計算エラー';
+      td.classList.remove('fulfilled');
+      continue;
+    }
+
+    const { text: summarytext, fulfilled } = summary;
+
     td.innerHTML = '<div class="condition-result">'
       + (fulfilled ? agariSummaryToHTML(summarytext): (summarytext ?? '-'))
       + '</div>';
@@ -80,9 +97,17 @@ function showRyukyokuSummary() {
 
     const summaryGroup = state.result.summaryGroup;
 
-    const { text: summarytext, fulfilled } = tenpaiState === "undefined" ?
+    const summary = tenpaiState === "undefined" ?
       summaryGroup.getSummary({agariType}, condition, seat) :
       summaryGroup.getSummary({agariType, focus: seat, tenpai: tenpaiState === "tenpai"}, condition, seat);
+
+    if(summary == null) {
+      td.innerHTML = '計算エラー';
+      td.classList.remove('fulfilled');
+      continue;
+    }
+
+    const { text: summarytext, fulfilled } = summary;
 
     td.innerHTML = '<div class="condition-result">'+ summarytext + '</div>';
     td.classList.toggle('fulfilled', fulfilled);

@@ -4,6 +4,7 @@
 
 import * as Condition from "../condition/index.js";
 import { state } from "../state.js";
+import { calculateCondition } from "./calculate-button.js";
 import { setSelectOptions } from "./common.js";
 import { attachHoverHint } from "./hoverhint.js";
 import { showSummary } from "./summary.js";
@@ -119,9 +120,7 @@ function submitHandler(e) {
   e.preventDefault();
 
   const formData = new FormData(form);
-  // console.log(formData);
-  // console.log(...formData.entries());
-  // 
+
   if(!nowEditing) {
     nowEditing = createCard();
   }
@@ -147,8 +146,6 @@ function createCard() {
    * @type {HTMLDivElement}
    */
   const card = flag.firstElementChild;
-
-  // const conditionObj = {};
 
   // /**
   //  * マウスオーバーヒント
@@ -210,10 +207,13 @@ function editCard(card, formData) {
    * @type {HTMLDivElement}
    */
   const label = card.querySelector('.condition-card-label');
-  label.textContent = condition.label; // 仮の表示。
+  label.textContent = condition.label;
   state.conditions.set(card, condition);
   updateEmptyState();
   selectCard(card);
+  if(state.scoreSumChecked && state.hasCalculated) {
+    calculateCondition();
+  }
 }
 
 /**
