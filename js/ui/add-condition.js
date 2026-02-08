@@ -6,6 +6,7 @@ import * as Condition from "../condition/index.js";
 import { state } from "../state.js";
 import { setSelectOptions } from "./common.js";
 import { attachHoverHint } from "./hoverhint.js";
+import { showSummary } from "./summary.js";
 
 
 /**
@@ -160,18 +161,13 @@ function createCard() {
   card.addEventListener('click', e => {
     if(e.target.closest('.condition-card-delete-btn')) {
       // 削除ボタン
-      console.log('delete');
-      state.conditions.delete(card);
-      card.remove();
-      updateEmptyState();
+      deleteCard(card);
       // detachHint();
     } else if (e.target.closest('.condition-card-edit-btn')) {
       // 編集ボタン
-      console.log('edit');
       showAddConditionModall(card);
     } else {
       // カード選択
-      console.log('card');
       selectCard(card);
     }
   });
@@ -192,6 +188,16 @@ function formToCondition(formData) {
 
 /**
  * 
+ * @param {HTMLDivElement} card 
+ */
+function deleteCard(card) {
+  state.conditions.delete(card);
+  card.remove();
+  updateEmptyState();
+}
+
+/**
+ * 
  * @param {FormData} formData 
  */
 function editCard(card, formData) {
@@ -206,8 +212,8 @@ function editCard(card, formData) {
   const label = card.querySelector('.condition-card-label');
   label.textContent = condition.label; // 仮の表示。
   state.conditions.set(card, condition);
-  selectCard(card);
   updateEmptyState();
+  selectCard(card);
 }
 
 /**
@@ -215,11 +221,17 @@ function editCard(card, formData) {
  * @param {HTMLDivElement} card 
  */
 function selectCard(card) {
+  if(!card) return;
   for(const everycard of state.conditions.keys()) {
     everycard.classList.remove('selected');
   }
+
   card.classList.add('selected');
   state.selectedCondition = state.conditions.get(card);
+  // 選択した条件で計算結果を再表示
+  if(state.scoreSumChecked && state.hasCalculated) {
+    showSummary();
+  }
 }
 
 function addCondition(condition) {

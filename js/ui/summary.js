@@ -1,5 +1,6 @@
 import * as GameCalc from "../game-calculator/index.js";
 import { state } from "../state.js";
+import { expandTable, reflectName } from "./tabpanel-main.js";
 
 /** @type {HTMLCollectionOf<HTMLTableCellElement>} */
 const td_result = document.getElementsByClassName('td-result');
@@ -25,6 +26,9 @@ const td_ryukyoku = document.getElementsByClassName('td-result-ryukyoku');
 
 
 export function showSummary() {
+  expandTable();
+  reflectName();
+
   if(state.hasCalculated && state.selectedCondition) {
     showTsumoSummary();
     showRonSummary();
@@ -100,8 +104,8 @@ function agariSummaryToHTML(text) {
       /(\d{1,3}(?:,\d{3})*(?:\/\d{1,3}(?:,\d{3})*)*(?:オール)?)/g,
       '<span class="result-value">$1</span>'
     )
-    // 以上・以下
-    .replace(/(以上|以下)/g, '<span class="result-op">$1</span>')
+    // 以上・以下・のみ
+    .replace(/(以上|以下|のみ)/g, '<span class="result-op">$1</span>')
     // 不可は別枠
     .replace(/(不可)/g, '<span class="result-ng">$1</span>');
 }

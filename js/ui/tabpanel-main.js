@@ -18,6 +18,7 @@ import { formatPoints, selectAllOnFocus } from "./common.js";
 import { promise_tab2 } from '../main.js';
 import { setUpConditionForm } from './add-condition.js';
 import { loadTextFile } from './html-loader.js';
+import { calculateCondition } from "./calculate-button.js";
 
 
 /** @type {HTMLElement|Document} */
@@ -26,16 +27,7 @@ let rootNode = document;
 /** @type {HTMLTableElement} */
 let mainTable;
 
-/**
- * 対局者名の入力ボックス
- * @type {NodeListOf<HTMLInputElement>}
- */
-let inputs_name;
 
-/**
- * @type {import("../seat-map/index.js").SeatMap<HTMLInputElement>}
- */
-let inputsMap_name;
 
 /**
  * @type  {NodeListOf<HTMLInputElement>}
@@ -105,10 +97,6 @@ export default function activate(root) {
 function ensureDom() {
   if(!mainTable) mainTable = rootNode.querySelector('#mainTable');
 
-  if(!inputs_name || inputs_name?.length == 0) {
-    inputs_name = rootNode.querySelectorAll('.input-name');
-    inputsMap_name = nodeListToSeatMap(inputs_name);
-  }
   if(!inputs_point || inputs_point?.length == 0) {
     inputs_point = rootNode.querySelectorAll('.input-point');
     inputsMap_point = nodeListToSeatMap(inputs_point);
@@ -131,7 +119,11 @@ function ensureDom() {
 function initDom() {
   ensureDom();
 
-  for(const input of [...inputs_name, ...inputs_point, ...inputs_score]) {
+  for(const input of [
+    ...rootNode.querySelectorAll('.input-name'),
+    ...rootNode.querySelectorAll('.input-point'),
+    ...rootNode.querySelectorAll('.input-score')]
+  ) {
     const field = input.dataset.field;
     const seat = input.dataset.seat;
 
@@ -207,7 +199,7 @@ function initInputTsumibo() {
 
 /**
  * @template {HTMLElement} T
- * @param {NodeListOf<T>} nodeList 
+ * @param {NodeListOf<T>} nodeList node に dataset.seat が必要。
  * @returns {import("../seat-map/index.js").SeatMap<T>}
  */
 function nodeListToSeatMap(nodeList){
@@ -223,14 +215,17 @@ function nodeListToSeatMap(nodeList){
  * @returns {string} 変更後の値
  */
 function setName(seat, value) {
-  ensureDom();
   value = String(value);
-  inputsMap_name[seat].value = value;
+
+  /** 
+   * 名前の入力ボックス
+   * @type {HTMLInputElement}
+   */
+  const input = rootNode.querySelector(`.input-name[data-seat="${seat}"]`);
+  input.value = value;
   state.players[seat].name = value;
   // 条件表示セルに名前を表示する
-  for(const span of collectionMapOfTargetName[seat]) {
-    span.textContent = value ? value : seatToJp(seat)  +'家';
-  }
+  reflectName(seat);
   return value;
 }
 
@@ -242,12 +237,19 @@ function setName(seat, value) {
  * @returns {number} 変更後の値
  */
 function setPoint(seat, value) {
-  ensureDom();
   value = Number(value);
+
+  /** 
+   * ポイントの入力ボックス
+   * @type {HTMLInputElement}
+   */
+  const input = rootNode.querySelector(`.input-point[data-seat="${seat}"]`);
+
   // 表示上は小数表示として、整数の場合は".0"を付与する
-  inputsMap_point[seat].value = Number.isNaN(value) ? '' : Number.isInteger(value) ? value.toFixed(1) : value;
+  input.value = Number.isNaN(value) ? '' : Number.isInteger(value) ? value.toFixed(1) : value;
   // ポイントは内部では1000倍して点棒とスケールを合わせ、整数で保持する
   state.players[seat].startPoint = value * 1000;
+
   // ポイントが変化した場合、Totalが変化するため、再計算
   computeTentativePoint();
   return value;
@@ -261,10 +263,19 @@ function setPoint(seat, value) {
  * @returns {number} 変更後の値
  */
 function setScore(seat, value) {
-  ensureDom();
   value = Number(value);
-  inputsMap_score[seat].value = Number.isNaN(value) ? '' : value;
+
+  /** 
+   * 点棒の入力ボックス
+   * @type {HTMLInputElement}
+   */
+  const input = rootNode.querySelector(`.input-score[data-seat="${seat}"]`);
+
+  input.value = Number.isNaN(value) ? '' : value;
   state.players[seat].score = value;
+
+  // 点棒合計チェック済みなら未チェックに戻す
+  state.scoreSumChecked = false;
   // 1者の点棒が変化すると、暫定ポイントが意味をなさなくなるため、隠す
   if(state.showTentative) {
     hideTentativePoint();
@@ -273,10 +284,14 @@ function setScore(seat, value) {
 }
 
 function setRiichi(seat, value) {
+  const input = rootNode.querySelector(`.input-riichi[data-seat="${seat}"]`);
   ensureDom();
   value = toBoolean(value);
-  inputsMap_riichi[seat].checked = value;
+  input.checked = value;
   state.players[seat].riichi = value;
+  if(state.scoreSumChecked && state.hasCalculated) {
+    calculateCondition();
+  }
   return value;
 }
 
@@ -347,19 +362,33 @@ export function resetScore() {
  * 
  */
 export function expandTable() {
-  // rootNode.querySelector('#tbody_tentative').classList.remove('hide');
-  // rootNode.querySelector('#tbody_result')?.classList?.remove('hide');
   const oldtbody = rootNode.querySelector('.maintable-tbody-summary');
   if(oldtbody) oldtbody.remove();
 
-  const t = rootNode.querySelector('.template-result-agari').content.cloneNode(true);
-  const r = (state.rule[Rule.KEY.TENPAI_FEE] !== 0 ?
+  const agari = rootNode.querySelector('.template-result-agari').content.cloneNode(true);
+  // const others = rootNode.querySelector('.template-result-others').content.cloneNode(true);
+  const ryukyoku = (state.rule[Rule.KEY.TENPAI_FEE] !== 0 ?
     rootNode.querySelector('.template-result-ryukyoku-2lines') :
     rootNode.querySelector('.template-result-ryukyoku-1line')).content.cloneNode(true);
   const tbody = document.createElement('tbody');
   tbody.classList.add('mainTable-tbody', 'maintable-tbody-summary');
-  tbody.append(t, r);
+  tbody.append(agari, ryukyoku);
   mainTable.append(tbody);
+}
+
+
+/**
+ * 
+ * @param  {...import("../seat-utilities").Seat} seats 無指定で全席
+ */
+export function reflectName(...seats) {
+  if(seats.length === 0) seats = [...SEAT_ORDER];
+  for(const seat of seats){
+    const value = state.players[seat].name || seatToJp(seat) + '家';
+    for(const span of collectionMapOfTargetName[seat]) {
+      span.textContent = value;
+    }
+  }
 }
 
 
@@ -434,12 +463,16 @@ export function hideTentativePoint() {
 }
 
 
-
-export function zeroSumScoreCheck() {
+/**
+ * 
+ */
+export function scoreSumCheck() {
   try {
     const checkResult = helperForZeroSumScoreCheck();
     // 点棒を短縮表記した場合に、100倍または1000倍した値をセットし直す
-    SEAT_ORDER.forEach(seat => setScore(seat, state.players[seat].score * checkResult));
+    SeatMap.forEach((player, seat) => setScore(seat, player.score * checkResult), state.players);
+    state.scoreSumChecked = true;
+    // SEAT_ORDER.forEach(seat => setScore(seat, state.players[seat].score * checkResult));
   } catch (e) {
     if(e instanceof ZeroSumScoreError) {
       confirm('あ');
@@ -449,6 +482,11 @@ export function zeroSumScoreCheck() {
     }
   }
 }
+
+export function scoreSumWarn() {
+
+}
+
 
 function helperForZeroSumScoreCheck() {
   // 23400 | 234 | 23.4 いずれの書き方にも対応するため、
@@ -461,7 +499,6 @@ function helperForZeroSumScoreCheck() {
     if(sum === expected) return multiplier;
     errors.push({ multiplier, sum, expected, error: Math.abs(expected - sum) });
   }
-
 
   // 1倍, 100倍, 1000倍いずれも合計が合わなかったとき
   const minimum = errors.reduce((a, b) => a.error < b.error ? a : b);

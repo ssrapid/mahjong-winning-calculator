@@ -52,6 +52,11 @@ export const state = {
    */
   selectedCondition: null,
 
+  /**
+   * 点棒合計チェック済み
+   * @type {boolean}
+   */
+  scoreSumChecked: false,
 
   /**
    * 暫定ポイントを表示中かのフラグ
@@ -64,7 +69,15 @@ export const state = {
    */
   hasCalculated: false,
 
+
   /**
+   * 最後に計算したときの入力
+   */
+  lastInput: null,
+
+
+  /**
+   * 計算結果
    * @type {import('./game-calculator/agari-pattern').PatternContext}
    */
   result: null

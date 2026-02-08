@@ -151,6 +151,7 @@ function buildSummaryMap(group, condition) {
      * 今のところ、放銃してもよい点数を表示することとする
      */
     const target = true;
+    // const target = seat !== discarder;
 
     const booleanRanges = MyUtilities.findBooleanRangesWithExceptions(flags, target, { maxGap:2, maxExcept:3 });
 
@@ -158,14 +159,14 @@ function buildSummaryMap(group, condition) {
      * booleanRangeを "○○以上○○以下(除く○○)" のフォーマットで文字列化する。
      * @type {string[]}
      */
-    const parts = booleanRanges.map(range => {
+    const parts = booleanRanges.map((range, _, array) => {
       const { start, end, except } = range;
       if(start === end) {
         // 連続しない範囲の場合
-        return patterns[start].agariLabel;
+        return patterns[start].agariLabel + (array.length === 1  ? 'のみ' : '');
       }
       /** "○○以上" */
-      const from = (target === false && start === 0) ? '' : patterns[start].agariLabel + '以上';
+      const from = ((target === false || seat !== winner) && start === 0) ? '' : patterns[start].agariLabel + '以上';
       /** "○○以下"  */
       const to = end === flags.length - 1 ? '' : patterns[end].agariLabel + '以下';
       /** "(除く○○)" */

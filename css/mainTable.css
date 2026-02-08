@@ -164,21 +164,24 @@
 }
 
 .result-value {
-  font-weight: 600;
+  /* font-weight: 600; */
 }
 
+/* "以上"、"以下"、"のみ" */
 .result-op {
   font-size: 0.75em;
   opacity: 0.75;
 }
 
+/* "または"、"および" */
 .result-logic {
   font-size: 0.7em;
   opacity: 0.6;
 }
 
+/* "不可" */
 .result-ng {
-  font-weight: 600;
+  /* font-weight: 600; */
   /* 将来ここを赤くするとか */
   /* color: #c33; */
 }
