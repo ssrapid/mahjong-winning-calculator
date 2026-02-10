@@ -3,7 +3,7 @@
  */
 
 
-import { insertHTML } from "./ui/html-loader.js";
+import { insertHTML, loadTextFile } from "./ui/html-loader.js";
 import { setupCalculateButton } from "./ui/calculate-button.js";
 import { resetScore } from "./ui/tabpanel-main.js";
 
@@ -13,6 +13,7 @@ import tabPanel_rule from "./ui/tabpanel-rule.js";
 // import * as SeatUtilities from './seat-utilities/index.js'
 import { getTsumoAgariTemplates, getRonAgariTemplates } from "./game-calculator/agari-template/builder.js";
 import * as Rule from './rule/index.js'
+import { initDetailModal } from "./ui/detail.js";
 
 // import { state } from "./state.js"
 
@@ -37,7 +38,22 @@ export const promise_tab2 = insertHTML(
   return panel;
 });
 
+export const promise_tab3 = insertHTML(
+  document.getElementById("tab__panel-advanced"),
+  "tabpanels/advanced.html"
+)
 
+
+export const promise_detailModal = loadTextFile(
+  "detail.html"
+).then (html => {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const dialog = doc.querySelector('dialog');
+
+  document.body.appendChild(dialog);
+  initDetailModal(dialog);
+  return dialog;
+});
 
 
 

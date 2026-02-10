@@ -29,7 +29,7 @@ export function calculateCondition() {
   const tableInfo = structuredClone(state.tableInfo);
   const ruleObj = structuredClone(state.rule);
   const conditions = Array.from(state.conditions.values());
-  state.lastInput = { players: playersInfo, tableInfo, ruleObj, conditions };
+  state.lastInput = { playersInfo, tableInfo, ruleObj, conditions };
 
   const result = GameCalculator.AgariPattern.build(
     playersInfo,

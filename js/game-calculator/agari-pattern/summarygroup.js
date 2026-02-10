@@ -150,8 +150,8 @@ function buildSummaryMap(group, condition) {
      * 放銃条件などで、「○○不可」のように出す場合、この値をfalseにして使う。
      * 今のところ、放銃してもよい点数を表示することとする
      */
-    const target = true;
-    // const target = seat !== discarder;
+    // const target = true;
+    const target = seat !== discarder;
 
     const booleanRanges = MyUtilities.findBooleanRangesWithExceptions(flags, target, { maxGap:2, maxExcept:3 });
 

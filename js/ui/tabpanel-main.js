@@ -19,6 +19,7 @@ import { promise_tab2 } from '../main.js';
 import { setUpConditionForm } from './add-condition.js';
 import { loadTextFile } from './html-loader.js';
 import { calculateCondition } from "./calculate-button.js";
+import { attachDetailEvent } from "./detail.js";
 
 
 /** @type {HTMLElement|Document} */
@@ -155,6 +156,7 @@ function initDom() {
   // オーラスのチェックボックス
   rootNode.querySelector('#input_finalRound').addEventListener('change', e => state.tableInfo.finalRound = toBoolean(e.target.checked));
 
+  attachDetailEvent(mainTable);
 }
 
 

@@ -195,10 +195,9 @@ export function create(playersInfo, tableInfo, ruleObj) {
     // SeatMap.forEach((playerObj, tenpai) => playerObj.tenpai = tenpai, pattern.playersInfo, tenpaiMap);
     allPatterns.push(pattern);
     ryukyokuPatterns.push(pattern);
-    if(tenpaiFee === 0) {
+    summaryGroup.push({ agariType }, pattern);
+    if(tenpaiFee !== 0) {
       // テンパイ料が0のルールでは簡易モード
-      summaryGroup.push({ agariType }, pattern);
-    } else {
       for(const seat of SeatUtil.SEAT_ORDER) {
         const isTenpai = tenpai.includes(seat);
         summaryGroup.push({ agariType, focus:seat, tenpai: isTenpai }, pattern);

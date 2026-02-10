@@ -1,0 +1,33 @@
+<div id="advanced-table-root">
+  <table id="advancedTable" class="advanced-table">
+    <thead id="advancedTable_thead">
+      <tr>
+        <th>対局者名</th>
+        <th colspan="2">
+          <input type="text"
+            class="input-name input-player input-player_e"
+            placeholder="対局者名(東家)" data-field="name" data-value-type="string" data-seat="e">
+        </th>
+        <th colspan="2">
+          <input type="text"
+            class="input-name input-player input-player_s"
+            placeholder="対局者名(南家)" data-field="name" data-value-type="string" data-seat="s">
+        </th>
+        <th colspan="2">
+          <input type="text"
+            class="input-name input-player input-player_w"
+            placeholder="対局者名(西家)" data-field="name" data-value-type="string" data-seat="w">
+        </th>
+        <th colspan="2">
+          <input type="text"
+            class="input-name input-player input-player_n"
+            placeholder="対局者名(北家)" data-field="name" data-value-type="string" data-seat="n">
+        </th>
+        <th class="button-only">
+          <!-- 未実装のためdisabled -->
+          <button id="button_change_seat" class="button-shortcut" tabindex="-1" disabled>席替え</button>
+        </th>
+      </tr>
+    </thead>
+  </table>
+</div>

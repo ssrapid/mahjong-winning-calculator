@@ -1,0 +1,119 @@
+<dialog>
+  <button id="closeDetailModal">✕</button>
+  <div id="detailModalContent" class="modal-content">
+    <div class="detail-table-scroll">
+      <table id="detailTable" class="detail-table">
+        <thead id="detailTableHead">
+            <tr>
+            <th>和了者</th>
+            <th>放銃者</th>
+            <th>和了点</th>
+            <th class="detail-name" data-seat="e">東家</th>
+            <th class="detail-name" data-seat="s">南家</th>
+            <th class="detail-name" data-seat="w">西家</th>
+            <th class="detail-name" data-seat="n">北家</th>
+          </tr>
+          <tr>
+            <th colspan="3">開始時ポイント</th>
+            <th class="detail-start-point" data-seat="e">0.0</th>
+            <th class="detail-start-point" data-seat="s">0.0</th>
+            <th class="detail-start-point" data-seat="w">0.0</th>
+            <th class="detail-start-point" data-seat="n">0.0</th>
+          </tr>
+          <tr>
+            <th colspan="3">現在の持ち点</th>
+            <th class="detail-now-score" data-seat="e">25,000</th>
+            <th class="detail-now-score" data-seat="s">25,000</th>
+            <th class="detail-now-score" data-seat="w">25,000</th>
+            <th class="detail-now-score" data-seat="n">25,000</th>
+          </tr>
+        </thead>
+        <tbody id="detailTableBody">
+          <!-- scriptから生成 -->
+        </tbody>
+      </table>
+    </div>
+    <div id="detailTableControls">
+      <div>
+        <strong>和了者:</strong>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="detailWinner" class="detail-winner-radio" value="e" checked>
+            <span class="span-targetname-e">東家</span>
+          </label>
+          <label>
+            <input type="radio" name="detailWinner" class="detail-winner-radio" value="s">
+            <span class="span-targetname-s">南家</span>
+          </label>
+          <label>
+            <input type="radio" name="detailWinner" class="detail-winner-radio" value="w">
+            <span class="span-targetname-w">西家</span>
+          </label>
+          <label>
+            <input type="radio" name="detailWinner" class="detail-winner-radio" value="n">
+            <span class="span-targetname-n">北家</span>
+          </label>
+          <label>
+            <input type="radio" name="detailWinner" class="detail-winner-radio" data-agari-type="ryukyoku" value="ryukyoku">
+            <span>流局</span>
+          </label>
+        </div>
+      </div>
+      <div>
+        <strong>和了種別:</strong>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="detailDiscarder" id="detail-tsumo-radio" data-agari-type="tsumo" value="tsumo" checked>
+            ツモ
+          </label>
+          <label>
+            <input type="radio" name="detailDiscarder" class="detail-discarder-radio" data-agari-type="ron" data-discarder="n" value="e" disabled>
+            ロン(<span class="span-targetname-e">東家</span>から)
+          </label>
+          <label>
+            <input type="radio" name="detailDiscarder" class="detail-discarder-radio" data-agari-type="ron" data-discarder="n" value="s">
+            ロン(<span class="span-targetname-s">南家</span>から)
+          </label>
+          <label>
+            <input type="radio" name="detailDiscarder" class="detail-discarder-radio" data-agari-type="ron" data-discarder="n" value="w">
+            ロン(<span class="span-targetname-w">西家</span>から)
+          </label>
+          <label>
+            <input type="radio" name="detailDiscarder" class="detail-discarder-radio" data-agari-type="ron" data-discarder="n" value="n">
+            ロン(<span class="span-targetname-n">北家</span>から)
+          </label>
+        </div>
+      </div>
+      <div>
+        <strong>表示:</strong>
+        <div id="detailDisplayModeRadios" class="radio-group">
+          <label>
+            <input type="radio" name="detailDisplayMode" value="totalPoint" checked>
+            トータルポイント
+          </label>
+          <label>
+            <input type="radio" name="detailDisplayMode" value="totalRank">
+            トータル順位
+          </label>
+          <label>
+            <input type="radio" name="detailDisplayMode" value="tableRank" disabled>
+            トータル卓内順位
+          </label>
+          <label>
+            <input type="radio" name="detailDisplayMode" value="gamePoint">
+            半荘ポイント
+          </label>
+          <label>
+            <input type="radio" name="detailDisplayMode" value="score">
+            点棒
+          </label>
+          <label>
+            <input type="radio" name="detailDisplayMode" value="gameRank">
+            半荘順位
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</dialog>

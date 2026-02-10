@@ -130,10 +130,16 @@ function submitHandler(e) {
 }
 
 function updateEmptyState() {
-  conditionContainer.classList.toggle(
-    'is-empty',
-    !state.conditions.size
-  );
+  // conditionContainer.classList.toggle(
+  //   'is-empty',
+  //   !state.conditions.size
+  // );
+  if(state.conditions.size === 0) {
+    conditionContainer.classList.add('is-empty');
+    conditionContainer.textContent = "";
+  } else {
+    conditionContainer.classList.remove('is-empty');
+  }
 }
 
 

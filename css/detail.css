@@ -1,0 +1,67 @@
+button#closeDetailModal {
+  float: right;
+}
+
+#detailModalContent {
+  display: flex;
+  height: 70vh;
+}
+
+.detail-table-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  min-width: 60vw;
+  border: 1px solid #ccc;
+}
+
+#detailTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  font-size: 14px;
+}
+
+#detailTable th {
+  font-weight: normal;
+}
+
+#detailTable td {
+  padding: 6px 4px;
+  border: 1px solid #ddd;
+  text-align: center;
+  background: #fff;
+  /* word-break: break-word; */
+}
+
+#detailTable tr:nth-child(even) td {
+  /* 偶数行薄グレーで視認性向上 */
+  background: #fafafa;
+}
+
+#detailTable thead th {
+  background: #f2f2f2;
+  /* z-index: 1; */
+  /* padding: 0.3rem 0.3rem; */
+  border: 1px solid #ccc;
+}
+
+#detailTable thead tr:nth-child(1) th {
+  position: sticky;
+  top: 0;
+  height: var(--header-row-height);
+}
+
+#detailTable thead tr:nth-child(2) th {
+  position: sticky;
+  top: calc(var(--header-row-height));
+  z-index: 2;
+}
+
+.radio-group {
+  display: flex;
+  /* 横幅が足りない場合自動折り返し */
+  flex-wrap: wrap;
+  /* 行間・列間 */
+  gap: 0.5em 1em;  
+}

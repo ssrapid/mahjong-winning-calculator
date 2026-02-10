@@ -238,6 +238,7 @@ function computeDeltaForRyukyoku (pattern) {
       if(player.riichi) player.delta -= 1000; // リーチ者は1000点支出
     }, playersInfo);
   } else {
+    pattern.agariLabel = `流局(${ tenpaiSeats.join(', ') }テンパイ)`;
     const tenpaiFeeMap = distributePoints(defTenpaiFee, tenpaiSeats);
     const notenPaymentMap = distributePoints(defTenpaiFee, notenSeats);
     SeatMap.forEach((player, tenpaiFee, notenPayment, seat) => {
