@@ -2,24 +2,55 @@ button#closeDetailModal {
   float: right;
 }
 
+dialog:has(#detailModalContent) {
+  border-radius: 1em;
+  border: 1px;
+}
+
 #detailModalContent {
   display: flex;
-  height: 70vh;
+  width: 80vw;
+  height: 80vh;
 }
 
 .detail-table-scroll {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: auto;
-  min-width: 60vw;
+  min-width: 50vw;
+  max-width: 70vw;
   border: 1px solid #ccc;
 }
 
+/* パターン列挙テーブル */
 #detailTable {
   width: 100%;
-  border-collapse: collapse;
+  border-spacing: 0;
   table-layout: auto;
-  font-size: 14px;
+  font-size: 0.85rem;
+  --row-height: 2.1em;
+}
+
+#detailTable col.detail-winner,
+#detailTable col.detail-discarder {
+  min-width: 6em;
+}
+
+#detailTable col.detail-agariLabel {
+  min-width: 8em;
+}
+
+#detailTable col.detail-value {
+  min-width: 6em;
+}
+
+#detailTable th,
+#detailTable td {
+  text-align: center;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  /* min-height: var(--row-height); */
+  line-height: var(--row-height);
 }
 
 #detailTable th {
@@ -27,12 +58,12 @@ button#closeDetailModal {
 }
 
 #detailTable td {
-  padding: 6px 4px;
-  border: 1px solid #ddd;
+  /* padding: 6px 4px; */
   text-align: center;
   background: #fff;
   /* word-break: break-word; */
 }
+
 
 #detailTable tr:nth-child(even) td {
   /* 偶数行薄グレーで視認性向上 */
@@ -41,21 +72,46 @@ button#closeDetailModal {
 
 #detailTable thead th {
   background: #f2f2f2;
-  /* z-index: 1; */
-  /* padding: 0.3rem 0.3rem; */
-  border: 1px solid #ccc;
+  z-index: 1;
 }
 
 #detailTable thead tr:nth-child(1) th {
   position: sticky;
   top: 0;
-  height: var(--header-row-height);
+  max-height: var(--row-height);
+  min-height: var(--row-height);
+  line-height: var(--row-height);
+  z-index: 10;
 }
 
 #detailTable thead tr:nth-child(2) th {
   position: sticky;
-  top: calc(var(--header-row-height));
-  z-index: 2;
+  top: calc(var(--row-height) + 2.8px);
+  max-height: var(--row-height);
+  min-height: var(--row-height);
+  line-height: var(--row-height);
+  z-index: 9;
+}
+
+#detailTable thead tr:nth-child(3) th {
+  position: sticky;
+  top: calc(2 * (var(--row-height) + 2.8px));
+  max-height: var(--row-height);
+  min-height: var(--row-height);
+  line-height: var(--row-height);
+  z-index: 8;
+}
+
+#detailTable .detail-name {
+  max-width: 6em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+#detailTable tbody td.fulfilled {
+  background: #fdd;
 }
 
 .radio-group {

@@ -125,7 +125,14 @@
 }
 
 
-
+.span-targetname {
+  display: inline-block;
+  max-width: 8em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: text-bottom;
+}
 
 /* 暫定ポイント表示 */
 .td-tentative-game-point div,
@@ -170,17 +177,22 @@
   color: #aaa;
 }
 
+.td-result:not(.fulfilled) {
+  color: grey;
+}
+
 .td-result.fulfilled {
   color: black;
 }
 
 /* 計算結果 */
 div.condition-result {
+  display: inline-block;
   cursor: pointer;
 }
 
 .result-value {
-  /* font-weight: 600; */
+  font-weight: 400;
 }
 
 /* "以上"、"以下"、"のみ" */
@@ -197,7 +209,7 @@ div.condition-result {
 
 /* "不可" */
 .result-ng {
-  /* font-weight: 600; */
+  font-weight: 500;
   /* 将来ここを赤くするとか */
   /* color: #c33; */
 }

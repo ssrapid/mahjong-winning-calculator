@@ -3,6 +3,16 @@
   <div id="detailModalContent" class="modal-content">
     <div class="detail-table-scroll">
       <table id="detailTable" class="detail-table">
+        <colgroup>
+          <col class="detail-winner">
+          <col class="detail-discarder">
+          <col class="detail-agariLabel">
+          <col class="detail-value">
+          <col class="detail-value">
+          <col class="detail-value">
+          <col class="detail-value">
+        </colgroup>
+
         <thead id="detailTableHead">
             <tr>
             <th>和了者</th>
@@ -92,7 +102,7 @@
             トータルポイント
           </label>
           <label>
-            <input type="radio" name="detailDisplayMode" value="totalRank">
+            <input type="radio" name="detailDisplayMode" value="totalRank" disabled>
             トータル順位
           </label>
           <label>
